@@ -97,11 +97,13 @@ export function EntityForm({
   record: Record<string, any> | null;
 }) {
   const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
   const { toast, update } = useToast();
   const router = useRouter();
 
   async function handleSave(fd: FormData) {
     setSaving(true);
+    setSaved(false);
     const id = toast({
       title: record ? "Saving changes…" : `Creating ${entity.titleSingular.toLowerCase()}…`,
       variant: "loading",
@@ -110,12 +112,15 @@ export function EntityForm({
       const result = await saveEntity(entity.slug, record?.id ?? null, fd);
       if (result.ok) {
         update(id, {
-          title: record ? "Changes saved" : `${entity.titleSingular} created`,
+          title: record ? "Changes saved ✓" : `${entity.titleSingular} created ✓`,
           description: "Live on the site now.",
           variant: "success",
         });
-        // Only leave the form once the save actually succeeded.
-        router.push(`/admin/content/${entity.slug}`);
+        setSaved(true);
+        setTimeout(() => {
+          // Navigate away after showing success briefly
+          router.push(`/admin/content/${entity.slug}`);
+        }, 800);
       } else {
         update(id, {
           title: record ? "Not saved" : "Not created",
@@ -209,9 +214,24 @@ export function EntityForm({
         </Card>
       ))}
       <div className="flex gap-3">
-        <Button type="submit" disabled={saving}>
-          {saving && <Loader2 className="h-4 w-4 animate-spin" />}
-          {record ? "Save Changes" : `Create ${entity.titleSingular}`}
+        <Button
+          type="submit"
+          disabled={saving || saved}
+          className={`min-w-[160px] transition-all ${
+            saved
+              ? "bg-green-600 hover:bg-green-600 cursor-default"
+              : saving
+              ? "opacity-80 cursor-not-allowed"
+              : ""
+          }`}
+        >
+          {saving ? (
+            <><Loader2 className="h-4 w-4 animate-spin" /> Saving…</>
+          ) : saved ? (
+            <><span className="text-base">✓</span> Saved!</>
+          ) : (
+            record ? "Save Changes" : `Create ${entity.titleSingular}`
+          )}
         </Button>
         <Button asChild variant="outline">
           <Link href={`/admin/content/${entity.slug}`}>Cancel</Link>

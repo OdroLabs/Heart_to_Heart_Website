@@ -7,22 +7,22 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 215 45% 12%;
+    --foreground: 165 25% 15%;
     --card: 0 0% 100%;
-    --card-foreground: 215 45% 12%;
-    --primary: 201 100% 36%;
+    --card-foreground: 165 25% 15%;
+    --primary: 160 55% 40%; /* Medium green — like the MedixWeb teal-green */
     --primary-foreground: 0 0% 100%;
-    --secondary: 213 55% 16%;
+    --secondary: 165 35% 25%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 208 45% 97%;
-    --muted-foreground: 213 18% 42%;
-    --accent: 190 92% 42%;
+    --muted: 160 20% 97%;
+    --muted-foreground: 165 18% 45%;
+    --accent: 162 60% 45%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
-    --border: 212 30% 90%;
-    --input: 212 30% 87%;
-    --ring: 201 100% 36%;
+    --border: 160 15% 90%;
+    --input: 160 15% 87%;
+    --ring: 160 55% 40%;
     --radius: 0.75rem;
   }
 }
@@ -293,9 +293,9 @@
   -webkit-backdrop-filter: blur(16px);
 }
 
-/* Cyan → blue gradient text */
+/* Green brand gradient text */
 .text-gradient {
-  background: linear-gradient(100deg, #4fc3f7 0%, #22d3ee 55%, #7dd3fc 100%);
+  background: linear-gradient(100deg, #16a34a 0%, #22c55e 55%, #4ade80 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

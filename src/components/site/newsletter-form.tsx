@@ -6,11 +6,16 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import type { Dictionary } from "@/lib/dictionaries";
 
-export function NewsletterForm({ dict }: { dict: Dictionary }) {
+export function NewsletterForm({ dict, dark }: { dict: Dictionary; dark?: boolean }) {
   const [done, setDone] = useState(false);
 
   if (done) {
-    return <p className="text-sm text-teal-100">✓ {dict.home.subscribed}</p>;
+    return (
+      <p className={`flex items-center gap-2 text-sm font-medium ${dark ? "text-primary" : "text-green-600"}`}>
+        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-white text-xs">✓</span>
+        {dict.home.subscribed}
+      </p>
+    );
   }
 
   return (
@@ -26,9 +31,20 @@ export function NewsletterForm({ dict }: { dict: Dictionary }) {
         type="email"
         required
         placeholder={dict.home.emailPlaceholder}
-        className="bg-white/10 text-white placeholder:text-white/50 border-white/20"
+        className={
+          dark
+            ? "h-10 rounded-full border-white/20 bg-white/10 text-white placeholder:text-white/40 focus:border-primary/50 focus:ring-primary/20"
+            : "h-10 rounded-full border-border bg-white text-navy-950 placeholder:text-muted-foreground"
+        }
       />
-      <Button type="submit" variant="secondary">
+      <Button
+        type="submit"
+        className={
+          dark
+            ? "h-10 shrink-0 rounded-full bg-primary px-5 text-sm font-bold text-white hover:bg-primary/90"
+            : "h-10 shrink-0 rounded-full bg-primary px-5 text-sm font-bold text-white hover:bg-primary/90"
+        }
+      >
         {dict.home.subscribe}
       </Button>
     </form>

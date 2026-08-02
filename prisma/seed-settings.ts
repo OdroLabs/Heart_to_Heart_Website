@@ -159,9 +159,34 @@ const content: Record<string, Val> = {
     ta: "அனைத்து தகவல்களும் முற்றிலும் இரகசியமாக பாதுகாக்கப்படும்\nஒவ்வொருவருக்கும் தீர்ப்பற்ற ஆதரவு\nபுரிந்துகொள்பவர்களால் வழிநடத்தப்படும் சமூகம்\nஇலவச சேவைகள் — செலவு இல்லை, தடைகள் இல்லை",
   },
   hero_footnote: {
-    en: "08+ partner organizations · 10 districts across Sri Lanka",
-    si: "හවුල්කාර ආයතන 08+ · ශ්‍රී ලංකාව පුරා දිස්ත්‍රික්ක 10ක්",
-    ta: "08+ பங்காளர் அமைப்புகள் · இலங்கை முழுவதும் 10 மாவட்டங்கள்",
+    en: "Comprehensive Care",
+    si: "සම්පූර්ණ සේවා",
+    ta: "விரிவான சேவை",
+  },
+
+  /* ── NEW hero fields: trust badge, stat card, pill tags ── */
+  hero_trust_badge: {
+    en: "Trusted by 1,000s of women across Sri Lanka",
+    si: "ශ්‍රී ලංකා පුරා දහස් ගණනක් කාන්තාවන් විශ්වාස කළ",
+    ta: "இலங்கை முழுவதும் ஆயிரக்கணக்கான பெண்களால் நம்பகமான",
+  },
+  hero_stats_heading: { en: "Trusted Care Rate" },
+  hero_stats_value: { en: "97%" },
+  hero_stats_label: {
+    en: "Our beneficiaries trust us and are consistently satisfied with our treatment & support.",
+    si: "අපගේ ප්‍රතිලාභීන් අපව විශ්වාස කරන අතර අපගේ ප්‍රතිකාර සහ සහාය ගැන නිරන්තරයෙන් සෑහීමකට පත් වෙති.",
+    ta: "எங்கள் பயனாளிகள் எங்களை நம்புகிறார்கள், எங்கள் சிகிச்சை மற்றும் ஆதரவில் தொடர்ந்து திருப்தியடைகிறார்கள்.",
+  },
+  hero_trust_pills: {
+    en: "Compassion\nConfidential\nNon-Judgmental\nFree",
+    si: "සානුකම්පිතව\nරහස්‍ය\nවිනිශ්චයෙන් තොරව\nනොමිලේ",
+    ta: "இரக்கம்\nரகசியம்\nதீர்ப்பற்றது\nஇலவசம்",
+  },
+
+  /* ── Marquee trust bar ── */
+  show_home_marquee: ON,
+  home_marquee_items: {
+    en: "Free & Confidential Services\nHIV Prevention & Care\nWomen's Rights\nCommunity Support\nHealth Education\nSafe Spaces\nPeer Leadership\nCounselling & Referral\nLegal Awareness\nSkills Training",
   },
 
   show_home_about: ON,
@@ -183,6 +208,17 @@ const content: Record<string, Val> = {
     ta: "Heart to Heart",
   },
   home_about_link_label: { en: "Learn More", si: "තව දැනගන්න", ta: "மேலும் அறிய" },
+  home_about_stat_value: { en: "50+" },
+  home_about_stat_label: {
+    en: "Community Partner Organizations Supporting Lives Nationwide",
+    si: "ජාතිය පුරා ජීවිත සහාය දෙන ප්‍රජා හවුල්කාර ආයතන",
+    ta: "நாடு முழுவதும் வாழ்க்கையை ஆதரிக்கும் சமூக பங்காளி அமைப்புகள்",
+  },
+  home_about_features: {
+    en: "Compassionate Care :: Holistic, non-judgmental support for every woman, regardless of her background or circumstance.\nData Privacy :: All personal information is kept strictly confidential — never shared without consent.\nCommunity-Led :: Programs designed and run by people with lived experience of the issues we address.\nSecure Support :: Creating safe physical and digital spaces where women can seek help without fear.",
+    si: "සානුකම්පිත සේවා :: පසුබිම හෝ තත්ත්වය නොසලකා සෑම කාන්තාවකටම සමස්ත, විනිශ්චයෙන් තොර සහාය.\nදත්ත රහස්‍යතාව :: සියලු පෞද්ගලික තොරතුරු දැඩි රහස්‍යභාවයෙන් රකිනු ලැබේ.\nප්‍රජා නායකත්වය :: ගැටලු සජීව ලෙස අත්විඳි අය විසින් නිර්මාණය කළ වැඩසටහන්.\nආරක්ෂිත සහාය :: බිය නැතිව ආධාර සෙවිය හැකි ආරක්ෂිත භෞතික හා ඩිජිටල් අවකාශ.",
+    ta: "இரக்கமான சேவை :: பின்னணி அல்லது சூழ்நிலை எதுவாக இருந்தாலும் ஒவ்வொரு பெண்ணுக்கும் முழுமையான, தீர்ப்பற்ற ஆதரவு.\nதரவு தனியுரிமை :: அனைத்து தனிப்பட்ட தகவல்களும் கடுமையாக இரகசியமாக பாதுகாக்கப்படும்.\nசமூகம் சார்ந்தது :: சிக்கல்களை நேரடியாக அனுபவித்தவர்களால் வடிவமைக்கப்பட்ட திட்டங்கள்.\nபாதுகாப்பான ஆதரவு :: பயமின்றி உதவி நாடக்கூடிய பாதுகாப்பான இடங்கள்.",
+  },
 
   show_home_stats: ON,
   home_stats_eyebrow: { en: "Our Impact", si: "අපගේ බලපෑම", ta: "எங்கள் தாக்கம்" },
@@ -200,9 +236,39 @@ const content: Record<string, Val> = {
     si: "අපි අපගේ ප්‍රජාවට සහාය දෙන ආකාරය",
     ta: "எங்கள் சமூகத்திற்கு நாம் ஆதரவளிக்கும் விதம்",
   },
-  home_services_text: BLANK,
+  home_services_text: {
+    en: "Accessible, compassionate services where care meets community — from health to rights, support is always free.",
+    si: "ප්‍රවේශ, සානුකම්පිත සේවාවන් — සෞඛ්‍ය සිට අයිතිවාසිකම් දක්වා, සහාය සැමවිටම නොමිලේ.",
+    ta: "அணுகக்கூடிய, இரக்கமான சேவைகள் — சுகாதாரம் முதல் உரிமைகள் வரை, ஆதரவு எப்போதும் இலவசம்.",
+  },
+  home_services_commitment: {
+    en: "We're committed to delivering the highest standard of care with sensitivity, dignity, and unwavering respect for every woman we serve.",
+    si: "අපි ගෞරවය, ගරුත්වය සහ සෑම කාන්තාවකටම නොවෙනස් ගරුත්වයෙන් ශ්‍රේෂ්ඨ සේවාව ලබා දීමට කැපවී සිටිමු.",
+    ta: "நாங்கள் சேவை செய்யும் ஒவ்வொரு பெண்ணுக்கும் உணர்திறன், கண்ணியம் மற்றும் அசைக்க முடியாத மரியாதையுடன் அதிக தரமான சேவை வழங்க உறுதிபூண்டுள்ளோம்.",
+  },
+  home_services_image: { en: COMMUNITY_IMAGE },
   home_services_count: { en: "6" },
   home_services_link_label: VIEW_ALL,
+
+  /* ── Total Care Model ── */
+  show_home_model: ON,
+  home_model_eyebrow: { en: "Our Approach", si: "අපගේ ප්‍රවේශය", ta: "எங்கள் அணுகுமுறை" },
+  home_model_title: {
+    en: "The Heart to Heart Holistic Care Model",
+    si: "Heart to Heart සමස්ත සේවා ආකෘතිය",
+    ta: "Heart to Heart முழுமையான சேவை மாதிரி",
+  },
+  home_model_text: {
+    en: "Providing community-centered care through peer support, rights advocacy, and personalized assistance every step of the way.",
+    si: "සෑම අවස්ථාවකම සම සහාය, අයිතිවාසිකම් පෙනී සිටීම සහ පුද්ගලාරෝපිත සහාය හරහා ප්‍රජා-කේන්ද්‍රීය සේවාව ලබා දෙමු.",
+    ta: "சக ஆதரவு, உரிமை வாதிடல் மற்றும் தனிப்பயனாக்கப்பட்ட உதவி மூலம் ஒவ்வொரு படியிலும் சமூக மையமான சேவை வழங்குகிறோம்.",
+  },
+  home_model_image: { en: HERO_IMAGE },
+  home_model_caption: {
+    en: "Our Heart to Heart model unites peer supporters, health workers, and community advocates in one network. From outreach to recovery, we ensure holistic care, long-term wellness, and sustainable livelihoods for every woman we serve.",
+    si: "Heart to Heart ආකෘතිය සම සහාය ලබා දෙන්නන්, සෞඛ්‍ය කාර්ය මණ්ඩලය සහ ප්‍රජා සෙනවිලිවරුන් ජාලයකට එකට ගෙන යයි. ළඟා වීමේ සිට සුවය දක්වා, සෑම කාන්තාවකටම සමස්ත සේවා, දිගු කාලීන සෞඛ්‍ය සහ තිරසාර ජීවනෝපාය සහතික කරමු.",
+    ta: "எங்கள் Heart to Heart மாதிரி சக ஆதரவாளர்களை, சுகாதார ஊழியர்களை மற்றும் சமூக வாதிகளை ஒரே நெட்வொர்க்கில் இணைக்கிறது. தொடர்பிலிருந்து மீட்சி வரை, நாங்கள் சேவை செய்யும் ஒவ்வொரு பெண்ணுக்கும் முழுமையான சேவை, நீண்ட கால நலன் மற்றும் நிலையான வாழ்வாதாரத்தை உறுதி செய்கிறோம்.",
+  },
 
   show_home_projects: ON,
   home_projects_eyebrow: { en: "Projects", si: "ව්‍යාපෘති", ta: "திட்டங்கள்" },

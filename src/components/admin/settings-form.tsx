@@ -133,6 +133,7 @@ export function SettingsForm({
   settings: SettingsMap;
 }) {
   const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
   /** Which child tab is open. Also decides what the preview panel shows. */
   const [activeIndex, setActiveIndex] = useState(0);
   /** Bumped on every successful save so the preview reloads. */
@@ -142,6 +143,7 @@ export function SettingsForm({
 
   async function handleSave(fd: FormData) {
     setSaving(true);
+    setSaved(false);
     const id = toast({
       title: `Saving ${page.title}…`,
       variant: "loading",
@@ -150,17 +152,19 @@ export function SettingsForm({
       const result = await saveSettingsPage(page.slug, fd);
       if (result.ok) {
         update(id, {
-          title: "Saved",
+          title: "Saved ✓",
           description: `${page.title} is live on the site.`,
           variant: "success",
         });
+        setSaved(true);
         setSavedCount((n) => n + 1);
         router.refresh();
+        // Reset saved indicator after 3 seconds
+        setTimeout(() => setSaved(false), 3000);
       } else {
         update(id, { title: "Not saved", description: result.error, variant: "error" });
       }
     } catch {
-      // Network drop, or the action never reached the server.
       update(id, {
         title: "Not saved",
         description: "Could not reach the server. Check your connection and try again.",
@@ -243,10 +247,36 @@ export function SettingsForm({
           </Card>
         ))}
 
-        <div className="sticky bottom-0 -mx-1 flex flex-wrap items-center gap-3 border-t bg-muted/40 px-1 py-3 backdrop-blur">
-          <Button type="submit" size="lg" disabled={saving}>
-            {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
-            {saving ? "Saving…" : `Save ${page.title}`}
+        <div className="sticky bottom-0 -mx-1 flex flex-wrap items-center gap-3 border-t bg-white/80 px-1 py-3 backdrop-blur shadow-[0_-2px_12px_rgba(0,0,0,0.06)]">
+          <Button
+            type="submit"
+            size="lg"
+            disabled={saving || saved}
+            className={cn(
+              "relative min-w-[160px] transition-all",
+              saved
+                ? "bg-green-600 hover:bg-green-600 cursor-default"
+                : saving
+                ? "opacity-80 cursor-not-allowed"
+                : ""
+            )}
+          >
+            {saving ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                Saving…
+              </>
+            ) : saved ? (
+              <>
+                <span className="text-base">✓</span>
+                Saved!
+              </>
+            ) : (
+              <>
+                <Save className="h-4 w-4" />
+                {`Save ${page.title}`}
+              </>
+            )}
           </Button>
           <div className="flex items-center gap-1">
             <Button

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Heart, Phone, Mail, ChevronDown } from "lucide-react";
+import { Menu, X, Heart, Phone, Mail, ChevronDown, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LocaleSwitcher } from "./locale-switcher";
 import { cn } from "@/lib/utils";
@@ -279,10 +279,13 @@ export function SiteHeader({
               <Button
                 asChild
                 size="sm"
-                className="hidden rounded-full bg-destructive px-5 font-bold hover:bg-destructive/90 md:inline-flex"
+                className="hidden items-center gap-0 rounded-full border border-border bg-white pl-4 pr-1 py-1 text-[13px] font-bold text-navy-950 shadow-sm hover:shadow-md transition-all md:inline-flex"
               >
                 <Link href={`/${locale}/donate`}>
-                  <Heart className="h-4 w-4 fill-current" /> {donateLabel}
+                  {donateLabel}
+                  <span className="ml-2 flex h-7 w-7 items-center justify-center rounded-full bg-primary text-white shrink-0">
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </span>
                 </Link>
               </Button>
             )}
@@ -340,10 +343,13 @@ export function SiteHeader({
                     <Button
                       asChild
                       size="sm"
-                      className="rounded-full bg-destructive px-6 font-bold hover:bg-destructive/90"
+                      className="inline-flex items-center gap-0 rounded-full border border-border bg-white pl-4 pr-1 py-1 font-bold text-navy-950 shadow-sm"
                     >
                       <Link href={`/${locale}/donate`} onClick={() => setOpen(false)}>
-                        <Heart className="h-4 w-4 fill-current" /> {donateLabel}
+                        {donateLabel}
+                        <span className="ml-2 flex h-7 w-7 items-center justify-center rounded-full bg-primary text-white shrink-0">
+                          <ArrowRight className="h-3.5 w-3.5" />
+                        </span>
                       </Link>
                     </Button>
                   )}
