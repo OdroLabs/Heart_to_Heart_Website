@@ -47,6 +47,7 @@ const settingsLinks = [
 ];
 
 const contentLinks = [
+  { href: "/admin/content/team", label: "BOD & Staff", icon: Users },
   { href: "/admin/content/projects", label: "Projects", icon: FolderKanban },
   { href: "/admin/content/services", label: "Services", icon: HandHeart },
   { href: "/admin/content/publications", label: "Publications", icon: FileText },
@@ -66,7 +67,17 @@ const inboxLinks = [
   { href: "/admin/content/subscribers", label: "Subscribers", icon: Users },
 ];
 
-export function AdminSidebar({ role }: { role: string }) {
+export function AdminSidebar({
+  role,
+  logoImage,
+  logoLetter = "C",
+  siteName = "Heart to Heart",
+}: {
+  role: string;
+  logoImage?: string;
+  logoLetter?: string;
+  siteName?: string;
+}) {
   const pathname = usePathname();
   // Site settings and user management are owner-only.
   const isOwner = role === "owner";
@@ -88,11 +99,22 @@ export function AdminSidebar({ role }: { role: string }) {
 
   return (
     <aside className="flex w-60 shrink-0 flex-col border-r bg-brand-950 text-white">
-      <div className="flex items-center gap-2 border-b border-white/10 p-4">
-        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-bold">
-          C
-        </span>
-        <span className="font-bold">Heart to Heart Admin</span>
+      <div className="flex h-[72px] items-center gap-3 border-b border-white/10 px-4 py-3">
+        {logoImage ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={logoImage}
+            alt={siteName}
+            className="h-full w-auto max-w-[200px] object-contain brightness-0 invert"
+          />
+        ) : (
+          <>
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold">
+              {logoLetter}
+            </span>
+            <span className="font-bold truncate" title={`${siteName} Admin`}>{siteName}</span>
+          </>
+        )}
       </div>
       <nav className="flex-1 space-y-4 overflow-y-auto p-3">
         <div className="space-y-0.5">

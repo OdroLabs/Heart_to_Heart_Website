@@ -403,6 +403,28 @@ export const settingPages: SettingPage[] = [
             help: "Shown in the glass card beside the hero. Remove them all to hide the card.",
           }),
           T("hero_footnote", "Highlight card footnote"),
+          T("hero_stats_value", "Floating stat value", "e.g. 97% — shown in the overlay stat card."),
+          T("hero_stats_heading", "Stat card heading", "e.g. Trusted Care Rate — label above the number."),
+          T("hero_stats_label", "Floating stat label", "e.g. Our patients trust us — small text below the number."),
+          LINES("hero_trust_pills", "Trust pill labels", {
+            itemLabel: "Label",
+            addLabel: "Add label",
+            help: "Short labels shown as pills in the hero stat card (e.g. Compassion, Excellence).",
+          }),
+          T("hero_trust_badge", "Trust badge text", "e.g. Trusted by 100s — shown beside avatars above the title."),
+        ],
+      },
+      {
+        section: "Marquee Trust Bar",
+        preview: { path: "", anchor: "sec-marquee" },
+        hideNote: "Remove all items to hide the scrolling bar.",
+        items: [
+          SW("show_home_marquee", "Show the scrolling trust bar below the hero"),
+          LINES("home_marquee_items", "Scrolling items", {
+            itemLabel: "Item",
+            addLabel: "Add item",
+            help: "Text or emoji labels that scroll across the trust bar strip.",
+          }),
         ],
       },
       {
@@ -417,6 +439,15 @@ export const settingPages: SettingPage[] = [
           IMG("home_about_image", "Photo"),
           T("home_about_caption", "Caption on the photo"),
           T("home_about_link_label", "Link text", "Leave blank to hide the link."),
+          P("home_about_stat_value", "Floating stat number", "e.g. 50+ — appears on the image card."),
+          T("home_about_stat_label", "Floating stat description", "e.g. Healthcare Professionals Supporting Lives Worldwide."),
+          PAIRS("home_about_features", "Feature cards (2×2 grid)", {
+            leftLabel: "Title",
+            rightLabel: "Description",
+            itemLabel: "Feature",
+            addLabel: "Add feature",
+            help: "Up to 4 feature cards shown in the 2×2 grid to the right of the photo.",
+          }),
         ],
       },
       {
@@ -439,8 +470,23 @@ export const settingPages: SettingPage[] = [
           T("home_services_eyebrow", "Small label above the heading"),
           T("home_services_title", "Heading"),
           TA("home_services_text", "Intro text", "Optional."),
+          TA("home_services_commitment", "Commitment card text", "Shown on the green card to the right of the services list."),
+          IMG("home_services_image", "Photo shown beside the services list"),
           NUM("home_services_count", "How many to show", "Default 6."),
           T("home_services_link_label", "View-all button text", "Blank hides the button."),
+        ],
+      },
+      {
+        section: "Total Care Model",
+        preview: { path: "", anchor: "sec-model" },
+        hideNote: "Clear the title to hide this section.",
+        items: [
+          SW("show_home_model", "Show this section"),
+          T("home_model_eyebrow", "Small label above the heading"),
+          T("home_model_title", "Heading"),
+          TA("home_model_text", "Subtitle text"),
+          IMG("home_model_image", "Full-width background image"),
+          TA("home_model_caption", "Caption overlaid on the image"),
         ],
       },
       {
@@ -594,6 +640,21 @@ export const settingPages: SettingPage[] = [
           T("about_history_title", "Heading"),
           TA("about_history", "Text"),
           IMG("about_history_image", "Photo"),
+          PAIRS("about_history_timeline", "Timeline milestones", {
+            leftLabel: "Year",
+            rightLabel: "Event",
+            itemLabel: "Milestone",
+            addLabel: "Add a milestone",
+            help: "Shown below the history text. e.g. 2002 :: Founded in Kolonnawa",
+          }),
+        ],
+      },
+      {
+        section: "BOD and Staff",
+        preview: { path: "/about", anchor: "sec-team" },
+        hideNote: "This controls the heading. Manage members under Content -> BOD and Staff.",
+        items: [
+          T("about_team_title", "Heading"),
         ],
       },
       {

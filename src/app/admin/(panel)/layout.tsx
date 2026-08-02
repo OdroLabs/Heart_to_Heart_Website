@@ -1,3 +1,4 @@
+import { getSettings, s } from "@/lib/settings";
 import { redirect } from "next/navigation";
 import { getAdmin } from "@/lib/session";
 import { ROLE_LABELS } from "@/lib/roles";
@@ -8,12 +9,22 @@ export default async function AdminPanelLayout({ children }: { children: React.R
   const admin = await getAdmin();
   if (!admin) redirect("/admin/login");
 
+  const settings = await getSettings();
+  const logoImage = s(settings, "logo_image");
+  const logoLetter = s(settings, "logo_letter") || "C";
+  const siteName = s(settings, "site_short_name") || s(settings, "site_name") || "Heart to Heart";
+
   return (
     <ToastProvider>
-      <div className="flex min-h-screen">
-        <AdminSidebar role={admin.role} />
-        <div className="min-w-0 flex-1 bg-muted/40">
-          <header className="flex h-14 items-center justify-between gap-4 border-b bg-white px-6">
+      <div className="flex h-screen overflow-hidden">
+        <AdminSidebar 
+          role={admin.role} 
+          logoImage={logoImage} 
+          logoLetter={logoLetter} 
+          siteName={siteName} 
+        />
+        <div className="min-w-0 flex-1 flex flex-col bg-muted/40">
+          <header className="flex shrink-0 h-14 items-center justify-between gap-4 border-b bg-white px-6">
             <span className="truncate text-sm text-muted-foreground">
               Signed in as <strong>{admin.email}</strong>
             </span>
@@ -21,7 +32,7 @@ export default async function AdminPanelLayout({ children }: { children: React.R
               {ROLE_LABELS[admin.role]}
             </span>
           </header>
-          <main className="p-6">{children}</main>
+          <main className="flex-1 overflow-y-auto p-6">{children}</main>
         </div>
       </div>
     </ToastProvider>

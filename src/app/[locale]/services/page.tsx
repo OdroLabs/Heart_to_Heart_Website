@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import * as Icons from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { loc, type Locale } from "@/lib/i18n";
 import { getLabels } from "@/lib/labels";
@@ -41,11 +42,14 @@ export default async function ServicesPage({ params }: { params: { locale: Local
               </div>
             )}
             <div className="flex flex-1 flex-col p-6">
-              {service.icon && (
-                <span className="mb-4 grid h-12 w-12 place-items-center rounded-xl bg-brand-500/10 text-2xl">
-                  {service.icon}
-                </span>
-              )}
+              {service.icon && (() => {
+                const IconCmp = (Icons as any)[service.icon];
+                return IconCmp ? (
+                  <span className="mb-4 grid h-12 w-12 place-items-center rounded-xl bg-brand-500/10 text-2xl text-primary">
+                    <IconCmp className="h-6 w-6" />
+                  </span>
+                ) : null;
+              })()}
               <h2 className="mb-2 text-lg font-bold leading-snug transition-colors group-hover:text-primary">
                 {loc(service, "title", locale)}
               </h2>
