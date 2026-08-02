@@ -37,16 +37,16 @@ const BLANK: Val = { en: "" };
 
 const VIEW_ALL: Val = { en: "View All", si: "සියල්ල බලන්න", ta: "அனைத்தையும் காண்க" };
 const CONTACT_US: Val = { en: "Contact Us", si: "අප අමතන්න", ta: "தொடர்பு கொள்ள" };
-const SUPPORT_CSDF: Val = { en: "Support CSDF", si: "CSDF සඳහා සහාය වන්න", ta: "CSDF-க்கு ஆதரவு" };
+const SUPPORT_HTH: Val = { en: "Support Heart to Heart", si: "Heart to Heart සඳහා සහාය වන්න", ta: "Heart to Heart-க்கு ஆதரவு" };
 
 const content: Record<string, Val> = {
   /* ====================================================== General ========= */
   site_name: {
-    en: "Community Strength Development Foundation",
-    si: "ප්‍රජා ශක්ති සංවර්ධන පදනම",
-    ta: "சமூக வலிமை மேம்பாட்டு மன்றம்",
+    en: "Heart to Heart",
+    si: "Heart to Heart",
+    ta: "Heart to Heart",
   },
-  site_short_name: { en: "CSDF" },
+  site_short_name: { en: "Heart to Heart" },
   site_tagline: {
     en: "Supporting marginalized women in Sri Lanka since 2002 — with dignity, respect, and equal opportunity.",
     si: "2002 සිට ශ්‍රී ලංකාවේ කොන් වූ කාන්තාවන්ට ගෞරවය, ගරුත්වය සහ සම අවස්ථා සහිතව සහාය වෙමින්.",
@@ -59,7 +59,7 @@ const content: Record<string, Val> = {
   address: { en: "No. 68, Kolonnawa Road,\nKolonnawa, Colombo,\nSri Lanka" },
   phone: { en: "0112 534 838" },
   phone2: BLANK,
-  email: { en: "info@csdf.lk" },
+  email: { en: "info@hearttoheart.lk" },
   email2: BLANK,
   whatsapp: { en: "94112534838" },
   office_hours: {
@@ -77,17 +77,17 @@ const content: Record<string, Val> = {
   tiktok: BLANK,
 
   seo_title: {
-    en: "Community Strength Development Foundation",
-    si: "ප්‍රජා ශක්ති සංවර්ධන පදනම",
-    ta: "சமூக வலிமை மேம்பாட்டு மன்றம்",
+    en: "Heart to Heart",
+    si: "Heart to Heart",
+    ta: "Heart to Heart",
   },
   seo_description: {
-    en: "CSDF improves health, safety, dignity, and rights for marginalized women in Sri Lanka through community-led support, advocacy, and education.",
-    si: "CSDF ප්‍රජා නායකත්වයෙන් යුත් සහාය, පෙනී සිටීම සහ අධ්‍යාපනය හරහා ශ්‍රී ලංකාවේ කොන් වූ කාන්තාවන්ගේ සෞඛ්‍යය, ආරක්ෂාව, ගෞරවය සහ අයිතිවාසිකම් වැඩිදියුණු කරයි.",
-    ta: "CSDF சமூகம் சார்ந்த ஆதரவு, வாதிடல் மற்றும் கல்வி மூலம் இலங்கையில் ஓரங்கட்டப்பட்ட பெண்களின் சுகாதாரம், பாதுகாப்பு, கண்ணியம் மற்றும் உரிமைகளை மேம்படுத்துகிறது.",
+    en: "Heart to Heart improves health, safety, dignity, and rights for marginalized women in Sri Lanka through community-led support, advocacy, and education.",
+    si: "Heart to Heart ප්‍රජා නායකත්වයෙන් යුත් සහාය, පෙනී සිටීම සහ අධ්‍යාපනය හරහා ශ්‍රී ලංකාවේ කොන් වූ කාන්තාවන්ගේ සෞඛ්‍යය, ආරක්ෂාව, ගෞරවය සහ අයිතිවාසිකම් වැඩිදියුණු කරයි.",
+    ta: "Heart to Heart சமூகம் சார்ந்த ஆதரவு, வாதிடல் மற்றும் கல்வி மூலம் இலங்கையில் ஓரங்கட்டப்பட்ட பெண்களின் சுகாதாரம், பாதுகாப்பு, கண்ணியம் மற்றும் உரிமைகளை மேம்படுத்துகிறது.",
   },
   seo_keywords: {
-    en: "CSDF, Sri Lanka, women's health, HIV support, community development, human rights, Colombo",
+    en: "Heart to Heart, Sri Lanka, women's health, HIV support, community development, human rights, Colombo",
   },
   og_image: BLANK,
 
@@ -126,9 +126,9 @@ const content: Record<string, Val> = {
   },
   footer_newsletter_text: BLANK,
   footer_copyright: {
-    en: "CSDF. All rights reserved.",
-    si: "CSDF. සියලුම හිමිකම් ඇවිරිණි.",
-    ta: "CSDF. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
+    en: "Heart to Heart. All rights reserved.",
+    si: "Heart to Heart. සියලුම හිමිකම් ඇවිරිණි.",
+    ta: "Heart to Heart. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
   },
   footer_credit: BLANK,
 
@@ -144,9 +144,9 @@ const content: Record<string, Val> = {
     ta: "சுகாதாரம், ஆதரவு மற்றும் வாதிடல் மூலம் பெண்களை மேம்படுத்துதல்",
   },
   hero_subtitle: {
-    en: "CSDF works alongside marginalized women to improve access to healthcare, promote human rights, strengthen communities, and create healthier and safer lives.",
-    si: "CSDF කොන් වූ කාන්තාවන් සමඟ එක්ව සෞඛ්‍ය සේවා ලබාගැනීම වැඩිදියුණු කිරීමට, මානව හිමිකම් ප්‍රවර්ධනයට, ප්‍රජාවන් ශක්තිමත් කිරීමට සහ සෞඛ්‍ය සම්පන්න, ආරක්ෂිත ජීවිත ගොඩනැගීමට කටයුතු කරයි.",
-    ta: "CSDF ஓரங்கட்டப்பட்ட பெண்களுடன் இணைந்து சுகாதார அணுகலை மேம்படுத்தவும், மனித உரிமைகளை ஊக்குவிக்கவும், சமூகங்களை வலுப்படுத்தவும், ஆரோக்கியமான பாதுகாப்பான வாழ்க்கையை உருவாக்கவும் செயல்படுகிறது.",
+    en: "Heart to Heart works alongside marginalized women to improve access to healthcare, promote human rights, strengthen communities, and create healthier and safer lives.",
+    si: "Heart to Heart කොන් වූ කාන්තාවන් සමඟ එක්ව සෞඛ්‍ය සේවා ලබාගැනීම වැඩිදියුණු කිරීමට, මානව හිමිකම් ප්‍රවර්ධනයට, ප්‍රජාවන් ශක්තිමත් කිරීමට සහ සෞඛ්‍ය සම්පන්න, ආරක්ෂිත ජීවිත ගොඩනැගීමට කටයුතු කරයි.",
+    ta: "Heart to Heart ஓரங்கட்டப்பட்ட பெண்களுடன் இணைந்து சுகாதார அணுகலை மேம்படுத்தவும், மனித உரிமைகளை ஊக்குவிக்கவும், சமூகங்களை வலுப்படுத்தவும், ஆரோக்கியமான பாதுகாப்பான வாழ்க்கையை உருவாக்கவும் செயல்படுகிறது.",
   },
   hero_image: { en: HERO_IMAGE },
   hero_cta1_label: { en: "Get Support", si: "සහාය ලබාගන්න", ta: "உதவி பெற" },
@@ -167,20 +167,20 @@ const content: Record<string, Val> = {
   show_home_about: ON,
   home_about_eyebrow: { en: "Who We Are", si: "අපි කවුද", ta: "நாங்கள் யார்" },
   home_about_title: {
-    en: "Community Strength Development Foundation",
-    si: "ප්‍රජා ශක්ති සංවර්ධන පදනම",
-    ta: "சமூக வலிமை மேம்பாட்டு மன்றம்",
+    en: "Heart to Heart",
+    si: "Heart to Heart",
+    ta: "Heart to Heart",
   },
   home_about_text: {
-    en: "Community Strength Development Foundation (CSDF) is a non-profit, voluntary organization registered with the Department of Social Services and inaugurated in 2002. Working independently — irrespective of race, religion, caste, and party politics — CSDF focuses on marginalized women in Sri Lanka, providing the support services needed to uplift their lives with dignity, respect, and equal opportunity.",
-    si: "ප්‍රජා ශක්ති සංවර්ධන පදනම (CSDF) සමාජ සේවා දෙපාර්තමේන්තුවේ ලියාපදිංචි, 2002 දී ආරම්භ කරන ලද ලාභ නොලබන ස්වේච්ඡා සංවිධානයකි. ජාති, ආගම්, කුල සහ පක්ෂ දේශපාලනයෙන් තොරව ස්වාධීනව කටයුතු කරමින්, CSDF ශ්‍රී ලංකාවේ කොන් වූ කාන්තාවන් කෙරෙහි අවධානය යොමු කරමින්, ගෞරවය, ගරුත්වය සහ සම අවස්ථා සහිතව ඔවුන්ගේ ජීවිත නංවාලීමට අවශ්‍ය සහාය සේවා සපයයි.",
-    ta: "சமூக வலிமை மேம்பாட்டு மன்றம் (CSDF) சமூக சேவைகள் திணைக்களத்தில் பதிவுசெய்யப்பட்ட, 2002 இல் ஆரம்பிக்கப்பட்ட இலாப நோக்கற்ற தன்னார்வ அமைப்பாகும். இனம், மதம், சாதி மற்றும் கட்சி அரசியலுக்கு அப்பால் சுயாதீனமாக செயல்படும் CSDF, இலங்கையில் ஓரங்கட்டப்பட்ட பெண்களில் கவனம் செலுத்தி, கண்ணியம், மரியாதை மற்றும் சம வாய்ப்புடன் அவர்களின் வாழ்க்கையை மேம்படுத்த தேவையான ஆதரவு சேவைகளை வழங்குகிறது.",
+    en: "Heart to Heart is a non-profit, voluntary organization registered with the Department of Social Services and inaugurated in 2002. Working independently — irrespective of race, religion, caste, and party politics — Heart to Heart focuses on marginalized women in Sri Lanka, providing the support services needed to uplift their lives with dignity, respect, and equal opportunity.",
+    si: "Heart to Heart සමාජ සේවා දෙපාර්තමේන්තුවේ ලියාපදිංචි, 2002 දී ආරම්භ කරන ලද ලාභ නොලබන ස්වේච්ඡා සංවිධානයකි. ජාති, ආගම්, කුල සහ පක්ෂ දේශපාලනයෙන් තොරව ස්වාධීනව කටයුතු කරමින්, Heart to Heart ශ්‍රී ලංකාවේ කොන් වූ කාන්තාවන් කෙරෙහි අවධානය යොමු කරමින්, ගෞරවය, ගරුත්වය සහ සම අවස්ථා සහිතව ඔවුන්ගේ ජීවිත නංවාලීමට අවශ්‍ය සහාය සේවා සපයයි.",
+    ta: "Heart to Heart சமூக சேவைகள் திணைக்களத்தில் பதிவுசெய்யப்பட்ட, 2002 இல் ஆரம்பிக்கப்பட்ட இலாப நோக்கற்ற தன்னார்வ அமைப்பாகும். இனம், மதம், சாதி மற்றும் கட்சி அரசியலுக்கு அப்பால் சுயாதீனமாக செயல்படும் Heart to Heart, இலங்கையில் ஓரங்கட்டப்பட்ட பெண்களில் கவனம் செலுத்தி, கண்ணியம், மரியாதை மற்றும் சம வாய்ப்புடன் அவர்களின் வாழ்க்கையை மேம்படுத்த தேவையான ஆதரவு சேவைகளை வழங்குகிறது.",
   },
   home_about_image: { en: COMMUNITY_IMAGE },
   home_about_caption: {
-    en: "Community Strength Development Foundation",
-    si: "ප්‍රජා ශක්ති සංවර්ධන පදනම",
-    ta: "சமூக வலிமை மேம்பாட்டு மன்றம்",
+    en: "Heart to Heart",
+    si: "Heart to Heart",
+    ta: "Heart to Heart",
   },
   home_about_link_label: { en: "Learn More", si: "තව දැනගන්න", ta: "மேலும் அறிய" },
 
@@ -267,7 +267,7 @@ const content: Record<string, Val> = {
   },
 
   show_home_donate: ON,
-  home_donate_eyebrow: SUPPORT_CSDF,
+  home_donate_eyebrow: SUPPORT_HTH,
   home_donate_title: {
     en: "Your gift keeps these services running",
     si: "ඔබගේ දායකත්වය මෙම සේවා පවත්වාගෙන යයි",
@@ -292,9 +292,9 @@ const content: Record<string, Val> = {
 
   about_overview_title: { en: "Overview", si: "දළ විශ්ලේෂණය", ta: "மேலோட்டம்" },
   about_overview: {
-    en: "Community Strength Development Foundation (CSDF) is a non-profit, voluntary organization registered with the Department of Social Services and inaugurated in 2002. Working independently — irrespective of race, religion, caste, and party politics — CSDF focuses on marginalized women in Sri Lanka, providing the support services needed to uplift their lives with dignity, respect, and equal opportunity.",
-    si: "ප්‍රජා ශක්ති සංවර්ධන පදනම (CSDF) සමාජ සේවා දෙපාර්තමේන්තුවේ ලියාපදිංචි, 2002 දී ආරම්භ කරන ලද ලාභ නොලබන ස්වේච්ඡා සංවිධානයකි. ජාති, ආගම්, කුල සහ පක්ෂ දේශපාලනයෙන් තොරව ස්වාධීනව කටයුතු කරමින්, CSDF ශ්‍රී ලංකාවේ කොන් වූ කාන්තාවන් කෙරෙහි අවධානය යොමු කරමින්, ගෞරවය, ගරුත්වය සහ සම අවස්ථා සහිතව ඔවුන්ගේ ජීවිත නංවාලීමට අවශ්‍ය සහාය සේවා සපයයි.",
-    ta: "சமூக வலிமை மேம்பாட்டு மன்றம் (CSDF) சமூக சேவைகள் திணைக்களத்தில் பதிவுசெய்யப்பட்ட, 2002 இல் ஆரம்பிக்கப்பட்ட இலாப நோக்கற்ற தன்னார்வ அமைப்பாகும். இனம், மதம், சாதி மற்றும் கட்சி அரசியலுக்கு அப்பால் சுயாதீனமாக செயல்படும் CSDF, இலங்கையில் ஓரங்கட்டப்பட்ட பெண்களில் கவனம் செலுத்தி, கண்ணியம், மரியாதை மற்றும் சம வாய்ப்புடன் அவர்களின் வாழ்க்கையை மேம்படுத்த தேவையான ஆதரவு சேவைகளை வழங்குகிறது.",
+    en: "Heart to Heart is a non-profit, voluntary organization registered with the Department of Social Services and inaugurated in 2002. Working independently — irrespective of race, religion, caste, and party politics — Heart to Heart focuses on marginalized women in Sri Lanka, providing the support services needed to uplift their lives with dignity, respect, and equal opportunity.",
+    si: "Heart to Heart සමාජ සේවා දෙපාර්තමේන්තුවේ ලියාපදිංචි, 2002 දී ආරම්භ කරන ලද ලාභ නොලබන ස්වේච්ඡා සංවිධානයකි. ජාති, ආගම්, කුල සහ පක්ෂ දේශපාලනයෙන් තොරව ස්වාධීනව කටයුතු කරමින්, Heart to Heart ශ්‍රී ලංකාවේ කොන් වූ කාන්තාවන් කෙරෙහි අවධානය යොමු කරමින්, ගෞරවය, ගරුත්වය සහ සම අවස්ථා සහිතව ඔවුන්ගේ ජීවිත නංවාලීමට අවශ්‍ය සහාය සේවා සපයයි.",
+    ta: "Heart to Heart சமூக சேவைகள் திணைக்களத்தில் பதிவுசெய்யப்பட்ட, 2002 இல் ஆரம்பிக்கப்பட்ட இலாப நோக்கற்ற தன்னார்வ அமைப்பாகும். இனம், மதம், சாதி மற்றும் கட்சி அரசியலுக்கு அப்பால் சுயாதீனமாக செயல்படும் Heart to Heart, இலங்கையில் ஓரங்கட்டப்பட்ட பெண்களில் கவனம் செலுத்தி, கண்ணியம், மரியாதை மற்றும் சம வாய்ப்புடன் அவர்களின் வாழ்க்கையை மேம்படுத்த தேவையான ஆதரவு சேவைகளை வழங்குகிறது.",
   },
   about_overview_image: BLANK,
 
@@ -324,16 +324,16 @@ const content: Record<string, Val> = {
     ta: "நாங்கள் சேவை செய்யும் சமூகங்கள்",
   },
   about_community: {
-    en: "CSDF serves marginalized women across Sri Lanka, including female sex workers and women facing stigma, violence, or economic hardship. Our programs are community-led: designed and delivered by people who understand the lived experience of the women we serve, across 10 districts with 8+ partner organizations.",
-    si: "CSDF ශ්‍රී ලංකාව පුරා කොන් වූ කාන්තාවන්ට සේවය කරයි. අපගේ වැඩසටහන් ප්‍රජා නායකත්වයෙන් යුක්තයි: අප සේවය කරන කාන්තාවන්ගේ ජීවන අත්දැකීම් තේරුම් ගන්නා අය විසින් නිර්මාණය කර ක්‍රියාත්මක කරනු ලැබේ — දිස්ත්‍රික්ක 10ක්, හවුල්කාර ආයතන 8+ක් සමඟ.",
-    ta: "CSDF இலங்கை முழுவதும் ஓரங்கட்டப்பட்ட பெண்களுக்கு சேவை செய்கிறது. எங்கள் திட்டங்கள் சமூகத்தால் வழிநடத்தப்படுகின்றன: நாங்கள் சேவை செய்யும் பெண்களின் வாழ்க்கை அனுபவத்தைப் புரிந்துகொள்பவர்களால் வடிவமைக்கப்பட்டு வழங்கப்படுகின்றன — 10 மாவட்டங்களில், 8+ பங்காளர் அமைப்புகளுடன்.",
+    en: "Heart to Heart serves marginalized women across Sri Lanka, including female sex workers and women facing stigma, violence, or economic hardship. Our programs are community-led: designed and delivered by people who understand the lived experience of the women we serve, across 10 districts with 8+ partner organizations.",
+    si: "Heart to Heart ශ්‍රී ලංකාව පුරා කොන් වූ කාන්තාවන්ට සේවය කරයි. අපගේ වැඩසටහන් ප්‍රජා නායකත්වයෙන් යුක්තයි: අප සේවය කරන කාන්තාවන්ගේ ජීවන අත්දැකීම් තේරුම් ගන්නා අය විසින් නිර්මාණය කර ක්‍රියාත්මක කරනු ලැබේ — දිස්ත්‍රික්ක 10ක්, හවුල්කාර ආයතන 8+ක් සමඟ.",
+    ta: "Heart to Heart இலங்கை முழுவதும் ஓரங்கட்டப்பட்ட பெண்களுக்கு சேவை செய்கிறது. எங்கள் திட்டங்கள் சமூகத்தால் வழிநடத்தப்படுகின்றன: நாங்கள் சேவை செய்யும் பெண்களின் வாழ்க்கை அனுபவத்தைப் புரிந்துகொள்பவர்களால் வடிவமைக்கப்பட்டு வழங்கப்படுகின்றன — 10 மாவட்டங்களில், 8+ பங்காளர் அமைப்புகளுடன்.",
   },
 
   about_history_title: { en: "Our Story", si: "අපගේ කථාව", ta: "எங்கள் கதை" },
   about_history: {
-    en: "CSDF was founded in 2002 by a small group of community members who saw that the women most in need of health services were the least likely to receive them. What began as informal peer outreach in Kolonnawa has grown into a registered organization working across 10 districts.\n\nOver two decades we have become a frontline partner in Sri Lanka's HIV response, reaching communities that formal health systems often miss. The approach has not changed: confidentiality first, no judgement, and programs shaped by the women they serve.",
-    si: "CSDF 2002 දී ආරම්භ කරන ලද්දේ, සෞඛ්‍ය සේවා වඩාත් අවශ්‍ය කාන්තාවන්ට ඒවා ලැබීමේ ඉඩකඩ අවම බව දුටු කුඩා ප්‍රජා කණ්ඩායමක් විසිනි. කොළොන්නාවේ අවිධිමත් සම-සම්බන්ධතාවක් ලෙස ආරම්භ වූ දේ දිස්ත්‍රික්ක 10ක් පුරා කටයුතු කරන ලියාපදිංචි සංවිධානයක් බවට වර්ධනය වී ඇත.\n\nදශක දෙකකට වැඩි කාලයක් තුළ අපි ශ්‍රී ලංකාවේ HIV ප්‍රතිචාරයේ පෙරමුණේ හවුල්කරුවෙකු බවට පත් වී ඇත. ප්‍රවේශය වෙනස් වී නැත: රහස්‍යභාවය පළමුව, විනිශ්චයක් නැත, සහ සේවය කරන කාන්තාවන් විසින් හැඩගස්වන වැඩසටහන්.",
-    ta: "சுகாதார சேவைகள் மிகவும் தேவைப்படும் பெண்களே அவற்றைப் பெறும் வாய்ப்பு குறைவாக இருப்பதைக் கண்ட ஒரு சிறு சமூகக் குழுவினால் CSDF 2002 இல் நிறுவப்பட்டது. கொலன்னாவையில் முறைசாரா சக அணுகுமுறையாகத் தொடங்கியது இன்று 10 மாவட்டங்களில் செயல்படும் பதிவுசெய்யப்பட்ட அமைப்பாக வளர்ந்துள்ளது.\n\nஇரு தசாப்தங்களுக்கும் மேலாக இலங்கையின் HIV பதிலிறுப்பில் நாங்கள் முன்னணி பங்காளியாக மாறியுள்ளோம். அணுகுமுறை மாறவில்லை: இரகசியம் முதலில், தீர்ப்பு இல்லை, சேவை பெறும் பெண்களால் வடிவமைக்கப்படும் திட்டங்கள்.",
+    en: "Heart to Heart was founded in 2002 by a small group of community members who saw that the women most in need of health services were the least likely to receive them. What began as informal peer outreach in Kolonnawa has grown into a registered organization working across 10 districts.\n\nOver two decades we have become a frontline partner in Sri Lanka's HIV response, reaching communities that formal health systems often miss. The approach has not changed: confidentiality first, no judgement, and programs shaped by the women they serve.",
+    si: "Heart to Heart 2002 දී ආරම්භ කරන ලද්දේ, සෞඛ්‍ය සේවා වඩාත් අවශ්‍ය කාන්තාවන්ට ඒවා ලැබීමේ ඉඩකඩ අවම බව දුටු කුඩා ප්‍රජා කණ්ඩායමක් විසිනි. කොළොන්නාවේ අවිධිමත් සම-සම්බන්ධතාවක් ලෙස ආරම්භ වූ දේ දිස්ත්‍රික්ක 10ක් පුරා කටයුතු කරන ලියාපදිංචි සංවිධානයක් බවට වර්ධනය වී ඇත.\n\nදශක දෙකකට වැඩි කාලයක් තුළ අපි ශ්‍රී ලංකාවේ HIV ප්‍රතිචාරයේ පෙරමුණේ හවුල්කරුවෙකු බවට පත් වී ඇත. ප්‍රවේශය වෙනස් වී නැත: රහස්‍යභාවය පළමුව, විනිශ්චයක් නැත, සහ සේවය කරන කාන්තාවන් විසින් හැඩගස්වන වැඩසටහන්.",
+    ta: "சுகாதார சேவைகள் மிகவும் தேவைப்படும் பெண்களே அவற்றைப் பெறும் வாய்ப்பு குறைவாக இருப்பதைக் கண்ட ஒரு சிறு சமூகக் குழுவினால் Heart to Heart 2002 இல் நிறுவப்பட்டது. கொலன்னாவையில் முறைசாரா சக அணுகுமுறையாகத் தொடங்கியது இன்று 10 மாவட்டங்களில் செயல்படும் பதிவுசெய்யப்பட்ட அமைப்பாக வளர்ந்துள்ளது.\n\nஇரு தசாப்தங்களுக்கும் மேலாக இலங்கையின் HIV பதிலிறுப்பில் நாங்கள் முன்னணி பங்காளியாக மாறியுள்ளோம். அணுகுமுறை மாறவில்லை: இரகசியம் முதலில், தீர்ப்பு இல்லை, சேவை பெறும் பெண்களால் வடிவமைக்கப்படும் திட்டங்கள்.",
   },
   about_history_image: BLANK,
 
@@ -382,9 +382,9 @@ const content: Record<string, Val> = {
   show_donate_online: ON,
   donate_amounts: { en: "1000\n2500\n5000\n10000\n25000" },
   donate_note: {
-    en: "CSDF is a registered non-profit. Donations are processed securely by PayHere; we never see or store your card details.",
-    si: "CSDF ලියාපදිංචි ලාභ නොලබන සංවිධානයකි. පරිත්‍යාග PayHere මගින් ආරක්ෂිතව සකසනු ලැබේ; අපි කිසිදා ඔබගේ කාඩ්පත් විස්තර නොදකිමු හෝ නොගබඩා කරමු.",
-    ta: "CSDF ஒரு பதிவுசெய்யப்பட்ட இலாப நோக்கற்ற அமைப்பு. நன்கொடைகள் PayHere மூலம் பாதுகாப்பாக செயலாக்கப்படுகின்றன; உங்கள் அட்டை விவரங்களை நாங்கள் ஒருபோதும் பார்ப்பதில்லை அல்லது சேமிப்பதில்லை.",
+    en: "Heart to Heart is a registered non-profit. Donations are processed securely by PayHere; we never see or store your card details.",
+    si: "Heart to Heart ලියාපදිංචි ලාභ නොලබන සංවිධානයකි. පරිත්‍යාග PayHere මගින් ආරක්ෂිතව සකසනු ලැබේ; අපි කිසිදා ඔබගේ කාඩ්පත් විස්තර නොදකිමු හෝ නොගබඩා කරමු.",
+    ta: "Heart to Heart ஒரு பதிவுசெய்யப்பட்ட இலாப நோக்கற்ற அமைப்பு. நன்கொடைகள் PayHere மூலம் பாதுகாப்பாக செயலாக்கப்படுகின்றன; உங்கள் அட்டை விவரங்களை நாங்கள் ஒருபோதும் பார்ப்பதில்லை அல்லது சேமிப்பதில்லை.",
   },
 
   donate_bank_title: {
@@ -393,10 +393,10 @@ const content: Record<string, Val> = {
     ta: "நேரடி வங்கி பரிமாற்றம்",
   },
   bank_details: {
-    en: "Account Name: Community Strength Development Foundation\nBank: (your bank)\nBranch: (your branch)\nAccount No: (your account number)\nSWIFT: (for international transfers)",
+    en: "Account Name: Heart to Heart\nBank: (your bank)\nBranch: (your branch)\nAccount No: (your account number)\nSWIFT: (for international transfers)",
   },
 
-  donate_impact_title: SUPPORT_CSDF,
+  donate_impact_title: SUPPORT_HTH,
   donate_impact_items: {
     en: "Where it's needed most :: Flexible funding lets us respond to the most urgent needs first.\nHealth services :: Clinics, testing, treatment linkage and peer accompaniment.\nEducation & awareness :: Peer-led health education and rights training in the community.\nCommunity programs :: Safe spaces, peer leadership and economic opportunity.",
     si: "වඩාත්ම අවශ්‍ය තැනට :: නම්‍යශීලී අරමුදල් මගින් වඩාත් හදිසි අවශ්‍යතාවලට මුලින්ම ප්‍රතිචාර දැක්විය හැක.\nසෞඛ්‍ය සේවා :: සායන, පරීක්ෂණ, ප්‍රතිකාර සම්බන්ධ කිරීම සහ සම සහාය.\nඅධ්‍යාපනය සහ දැනුවත් කිරීම :: ප්‍රජාව තුළ සම-නායකත්ව සෞඛ්‍ය අධ්‍යාපනය සහ අයිතිවාසිකම් පුහුණුව.\nප්‍රජා වැඩසටහන් :: ආරක්ෂිත අවකාශ, සම නායකත්වය සහ ආර්ථික අවස්ථා.",

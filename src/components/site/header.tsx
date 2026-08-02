@@ -16,7 +16,7 @@ export interface HeaderProps {
   nav: NavConfig;
   /** Full organisation name, shown small under the wordmark. */
   siteName: string;
-  /** Abbreviation used as the wordmark, e.g. CSDF. */
+  /** Abbreviation used as the wordmark, e.g. Heart to Heart. */
   shortName: string;
   logoImage?: string;
   logoLetter: string;

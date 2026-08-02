@@ -1,6 +1,6 @@
-# CSDF Website
+# Heart to Heart Website
 
-Trilingual (English / සිංහල / தமிழ்) website for the Community Strength Development Foundation, with a full admin panel to manage every piece of content on the site.
+Trilingual (English / සිංහල / தமிழ்) website for Heart to Heart, with a full admin panel to manage every piece of content on the site.
 
 **Stack:** Next.js 14 (App Router) · TypeScript · Tailwind CSS · shadcn/ui (Radix UI) · Prisma · MySQL · NextAuth · PayHere
 
@@ -36,7 +36,7 @@ Edit `.env`:
 
 - `DATABASE_URL` — your MySQL connection string. Create the database first:
   ```sql
-  CREATE DATABASE csdf CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+  CREATE DATABASE heart_to_heart CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
   ```
   utf8mb4 is required for Sinhala/Tamil text.
 - `NEXTAUTH_SECRET` — any long random string (`openssl rand -base64 32`)
@@ -53,7 +53,7 @@ npm run db:seed
 
 The seed creates all pages' starter content in three languages, sample projects/services/news/events, and the admin account:
 
-> **Login:** `admin@csdf.lk` / `admin12345` — **change this password immediately** (Dashboard → Change Password).
+> **Login:** `admin@hearttoheart.lk` / `admin12345` — **change this password immediately** (Dashboard → Change Password).
 
 ### 5. Run
 
@@ -87,5 +87,5 @@ Suggested production start (PM2):
 
 ```bash
 npm run build
-pm2 start npm --name csdf -- start
+pm2 start npm --name heart-to-heart -- start
 ```

@@ -7,7 +7,7 @@ import "./globals.css";
  * `src/app/[locale]/layout.tsx`.
  */
 export const metadata: Metadata = {
-  title: "CSDF",
+  title: "Heart to Heart",
 };
 
 export const viewport: Viewport = {

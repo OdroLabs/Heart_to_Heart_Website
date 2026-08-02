@@ -92,7 +92,7 @@ export function AdminSidebar({ role }: { role: string }) {
         <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-bold">
           C
         </span>
-        <span className="font-bold">CSDF Admin</span>
+        <span className="font-bold">Heart to Heart Admin</span>
       </div>
       <nav className="flex-1 space-y-4 overflow-y-auto p-3">
         <div className="space-y-0.5">

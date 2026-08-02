@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
 
   const amount = amountRaw.toFixed(2);
   const currency = "LKR";
-  const orderId = `CSDF-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
+  const orderId = `H2H-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
 
   // No dedicated columns for frequency/purpose — encode them in the message
   const storedMessage =
@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
     cancel_url: `${siteUrl}/${locale}/donate?cancelled=1`,
     notify_url: `${siteUrl}/api/payhere/notify`,
     order_id: orderId,
-    items: `${monthly ? "Monthly donation" : "Donation"} to CSDF${purpose ? ` — ${purpose}` : ""}`,
+    items: `${monthly ? "Monthly donation" : "Donation"} to Heart to Heart${purpose ? ` — ${purpose}` : ""}`,
     currency,
     amount,
     // PayHere recurring-payment fields (ignored for one-time donations)

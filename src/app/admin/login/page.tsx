@@ -62,7 +62,7 @@ export default function AdminLoginPage() {
           <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white">
             <Lock className="h-5 w-5" />
           </div>
-          <CardTitle>CSDF Admin</CardTitle>
+          <CardTitle>Heart to Heart Admin</CardTitle>
         </CardHeader>
         <CardContent>
           <Suspense>

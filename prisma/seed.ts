@@ -7,11 +7,11 @@ async function main() {
   // ---------- Admin user ----------
   // The first account is an owner: full access, including user management.
   await prisma.user.upsert({
-    where: { email: "admin@csdf.lk" },
+    where: { email: "admin@hearttoheart.lk" },
     update: { role: "owner", active: true },
     create: {
-      name: "CSDF Admin",
-      email: "admin@csdf.lk",
+      name: "Heart to Heart Admin",
+      email: "admin@hearttoheart.lk",
       password: await hash("admin12345", 10),
       role: "owner",
     },
@@ -20,9 +20,9 @@ async function main() {
   // ---------- Settings ----------
   const settings: Record<string, { en: string; si?: string; ta?: string }> = {
     site_name: {
-      en: "Community Strength Development Foundation",
-      si: "ප්‍රජා ශක්ති සංවර්ධන පදනම",
-      ta: "சமூக வலிமை மேம்பாட்டு மன்றம்",
+      en: "Heart to Heart",
+      si: "Heart to Heart",
+      ta: "Heart to Heart",
     },
     site_tagline: {
       en: "Supporting marginalized women in Sri Lanka since 2002 — with dignity, respect, and equal opportunity.",
@@ -31,7 +31,7 @@ async function main() {
     },
     address: { en: "No. 68, Kolonnawa Road,\nKolonnawa, Colombo,\nSri Lanka" },
     phone: { en: "0112 534 838" },
-    email: { en: "info@csdf.lk" },
+    email: { en: "info@hearttoheart.lk" },
     whatsapp: { en: "94112534838" },
     office_hours: {
       en: "Mon – Fri, 8.30 am to 4.30 pm",
@@ -53,9 +53,9 @@ async function main() {
       ta: "சுகாதாரம், ஆதரவு மற்றும் வாதிடல் மூலம் பெண்களை மேம்படுத்துதல்",
     },
     hero_subtitle: {
-      en: "CSDF works alongside marginalized women to improve access to healthcare, promote human rights, strengthen communities, and create healthier and safer lives.",
-      si: "CSDF කොන් වූ කාන්තාවන් සමඟ එක්ව සෞඛ්‍ය සේවා ලබාගැනීම වැඩිදියුණු කිරීමට, මානව හිමිකම් ප්‍රවර්ධනයට, ප්‍රජාවන් ශක්තිමත් කිරීමට සහ සෞඛ්‍ය සම්පන්න, ආරක්ෂිත ජීවිත ගොඩනැගීමට කටයුතු කරයි.",
-      ta: "CSDF ஓரங்கட்டப்பட்ட பெண்களுடன் இணைந்து சுகாதார அணுகலை மேம்படுத்தவும், மனித உரிமைகளை ஊக்குவிக்கவும், சமூகங்களை வலுப்படுத்தவும், ஆரோக்கியமான பாதுகாப்பான வாழ்க்கையை உருவாக்கவும் செயல்படுகிறது.",
+      en: "Heart to Heart works alongside marginalized women to improve access to healthcare, promote human rights, strengthen communities, and create healthier and safer lives.",
+      si: "Heart to Heart කොන් වූ කාන්තාවන් සමඟ එක්ව සෞඛ්‍ය සේවා ලබාගැනීම වැඩිදියුණු කිරීමට, මානව හිමිකම් ප්‍රවර්ධනයට, ප්‍රජාවන් ශක්තිමත් කිරීමට සහ සෞඛ්‍ය සම්පන්න, ආරක්ෂිත ජීවිත ගොඩනැගීමට කටයුතු කරයි.",
+      ta: "Heart to Heart ஓரங்கட்டப்பட்ட பெண்களுடன் இணைந்து சுகாதார அணுகலை மேம்படுத்தவும், மனித உரிமைகளை ஊக்குவிக்கவும், சமூகங்களை வலுப்படுத்தவும், ஆரோக்கியமான பாதுகாப்பான வாழ்க்கையை உருவாக்கவும் செயல்படுகிறது.",
     },
     hero_points: {
       en: "All information kept strictly confidential\nNon-judgmental support for every person\nCommunity-led by people who understand\nFree services — no cost, no barriers",
@@ -68,9 +68,9 @@ async function main() {
       ta: "08+ பங்காளர் அமைப்புகள் · இலங்கை முழுவதும் 10 மாவட்டங்கள்",
     },
     about_overview: {
-      en: "Community Strength Development Foundation (CSDF) is a non-profit, voluntary organization registered with the Department of Social Services and inaugurated in 2002. Working independently — irrespective of race, religion, caste, and party politics — CSDF focuses on marginalized women in Sri Lanka, providing the support services needed to uplift their lives with dignity, respect, and equal opportunity.",
-      si: "ප්‍රජා ශක්ති සංවර්ධන පදනම (CSDF) සමාජ සේවා දෙපාර්තමේන්තුවේ ලියාපදිංචි, 2002 දී ආරම්භ කරන ලද ලාභ නොලබන ස්වේච්ඡා සංවිධානයකි. ජාති, ආගම්, කුල සහ පක්ෂ දේශපාලනයෙන් තොරව ස්වාධීනව කටයුතු කරමින්, CSDF ශ්‍රී ලංකාවේ කොන් වූ කාන්තාවන් කෙරෙහි අවධානය යොමු කරමින්, ගෞරවය, ගරුත්වය සහ සම අවස්ථා සහිතව ඔවුන්ගේ ජීවිත නංවාලීමට අවශ්‍ය සහාය සේවා සපයයි.",
-      ta: "சமூக வலிமை மேம்பாட்டு மன்றம் (CSDF) சமூக சேவைகள் திணைக்களத்தில் பதிவுசெய்யப்பட்ட, 2002 இல் ஆரம்பிக்கப்பட்ட இலாப நோக்கற்ற தன்னார்வ அமைப்பாகும். இனம், மதம், சாதி மற்றும் கட்சி அரசியலுக்கு அப்பால் சுயாதீனமாக செயல்படும் CSDF, இலங்கையில் ஓரங்கட்டப்பட்ட பெண்களில் கவனம் செலுத்தி, கண்ணியம், மரியாதை மற்றும் சம வாய்ப்புடன் அவர்களின் வாழ்க்கையை மேம்படுத்த தேவையான ஆதரவு சேவைகளை வழங்குகிறது.",
+      en: "Heart to Heart is a non-profit, voluntary organization registered with the Department of Social Services and inaugurated in 2002. Working independently — irrespective of race, religion, caste, and party politics — Heart to Heart focuses on marginalized women in Sri Lanka, providing the support services needed to uplift their lives with dignity, respect, and equal opportunity.",
+      si: "Heart to Heart සමාජ සේවා දෙපාර්තමේන්තුවේ ලියාපදිංචි, 2002 දී ආරම්භ කරන ලද ලාභ නොලබන ස්වේච්ඡා සංවිධානයකි. ජාති, ආගම්, කුල සහ පක්ෂ දේශපාලනයෙන් තොරව ස්වාධීනව කටයුතු කරමින්, Heart to Heart ශ්‍රී ලංකාවේ කොන් වූ කාන්තාවන් කෙරෙහි අවධානය යොමු කරමින්, ගෞරවය, ගරුත්වය සහ සම අවස්ථා සහිතව ඔවුන්ගේ ජීවිත නංවාලීමට අවශ්‍ය සහාය සේවා සපයයි.",
+      ta: "Heart to Heart சமூக சேவைகள் திணைக்களத்தில் பதிவுசெய்யப்பட்ட, 2002 இல் ஆரம்பிக்கப்பட்ட இலாப நோக்கற்ற தன்னார்வ அமைப்பாகும். இனம், மதம், சாதி மற்றும் கட்சி அரசியலுக்கு அப்பால் சுயாதீனமாக செயல்படும் Heart to Heart, இலங்கையில் ஓரங்கட்டப்பட்ட பெண்களில் கவனம் செலுத்தி, கண்ணியம், மரியாதை மற்றும் சம வாய்ப்புடன் அவர்களின் வாழ்க்கையை மேம்படுத்த தேவையான ஆதரவு சேவைகளை வழங்குகிறது.",
     },
     about_vision: {
       en: "A society where every marginalized woman in Sri Lanka lives with dignity, health, safety, and equal opportunity.",
@@ -83,9 +83,9 @@ async function main() {
       ta: "இனம், மதம், சாதி அல்லது அரசியல் வேறுபாடின்றி — கண்ணியம், இரகசியம் மற்றும் மரியாதையுடன் ஓரங்கட்டப்பட்ட பெண்களுக்கு சமூகம் சார்ந்த ஆதரவு, சுகாதார அணுகல், உரிமை விழிப்புணர்வு மற்றும் பொருளாதார வாய்ப்புகளை வழங்குதல்.",
     },
     about_community: {
-      en: "CSDF serves marginalized women across Sri Lanka, including female sex workers and women facing stigma, violence, or economic hardship. Our programs are community-led: designed and delivered by people who understand the lived experience of the women we serve, across 10 districts with 8+ partner organizations.",
-      si: "CSDF ශ්‍රී ලංකාව පුරා කොන් වූ කාන්තාවන්ට සේවය කරයි. අපගේ වැඩසටහන් ප්‍රජා නායකත්වයෙන් යුක්තයි: අප සේවය කරන කාන්තාවන්ගේ ජීවන අත්දැකීම් තේරුම් ගන්නා අය විසින් නිර්මාණය කර ක්‍රියාත්මක කරනු ලැබේ — දිස්ත්‍රික්ක 10ක්, හවුල්කාර ආයතන 8+ක් සමඟ.",
-      ta: "CSDF இலங்கை முழுவதும் ஓரங்கட்டப்பட்ட பெண்களுக்கு சேவை செய்கிறது. எங்கள் திட்டங்கள் சமூகத்தால் வழிநடத்தப்படுகின்றன: நாங்கள் சேவை செய்யும் பெண்களின் வாழ்க்கை அனுபவத்தைப் புரிந்துகொள்பவர்களால் வடிவமைக்கப்பட்டு வழங்கப்படுகின்றன — 10 மாவட்டங்களில், 8+ பங்காளர் அமைப்புகளுடன்.",
+      en: "Heart to Heart serves marginalized women across Sri Lanka, including female sex workers and women facing stigma, violence, or economic hardship. Our programs are community-led: designed and delivered by people who understand the lived experience of the women we serve, across 10 districts with 8+ partner organizations.",
+      si: "Heart to Heart ශ්‍රී ලංකාව පුරා කොන් වූ කාන්තාවන්ට සේවය කරයි. අපගේ වැඩසටහන් ප්‍රජා නායකත්වයෙන් යුක්තයි: අප සේවය කරන කාන්තාවන්ගේ ජීවන අත්දැකීම් තේරුම් ගන්නා අය විසින් නිර්මාණය කර ක්‍රියාත්මක කරනු ලැබේ — දිස්ත්‍රික්ක 10ක්, හවුල්කාර ආයතන 8+ක් සමඟ.",
+      ta: "Heart to Heart இலங்கை முழுவதும் ஓரங்கட்டப்பட்ட பெண்களுக்கு சேவை செய்கிறது. எங்கள் திட்டங்கள் சமூகத்தால் வழிநடத்தப்படுகின்றன: நாங்கள் சேவை செய்யும் பெண்களின் வாழ்க்கை அனுபவத்தைப் புரிந்துகொள்பவர்களால் வடிவமைக்கப்பட்டு வழங்கப்படுகின்றன — 10 மாவட்டங்களில், 8+ பங்காளர் அமைப்புகளுடன்.",
     },
     donate_intro: {
       en: "Your support funds direct services, peer leadership, health education, and safe community spaces.",
@@ -93,7 +93,7 @@ async function main() {
       ta: "உங்கள் ஆதரவு நேரடி சேவைகள், சக தலைமைத்துவம், சுகாதாரக் கல்வி மற்றும் பாதுகாப்பான சமூக இடங்களுக்கு நிதியளிக்கிறது.",
     },
     bank_details: {
-      en: "Account Name: Community Strength Development Foundation\nBank: (your bank)\nBranch: (your branch)\nAccount No: (your account number)\nSWIFT: (for international transfers)",
+      en: "Account Name: Heart to Heart\nBank: (your bank)\nBranch: (your branch)\nAccount No: (your account number)\nSWIFT: (for international transfers)",
     },
   };
 
@@ -127,13 +127,13 @@ async function main() {
       descriptionSi: "කාන්තාවන්ට ගරුත්වයෙන් යුත් සෞඛ්‍ය සේවා වෙත සම්බන්ධ කරන වෛද්‍ය යොමු කිරීම් සහ සුවතා සහාය.",
       descriptionTa: "பெண்களை மரியாதையான சுகாதாரப் பராமரிப்புடன் இணைக்கும் மருத்துவ பரிந்துரைகள் மற்றும் நல ஆதரவு.",
       contentEn:
-        "Access to respectful, responsive healthcare is at the heart of everything CSDF does. Many of the women we serve face stigma, cost barriers, or fear of judgment when seeking medical care — so we walk with them through every step of the journey.\n\nOur healthcare service connects women to trusted clinics and hospitals through a referral network built over two decades. Peer navigators accompany women to appointments where needed, help explain procedures and results, and follow up to make sure treatment plans are completed. Regular mobile wellness clinics bring screenings and basic care directly into communities.",
+        "Access to respectful, responsive healthcare is at the heart of everything Heart to Heart does. Many of the women we serve face stigma, cost barriers, or fear of judgment when seeking medical care — so we walk with them through every step of the journey.\n\nOur healthcare service connects women to trusted clinics and hospitals through a referral network built over two decades. Peer navigators accompany women to appointments where needed, help explain procedures and results, and follow up to make sure treatment plans are completed. Regular mobile wellness clinics bring screenings and basic care directly into communities.",
       featuresEn:
         "Trusted referral network of clinics & hospitals\nPeer navigators who accompany appointments\nMobile wellness clinics in 10 districts\nFree health screenings and follow-up\nConfidential, judgment-free care\nHealth education workshops",
       benefitsEn:
         "Better Health Outcomes :: Women complete treatment plans at far higher rates when supported by a peer navigator from first referral to final follow-up.\nCare Without Stigma :: Every partner facility in our network is oriented to provide respectful, confidential, judgment-free care.\nEarly Detection :: Regular mobile clinic screenings catch health issues early, when they are easiest and least costly to treat.",
       faqsEn:
-        "Is the service really free? :: Yes. Screenings, referrals, and accompaniment are provided at no cost. Where hospital fees apply, we help access fee-waiver schemes.\nWill my information be kept private? :: Absolutely. All records are confidential and nothing is shared without your written consent.\nHow do I get a referral? :: Contact our office, speak to any CSDF peer educator, or visit a mobile clinic — no documents or prior appointment needed.\nCan you accompany me to the hospital? :: Yes. A trained peer navigator can accompany you to appointments if you would like support.",
+        "Is the service really free? :: Yes. Screenings, referrals, and accompaniment are provided at no cost. Where hospital fees apply, we help access fee-waiver schemes.\nWill my information be kept private? :: Absolutely. All records are confidential and nothing is shared without your written consent.\nHow do I get a referral? :: Contact our office, speak to any Heart to Heart peer educator, or visit a mobile clinic — no documents or prior appointment needed.\nCan you accompany me to the hospital? :: Yes. A trained peer navigator can accompany you to appointments if you would like support.",
       order: 1,
     },
     {
@@ -145,7 +145,7 @@ async function main() {
       descriptionSi: "රහස්‍යභාවය සහ දැනුවත් තේරීම ප්‍රමුඛ කරගත් දැනුවත් කිරීම, වැළැක්වීම සහ පරීක්ෂණ සහාය.",
       descriptionTa: "இரகசியத்தன்மை மற்றும் அறிவார்ந்த தேர்வுக்கு முன்னுரிமை அளிக்கும் விழிப்புணர்வு, தடுப்பு மற்றும் பரிசோதனை ஆதரவு.",
       contentEn:
-        "CSDF has been a frontline partner in Sri Lanka's HIV response for over two decades, reaching communities that formal health systems often miss. Our approach puts confidentiality and informed choice first — no one is ever pressured, and no one is ever judged.\n\nTrained peer educators deliver accurate prevention information in community settings, distribute prevention materials, and support access to voluntary testing. For anyone who tests positive, we provide immediate emotional support, fast-tracked linkage to treatment, and ongoing peer accompaniment so nobody faces the journey alone.",
+        "Heart to Heart has been a frontline partner in Sri Lanka's HIV response for over two decades, reaching communities that formal health systems often miss. Our approach puts confidentiality and informed choice first — no one is ever pressured, and no one is ever judged.\n\nTrained peer educators deliver accurate prevention information in community settings, distribute prevention materials, and support access to voluntary testing. For anyone who tests positive, we provide immediate emotional support, fast-tracked linkage to treatment, and ongoing peer accompaniment so nobody faces the journey alone.",
       featuresEn:
         "Peer-led prevention education\nFree condom & prevention material distribution\nSupport for voluntary, confidential testing\nFast-track linkage to treatment services\nOngoing peer support after diagnosis\nStigma-reduction campaigns",
       benefitsEn:
@@ -163,7 +163,7 @@ async function main() {
       descriptionSi: "ඔරොත්තු දීමේ හැකියාව, සුවවීම සහ විශ්වාසය ගොඩනගන වෘත්තීය උපදේශන සහ සම සහාය.",
       descriptionTa: "மீள்திறன், குணமடைதல் மற்றும் நம்பிக்கையை வளர்க்கும் தொழில்முறை ஆலோசனை மற்றும் சக ஆதரவு.",
       contentEn:
-        "Healing takes more than medicine. Many of the women CSDF serves carry the weight of violence, stigma, loss, and economic stress — often with nowhere safe to talk about it.\n\nOur counselling service offers a safe, confidential space with trained counsellors, in person or by phone, in Sinhala and Tamil. Alongside professional counselling, peer support circles bring women together to share experiences and build resilience with others who truly understand. Sessions are free, and women decide the pace — there is no pressure and no time limit on healing.",
+        "Healing takes more than medicine. Many of the women Heart to Heart serves carry the weight of violence, stigma, loss, and economic stress — often with nowhere safe to talk about it.\n\nOur counselling service offers a safe, confidential space with trained counsellors, in person or by phone, in Sinhala and Tamil. Alongside professional counselling, peer support circles bring women together to share experiences and build resilience with others who truly understand. Sessions are free, and women decide the pace — there is no pressure and no time limit on healing.",
       featuresEn:
         "Trained, compassionate counsellors\nSessions in Sinhala and Tamil\nIn-person and phone counselling\nPeer support circles\nCrisis support referrals\nCompletely free and confidential",
       benefitsEn:
@@ -181,7 +181,7 @@ async function main() {
       descriptionSi: "ප්‍රචණ්ඩත්වය, අපකීර්තිය සහ බාධක ජය ගැනීමට කාන්තාවන්ට උපකාර වන අයිතිවාසිකම් දැනුවත් කිරීම සහ නීති මඟපෙන්වීම.",
       descriptionTa: "வன்முறை, களங்கம் மற்றும் தடைகளை எதிர்கொள்ள பெண்களுக்கு உதவும் உரிமை விழிப்புணர்வு மற்றும் சட்ட வழிகாட்டுதல்.",
       contentEn:
-        "Knowing your rights is the first step to defending them. CSDF's legal assistance program helps marginalized women understand and use the protections the law already gives them — and stands beside them when those rights are violated.\n\nWe run rights-awareness workshops in communities, provide one-to-one legal guidance for issues such as violence, harassment, documentation, and discrimination, and connect women to sympathetic lawyers and legal aid services. When a woman must face police stations or courts, a trained CSDF companion can accompany her so she never stands alone.",
+        "Knowing your rights is the first step to defending them. Heart to Heart's legal assistance program helps marginalized women understand and use the protections the law already gives them — and stands beside them when those rights are violated.\n\nWe run rights-awareness workshops in communities, provide one-to-one legal guidance for issues such as violence, harassment, documentation, and discrimination, and connect women to sympathetic lawyers and legal aid services. When a woman must face police stations or courts, a trained Heart to Heart companion can accompany her so she never stands alone.",
       featuresEn:
         "Rights-awareness workshops\nOne-to-one legal guidance\nReferrals to legal aid & lawyers\nAccompaniment to police & courts\nHelp with ID and documentation\nSupport for violence survivors",
       benefitsEn:
@@ -199,7 +199,7 @@ async function main() {
       descriptionSi: "කාන්තාවන් සිටින තැනට ප්‍රායෝගික සහාය ළං කරන ක්ෂේත්‍ර චාරිකා සහ ප්‍රජා මැදිහත්වීම්.",
       descriptionTa: "பெண்கள் இருக்கும் இடத்திற்கு நடைமுறை ஆதரவை நெருக்கமாக்கும் கள விஜயங்கள் மற்றும் சமூக ஈடுபாடு.",
       contentEn:
-        "The women who most need support are often the least able to travel to find it. That is why CSDF goes to them. Our outreach teams — most of them women from the very communities we serve — make regular field visits across 10 districts.\n\nEach visit brings practical help: health information and referrals, prevention materials, counselling check-ins, legal signposting, and simply a trusted face who listens. Outreach is also how we learn — every field visit shapes our programs around what communities actually need, not what we assume they need.",
+        "The women who most need support are often the least able to travel to find it. That is why Heart to Heart goes to them. Our outreach teams — most of them women from the very communities we serve — make regular field visits across 10 districts.\n\nEach visit brings practical help: health information and referrals, prevention materials, counselling check-ins, legal signposting, and simply a trusted face who listens. Outreach is also how we learn — every field visit shapes our programs around what communities actually need, not what we assume they need.",
       featuresEn:
         "Regular field visits in 10 districts\nCommunity-based peer educators\nOn-the-spot referrals & signposting\nPrevention material distribution\nTrust built over 20+ years\nCommunity feedback drives programs",
       benefitsEn:
@@ -217,7 +217,7 @@ async function main() {
       descriptionSi: "දිගුකාලීන ස්වාධීනත්වය ශක්තිමත් කරන කුසලතා සංවර්ධන සහ නායකත්ව වැඩසටහන්.",
       descriptionTa: "நீண்டகால சுதந்திரத்தை வலுப்படுத்தும் திறன் மேம்பாடு மற்றும் தலைமைத்துவ திட்டங்கள்.",
       contentEn:
-        "Lasting change comes when women lead it themselves. CSDF's capacity building programs develop the skills, confidence, and networks that turn today's participants into tomorrow's community leaders.\n\nTraining covers practical livelihoods — tailoring, food production, small-business management, and financial literacy — alongside leadership development: public speaking, advocacy, and peer education. Graduates go on to run their own businesses, lead outreach teams, and represent their communities in forums where decisions are made.",
+        "Lasting change comes when women lead it themselves. Heart to Heart's capacity building programs develop the skills, confidence, and networks that turn today's participants into tomorrow's community leaders.\n\nTraining covers practical livelihoods — tailoring, food production, small-business management, and financial literacy — alongside leadership development: public speaking, advocacy, and peer education. Graduates go on to run their own businesses, lead outreach teams, and represent their communities in forums where decisions are made.",
       featuresEn:
         "Livelihood & vocational training\nSmall-business & financial literacy\nLeadership & advocacy development\nPeer educator certification\nMentoring by program graduates\nSeed support for new businesses",
       benefitsEn:
@@ -254,7 +254,7 @@ async function main() {
       descriptionSi: "ජංගම සායන සහ යොමු කිරීම් හරහා ගුණාත්මක, ගරුත්වයෙන් යුත් සෞඛ්‍ය සේවා ප්‍රවේශය වැඩිදියුණු කිරීම.",
       descriptionTa: "நடமாடும் கிளினிக்குகள் மற்றும் பரிந்துரைகள் மூலம் தரமான, மரியாதையான சுகாதார அணுகலை மேம்படுத்துதல்.",
       contentEn:
-        "The Women's Health Program is CSDF's flagship initiative, born from a simple observation: the women who most need healthcare are often the least able to reach it. Cost, distance, stigma, and fear of judgment keep too many women away from clinics until small problems become serious ones.\n\nThe program runs regular mobile wellness clinics across our partner districts, staffed by nurses and supported by trained peer navigators. Each clinic offers free screenings, health education, and direct referrals into our trusted network of hospitals and specialist services. Peer navigators then follow each referral through to completion — accompanying women to appointments, explaining procedures, and making sure no one falls through the cracks.",
+        "The Women's Health Program is Heart to Heart's flagship initiative, born from a simple observation: the women who most need healthcare are often the least able to reach it. Cost, distance, stigma, and fear of judgment keep too many women away from clinics until small problems become serious ones.\n\nThe program runs regular mobile wellness clinics across our partner districts, staffed by nurses and supported by trained peer navigators. Each clinic offers free screenings, health education, and direct referrals into our trusted network of hospitals and specialist services. Peer navigators then follow each referral through to completion — accompanying women to appointments, explaining procedures, and making sure no one falls through the cracks.",
       objectivesEn:
         "Bring free health screenings to underserved communities\nBuild a trusted referral network of respectful providers\nTrain peer navigators from within the community\nRaise health awareness through community education\nReduce late diagnosis through early screening\nEliminate stigma as a barrier to care",
       outcomesEn:
@@ -272,7 +272,7 @@ async function main() {
       descriptionSi: "වැඩමුළු සහ සම අධ්‍යාපනඥයින් හරහා නීතිමය අයිතිවාසිකම් සහ ආරක්ෂාවන් පිළිබඳ ප්‍රජාවන් දැනුවත් කිරීම.",
       descriptionTa: "பட்டறைகள் மற்றும் சக கல்வியாளர்கள் மூலம் சட்ட உரிமைகள் மற்றும் பாதுகாப்புகள் குறித்து சமூகங்களுக்கு கற்பித்தல்.",
       contentEn:
-        "Rights that women don't know about are rights they cannot use. The Rights Awareness Initiative translates Sri Lanka's legal protections into plain Sinhala and Tamil and delivers them where women actually are — in markets, community halls, and workplaces.\n\nWorkshops cover protection from violence and harassment, labour rights, access to identity documentation, and how to engage police and courts safely. Sessions are led by trained peer educators alongside sympathetic legal professionals, and every participant leaves with a simple rights handbook and a direct line to CSDF's legal assistance service when they need real help.",
+        "Rights that women don't know about are rights they cannot use. The Rights Awareness Initiative translates Sri Lanka's legal protections into plain Sinhala and Tamil and delivers them where women actually are — in markets, community halls, and workplaces.\n\nWorkshops cover protection from violence and harassment, labour rights, access to identity documentation, and how to engage police and courts safely. Sessions are led by trained peer educators alongside sympathetic legal professionals, and every participant leaves with a simple rights handbook and a direct line to Heart to Heart's legal assistance service when they need real help.",
       objectivesEn:
         "Translate legal rights into plain, practical language\nRun community workshops in Sinhala and Tamil\nTrain peer educators to sustain rights education\nConnect participants to free legal assistance\nHelp women obtain missing identity documents\nBuild confidence to engage police and courts",
       outcomesEn:
@@ -290,12 +290,12 @@ async function main() {
       descriptionSi: "ප්‍රජා සාමාජිකයින් තමන් සහ අන් අය වෙනුවෙන් විශ්වාසයෙන් පෙනී සිටින්නන් බවට පුහුණු කිරීම.",
       descriptionTa: "சமூக உறுப்பினர்களை தங்களுக்கும் பிறருக்கும் நம்பிக்கையான வக்கீல்களாக பயிற்றுவித்தல்.",
       contentEn:
-        "Change lasts when it is led from within. Peer Leadership Training identifies women with the trust of their communities and equips them to become educators, advocates, and organizers.\n\nThe curriculum combines practical skills — public speaking, facilitation, basic counselling, and outreach methods — with deeper leadership development over a six-month mentored journey. Graduates lead CSDF outreach teams, run their own community sessions, and represent their communities in district forums. Many of today's CSDF staff and peer educators are graduates of this very program.",
+        "Change lasts when it is led from within. Peer Leadership Training identifies women with the trust of their communities and equips them to become educators, advocates, and organizers.\n\nThe curriculum combines practical skills — public speaking, facilitation, basic counselling, and outreach methods — with deeper leadership development over a six-month mentored journey. Graduates lead Heart to Heart outreach teams, run their own community sessions, and represent their communities in district forums. Many of today's Heart to Heart staff and peer educators are graduates of this very program.",
       objectivesEn:
-        "Identify and mentor emerging community leaders\nTeach facilitation, outreach, and advocacy skills\nProvide six months of guided field experience\nCertify graduates as CSDF peer educators\nCreate pathways into program leadership roles\nBuild a self-sustaining leadership pipeline",
+        "Identify and mentor emerging community leaders\nTeach facilitation, outreach, and advocacy skills\nProvide six months of guided field experience\nCertify graduates as Heart to Heart peer educators\nCreate pathways into program leadership roles\nBuild a self-sustaining leadership pipeline",
       outcomesEn:
-        "Leaders Certified :: Multiple cohorts of certified peer educators now lead outreach across all partner districts.\nPrograms Multiplied :: Graduate-led sessions have extended CSDF's reach far beyond what staff alone could deliver.\nVoices Heard :: Graduates now represent their communities in district coordination forums.",
-      location: "CSDF training centres & field sites",
+        "Leaders Certified :: Multiple cohorts of certified peer educators now lead outreach across all partner districts.\nPrograms Multiplied :: Graduate-led sessions have extended Heart to Heart's reach far beyond what staff alone could deliver.\nVoices Heard :: Graduates now represent their communities in district coordination forums.",
+      location: "Heart to Heart training centres & field sites",
       beneficiariesEn: "450+ training sessions delivered",
       status: "ongoing",
       order: 3,
@@ -308,7 +308,7 @@ async function main() {
       descriptionSi: "ජීවනෝපාය කුසලතා සහ ප්‍රජා ව්‍යාපාර හරහා මූල්‍ය ස්වාධීනත්වයට සහාය වීම.",
       descriptionTa: "வாழ்வாதார திறன்கள் மற்றும் சமூக வணிகம் மூலம் நிதி சுதந்திரத்தை ஆதரித்தல்.",
       contentEn:
-        "Economic dependence keeps women trapped in unsafe situations. The Economic Empowerment Project builds the practical foundations of financial independence: marketable skills, business knowledge, and a supportive community of women entrepreneurs.\n\nParticipants choose a livelihood track — tailoring, food production, handicrafts, or small trade — and pair it with financial literacy training covering budgeting, savings, and pricing. Promising business plans receive seed support and mentoring, and finished products are showcased through CSDF's Community Business platform, connecting women producers directly to buyers.",
+        "Economic dependence keeps women trapped in unsafe situations. The Economic Empowerment Project builds the practical foundations of financial independence: marketable skills, business knowledge, and a supportive community of women entrepreneurs.\n\nParticipants choose a livelihood track — tailoring, food production, handicrafts, or small trade — and pair it with financial literacy training covering budgeting, savings, and pricing. Promising business plans receive seed support and mentoring, and finished products are showcased through Heart to Heart's Community Business platform, connecting women producers directly to buyers.",
       objectivesEn:
         "Deliver vocational training in four livelihood tracks\nTeach budgeting, savings, and business basics\nProvide seed support for viable business plans\nMentor new entrepreneurs through their first year\nMarket products via the Community Business platform\nBuild peer networks of women producers",
       outcomesEn:
@@ -340,9 +340,9 @@ async function main() {
   // ---------- Testimonials ----------
   const testimonials = [
     {
-      quoteEn: "CSDF helped me access healthcare without fear or judgment. The support team treated me with respect and made it easier to ask for help.",
-      quoteSi: "CSDF මට බියෙන් හෝ විනිශ්චයෙන් තොරව සෞඛ්‍ය සේවා ලබා ගැනීමට උදව් කළා. සහාය කණ්ඩායම මට ගෞරවයෙන් සැලකූ අතර උදව් ඉල්ලීම පහසු කළා.",
-      quoteTa: "CSDF பயமோ தீர்ப்போ இன்றி சுகாதாரப் பராமரிப்பை அணுக எனக்கு உதவியது. ஆதரவு குழு என்னை மரியாதையுடன் நடத்தியது.",
+      quoteEn: "Heart to Heart helped me access healthcare without fear or judgment. The support team treated me with respect and made it easier to ask for help.",
+      quoteSi: "Heart to Heart මට බියෙන් හෝ විනිශ්චයෙන් තොරව සෞඛ්‍ය සේවා ලබා ගැනීමට උදව් කළා. සහාය කණ්ඩායම මට ගෞරවයෙන් සැලකූ අතර උදව් ඉල්ලීම පහසු කළා.",
+      quoteTa: "Heart to Heart பயமோ தீர்ப்போ இன்றி சுகாதாரப் பராமரிப்பை அணுக எனக்கு உதவியது. ஆதரவு குழு என்னை மரியாதையுடன் நடத்தியது.",
       authorEn: "Peer educator, outreach program participant",
       authorSi: "සම අධ්‍යාපනඥ, ප්‍රජා වැඩසටහන් සහභාගිකාරිය",
       authorTa: "சக கல்வியாளர், அணுகல் திட்ட பங்கேற்பாளர்",
@@ -438,7 +438,7 @@ async function main() {
       descriptionTa: "வரவேற்கத்தக்க சூழலில் சுகாதார பரிசோதனை, பரிந்துரைகள் மற்றும் நலக் கல்வி.",
       location: "Kolonnawa, Colombo",
       contentEn:
-        "Join us for a full day of free health services in a welcoming, judgment-free environment. The Community Health Camp brings CSDF's mobile clinic team, partner medical staff, and peer educators together under one roof.\n\nAll services are free and confidential. No appointment, documents, or referral letters are needed — just come as you are. Sinhala- and Tamil-speaking staff will be available throughout the day.",
+        "Join us for a full day of free health services in a welcoming, judgment-free environment. The Community Health Camp brings Heart to Heart's mobile clinic team, partner medical staff, and peer educators together under one roof.\n\nAll services are free and confidential. No appointment, documents, or referral letters are needed — just come as you are. Sinhala- and Tamil-speaking staff will be available throughout the day.",
       highlightsEn:
         "Free general health screenings\nConfidential testing and counselling\nReferrals to partner hospitals\nWellness and nutrition education\nSinhala & Tamil speaking staff\nChild-friendly waiting area",
       agendaEn:
@@ -454,9 +454,9 @@ async function main() {
       descriptionTa: "நடைமுறை சட்ட எழுத்தறிவு, மறுமொழி திட்டமிடல் மற்றும் சமூக பாதுகாப்பு உத்திகள்.",
       location: "Colombo",
       contentEn:
-        "A practical, hands-on workshop that turns legal rights from abstract ideas into tools women can actually use. Led by CSDF peer educators alongside sympathetic legal professionals, the session covers protection from violence and harassment, safe engagement with police, and community response planning.\n\nParticipation is free and confidential. Every participant receives a plain-language rights handbook in Sinhala or Tamil and direct contacts for CSDF's legal assistance service.",
+        "A practical, hands-on workshop that turns legal rights from abstract ideas into tools women can actually use. Led by Heart to Heart peer educators alongside sympathetic legal professionals, the session covers protection from violence and harassment, safe engagement with police, and community response planning.\n\nParticipation is free and confidential. Every participant receives a plain-language rights handbook in Sinhala or Tamil and direct contacts for Heart to Heart's legal assistance service.",
       highlightsEn:
-        "Plain-language legal literacy training\nSafe police & court engagement guidance\nCommunity protection planning\nFree rights handbook for every participant\nDirect line to CSDF legal assistance\nConfidential, women-only space",
+        "Plain-language legal literacy training\nSafe police & court engagement guidance\nCommunity protection planning\nFree rights handbook for every participant\nDirect line to Heart to Heart legal assistance\nConfidential, women-only space",
       agendaEn:
         "9.30 am :: Welcome & introductions\n10.00 am :: Know your rights — core session\n11.30 am :: Engaging police and courts safely\n1.00 pm :: Lunch break\n2.00 pm :: Community response planning\n3.30 pm :: Q&A with legal professionals",
       startDate: new Date(Date.now() + 21 * 24 * 3600 * 1000),
@@ -506,7 +506,7 @@ async function main() {
   }
 
   console.log("✔ Seed complete.");
-  console.log("  Admin login: admin@csdf.lk / admin12345");
+  console.log("  Admin login: admin@hearttoheart.lk / admin12345");
   console.log("  ⚠ Change the password after first login (Dashboard → Change Password).");
 }
 
