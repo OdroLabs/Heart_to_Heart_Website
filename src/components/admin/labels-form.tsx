@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Loader2, Save } from "lucide-react";
+import { CheckCircle2, Loader2, Save } from "lucide-react";
 import { saveLabels } from "@/lib/actions";
 import { useToast } from "./toast";
 import { labelGroups } from "@/lib/labels";
@@ -21,21 +21,25 @@ const langs = [
 
 export function LabelsForm({ settings }: { settings: SettingsMap }) {
   const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
   const [group, setGroup] = useState(labelGroups[0]?.group ?? "");
   const { toast, update } = useToast();
   const router = useRouter();
 
   async function handleSave(fd: FormData) {
     setSaving(true);
+    setSaved(false);
     const id = toast({ title: "Saving labels…", variant: "loading" });
     try {
       const result = await saveLabels(fd);
       if (result.ok) {
         update(id, {
-          title: "Saved",
+          title: "Saved ✓",
           description: "Labels and translations are live on the site.",
           variant: "success",
         });
+        setSaved(true);
+        setTimeout(() => setSaved(false), 3000);
         router.refresh();
       } else {
         update(id, { title: "Not saved", description: result.error, variant: "error" });
@@ -52,7 +56,7 @@ export function LabelsForm({ settings }: { settings: SettingsMap }) {
   }
 
   return (
-    <form action={handleSave} className="space-y-5">
+    <form action={handleSave} onSubmit={() => { setSaving(true); setSaved(false); }} className="space-y-5">
       <div className="flex flex-wrap gap-1.5">
         {labelGroups.map((g) => (
           <button
@@ -113,10 +117,26 @@ export function LabelsForm({ settings }: { settings: SettingsMap }) {
         </Card>
       ))}
 
-      <div className="sticky bottom-0 -mx-1 border-t bg-muted/40 px-1 py-3 backdrop-blur">
-        <Button type="submit" size="lg" disabled={saving}>
-          {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
-          {saving ? "Saving…" : "Save All Labels"}
+      <div className="sticky bottom-0 -mx-1 border-t bg-white/80 px-1 py-3 backdrop-blur shadow-[0_-2px_12px_rgba(0,0,0,0.06)]">
+        <Button
+          type="submit"
+          size="lg"
+          disabled={saving || saved}
+          className={`min-w-[160px] transition-all ${
+            saved
+              ? "bg-green-600 hover:bg-green-600 cursor-default"
+              : saving
+              ? "opacity-80 cursor-not-allowed"
+              : ""
+          }`}
+        >
+          {saving ? (
+            <><Loader2 className="h-4 w-4 animate-spin" /> Saving…</>
+          ) : saved ? (
+            <><span className="text-base">✓</span> Saved!</>
+          ) : (
+            <><Save className="h-4 w-4" /> Save All Labels</>
+          )}
         </Button>
       </div>
     </form>
