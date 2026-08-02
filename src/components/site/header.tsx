@@ -134,7 +134,7 @@ export function SiteHeader({
       {/* Utility strip — hidden when switched off, or when there is nothing to show */}
       {showTopbar && (hasContactStrip || showLangs) && (
         <div id="sec-topbar" className="hidden bg-navy-950 text-white md:block">
-          <div className="mx-auto flex max-w-[1400px] items-center justify-between px-4 py-2 text-xs md:px-6">
+          <div className="mx-auto flex max-w-[1800px] items-center justify-between px-18 py-2 text-xs md:px-32">
             <div className="flex items-center gap-6 text-white/75">
               {phones.map((phone) => (
                 <a
@@ -172,7 +172,7 @@ export function SiteHeader({
       >
         <div
           className={cn(
-            "mx-auto flex max-w-[1400px] items-center justify-between gap-6 px-4 transition-[padding] duration-300 md:px-6",
+            "mx-auto flex max-w-full items-center justify-between gap-6 px-18 transition-[padding] duration-300 md:px-32",
             scrolled ? "py-2" : "py-3"
           )}
         >
@@ -191,7 +191,7 @@ export function SiteHeader({
                 </span>
               )
             )}
-            {(shortName || siteName) && (
+            {!logoImage && (shortName || siteName) && (
               <span className="leading-tight">
                 {shortName && (
                   <span className="block text-lg font-extrabold tracking-tight text-navy-900">

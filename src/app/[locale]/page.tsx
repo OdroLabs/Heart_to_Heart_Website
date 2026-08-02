@@ -28,6 +28,9 @@ import { StatCounter } from "@/components/site/stat-counter";
 import { MarqueeTrustBar } from "@/components/site/marquee-trust-bar";
 import { ServicesTabs } from "@/components/site/services-tabs";
 
+
+import * as Icons from "lucide-react";
+
 /* -------------------------------------------------------------------------- */
 /* Small helpers                                                                */
 /* -------------------------------------------------------------------------- */
@@ -244,9 +247,9 @@ export default async function HomePage({
       {/* HERO                                                                */}
       {/* ================================================================== */}
       {showHero && (
-        <section id="sec-hero" className="px-3 pt-4 pb-0 md:px-5 md:pt-6">
+        <section id="sec-hero" className="">
           {/* ── Outer rounded container — sky-blue bg, fills edge-to-edge ── */}
-          <div className="relative mx-auto max-w-[1400px] overflow-hidden rounded-[2rem] min-h-[86svh] flex flex-col">
+          <div className="relative mx-auto max-w-full overflow-hidden rounded-b-[2rem] min-h-[86svh] flex flex-col">
 
             {/* ── Background: image first, then teal BG fills what image doesn't ── */}
             {heroImage ? (
@@ -267,7 +270,7 @@ export default async function HomePage({
             )}
 
             {/* ── Content layer ── */}
-            <div className="relative z-10 flex flex-1 flex-col px-8 py-12 md:px-14 md:py-16">
+            <div className="relative z-10 flex flex-1 flex-col px-12 py-12 md:px-32 md:py-16">
 
               {/* ── TOP: Trust badge + H1 + CTA button ── */}
               <div className="flex-1">
@@ -275,17 +278,16 @@ export default async function HomePage({
                 {heroTrustBadge && (
                   <div className="mb-6 inline-flex items-center gap-2.5 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 px-3 py-2 pr-4">
                     <div className="flex -space-x-2">
-                      {[...Array(4)].map((_, i) => (
+                      {["A", "K", "S", "M"].map((letter, i) => (
                         <div
                           key={i}
-                          className="h-7 w-7 rounded-full border-2 border-white/60 shadow-sm"
+                          className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white/60 shadow-sm text-[10px] font-bold text-white"
                           style={{
-                            backgroundImage: `url(/a51664d11fccbc1767508ede1f06572f.jpg)`,
-                            backgroundSize: "cover",
-                            backgroundPosition: `${20 + i * 20}% center`,
-                            backgroundColor: `hsl(${160 + i * 20}, 50%, ${55 - i * 5}%)`,
+                            backgroundColor: `hsl(${160 + i * 45}, 65%, 40%)`,
                           }}
-                        />
+                        >
+                          {letter}
+                        </div>
                       ))}
                     </div>
                     <span className="text-xs font-semibold text-white/90">{heroTrustBadge}</span>
@@ -392,18 +394,7 @@ export default async function HomePage({
 
             {/* Left col: eyebrow + image + floating stat */}
             <div data-animate className="relative">
-              {s(settings, "home_about_eyebrow", locale) && (
-                <div className="mb-8">
-                  <SectionTag>{s(settings, "home_about_eyebrow", locale)}</SectionTag>
-                </div>
-              )}
 
-              {/* Tabs row (Our Impact) — static UI element matching reference */}
-              <div className="mb-6 flex items-center gap-3">
-                <button type="button" className="rounded-full bg-primary px-4 py-1.5 text-xs font-bold text-white shadow-sm">
-                  Our Impact
-                </button>
-              </div>
 
               {/* Main image */}
               <div className="relative">
@@ -415,6 +406,14 @@ export default async function HomePage({
                         style={{ backgroundImage: `url(${aboutImage})` }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#eaf6f6]/30 to-transparent" />
+                    </div>
+
+                    <div className="absolute -top-6 -right-6 z-10 rounded-full bg-white/20 backdrop-blur-lg p-5 shadow-xl border border-border/40 max-w-[180px]">
+
+                      <p className="font-number text-sm font-light text-primary leading-none">
+                        99%
+                      </p>
+
                     </div>
 
                     {/* Floating stat card — "50+" in bottom-left */}
@@ -443,10 +442,18 @@ export default async function HomePage({
             </div>
 
             {/* Right col: text + feature cards */}
-            <div data-animate data-delay="0.15" className="lg:pt-12">
+            <div data-animate data-delay="0.15" className="max-sm:pt-12">
+              {s(settings, "home_about_eyebrow", locale) && (
+                <div className="mb-8">
+                  <SectionTag>{s(settings, "home_about_eyebrow", locale)}</SectionTag>
+                </div>
+              )}
+              <h2 className="mt-1 text-3xl font-extrabold tracking-tight text-navy-950 md:text-4xl">
+                {aboutTitle}
+              </h2>
               {/* About description */}
               {aboutText && (
-                <p className="mb-10 text-lg leading-relaxed text-navy-800/80 max-w-lg">
+                <p className="mb-10 mt-2 text-lg leading-relaxed text-navy-800/80 max-w-lg">
                   {aboutText}
                 </p>
               )}
@@ -549,21 +556,36 @@ export default async function HomePage({
       {/* ================================================================== */}
       {showServices && (
         <section id="sec-services" className="container py-20 md:py-28">
-          <div data-animate>
-            {s(settings, "home_services_eyebrow", locale) && (
-              <div className="mb-4">
-                <SectionTag>{s(settings, "home_services_eyebrow", locale)}</SectionTag>
-              </div>
-            )}
-            {servicesTitle && (
-              <h2 className="mb-3 text-3xl font-extrabold tracking-tight text-navy-950 md:text-[2.4rem] leading-[1.15]">
-                {servicesTitle}
-              </h2>
-            )}
-            {servicesText && (
-              <p className="mb-10 max-w-xl text-sm leading-relaxed text-muted-foreground">
-                {servicesText}
-              </p>
+          <div data-animate className="flex justify-between items-center">
+            <div className="flex-col">
+              {s(settings, "home_services_eyebrow", locale) && (
+                <div className="mb-4">
+                  <SectionTag>{s(settings, "home_services_eyebrow", locale)}</SectionTag>
+                </div>
+              )}
+              {servicesTitle && (
+                <h2 className="mb-3 text-3xl font-extrabold tracking-tight text-navy-950 md:text-[2.4rem] leading-[1.15]">
+                  {servicesTitle}
+                </h2>
+              )}
+              {servicesText && (
+                <p className="mb-10 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                  {servicesText}
+                </p>
+              )}
+            </div>
+
+            {/* CTA button */}
+            {servicesLinkLabel && (
+              <Link
+                href={`/${locale}/services`}
+                className="inline-flex items-center gap-0 rounded-full max-h-12 bg-primary pl-6 pr-1.5 py-1.5 text-sm font-bold text-white shadow-md shadow-primary/20 hover:bg-primary/90 transition-all"
+              >
+                {servicesLinkLabel}
+                <span className="ml-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/20 text-white shrink-0">
+                  <Icons.ArrowRight className="h-4 w-4" />
+                </span>
+              </Link>
             )}
           </div>
 
@@ -652,18 +674,22 @@ export default async function HomePage({
                   href={`/${locale}/projects/${project.slug ?? project.id}`}
                   className="group flex flex-col overflow-hidden rounded-3xl bg-white shadow-sm border border-border/60 transition-all hover:-translate-y-1.5 hover:shadow-md"
                 >
-                  {project.image && (
-                    <div className="relative aspect-[5/4] overflow-hidden">
+                  <div className="relative aspect-[5/4] overflow-hidden bg-brand-50">
+                    {project.image ? (
                       <div
                         className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
                         style={{ backgroundImage: `url(${project.image})` }}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-navy-950/50 via-transparent to-transparent" />
-                      <Badge className="absolute left-4 top-4 rounded-full border-0 bg-white/80 text-navy-900 text-xs font-semibold capitalize backdrop-blur-sm">
-                        {(dict.common as any)[project.status] ?? project.status}
-                      </Badge>
-                    </div>
-                  )}
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center transition-transform duration-700 group-hover:scale-105">
+                        <Icons.Heart className="h-12 w-12 text-primary/20" />
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy-950/50 via-transparent to-transparent" />
+                    <Badge className="absolute left-4 top-4 rounded-full border-0 bg-white/80 text-navy-900 text-xs font-semibold capitalize backdrop-blur-sm">
+                      {(dict.common as any)[project.status] ?? project.status}
+                    </Badge>
+                  </div>
                   <div className="flex flex-1 flex-col gap-2 p-5">
                     <h3 className="font-bold leading-snug text-navy-950 transition-colors group-hover:text-primary">
                       {loc(project, "title", locale)}
@@ -704,7 +730,7 @@ export default async function HomePage({
           <div className="absolute inset-0 bg-gradient-to-b from-navy-950/60 via-transparent to-navy-950/60" />
           <div className="container relative grid items-center gap-12 lg:grid-cols-[0.85fr_1.15fr]">
             <div data-animate>
-              <div className="relative mx-auto w-full max-w-sm overflow-hidden rounded-3xl bg-gradient-to-br from-destructive to-red-700 p-10 text-center shadow-xl">
+              <div className="relative mx-auto w-full max-w-sm overflow-hidden rounded-3xl bg-primary p-10 text-center shadow-xl">
                 <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-white/10 blur-2xl" />
                 <span className="mx-auto mb-5 grid h-14 w-14 place-items-center rounded-full bg-white/15 ring-2 ring-white/30">
                   <PhoneCall className="h-6 w-6" />
@@ -734,7 +760,7 @@ export default async function HomePage({
             </div>
             <div data-animate data-delay="0.15">
               {s(settings, "home_contact_eyebrow", locale) && (
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-red-400">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">
                   {s(settings, "home_contact_eyebrow", locale)}
                 </p>
               )}
@@ -744,8 +770,8 @@ export default async function HomePage({
                 </h2>
               )}
               <span className="mt-4 flex gap-1.5">
-                <span className="block h-1 w-8 rounded-full bg-destructive" />
-                <span className="block h-1 w-4 rounded-full bg-destructive/60" />
+                <span className="block h-1 w-8 rounded-full bg-primary" />
+                <span className="block h-1 w-4 rounded-full bg-primary/60" />
               </span>
               {contactText && (
                 <p className="mt-6 max-w-xl whitespace-pre-line leading-relaxed text-white/75">
@@ -756,7 +782,7 @@ export default async function HomePage({
                 <Button
                   asChild
                   size="lg"
-                  className="mt-8 rounded-full bg-destructive px-8 font-bold shadow-lg shadow-destructive/30 hover:bg-destructive/90"
+                  className="mt-8 rounded-full bg-primary px-8 font-bold shadow-lg shadow-primary/30 hover:bg-primary/90"
                 >
                   <Link href={`/${locale}/contact`}>
                     {contactButton} <ArrowRight className="h-4 w-4" />

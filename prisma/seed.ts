@@ -119,7 +119,7 @@ async function main() {
   // ---------- Services ----------
   const services = [
     {
-      icon: "❤️",
+      icon: "Heart",
       titleEn: "Healthcare",
       titleSi: "සෞඛ්‍ය සේවා",
       titleTa: "சுகாதாரம்",
@@ -137,7 +137,7 @@ async function main() {
       order: 1,
     },
     {
-      icon: "🩺",
+      icon: "ShieldCheck",
       titleEn: "HIV Prevention",
       titleSi: "HIV වැළැක්වීම",
       titleTa: "HIV தடுப்பு",
@@ -155,7 +155,7 @@ async function main() {
       order: 2,
     },
     {
-      icon: "💬",
+      icon: "Users",
       titleEn: "Mental Health & Counselling",
       titleSi: "මානසික සෞඛ්‍යය සහ උපදේශනය",
       titleTa: "மனநலம் & ஆலோசனை",
@@ -173,7 +173,7 @@ async function main() {
       order: 3,
     },
     {
-      icon: "⚖️",
+      icon: "Scale",
       titleEn: "Legal Assistance",
       titleSi: "නීති සහාය",
       titleTa: "சட்ட உதவி",
@@ -191,7 +191,7 @@ async function main() {
       order: 4,
     },
     {
-      icon: "🌍",
+      icon: "Globe",
       titleEn: "Community Outreach",
       titleSi: "ප්‍රජා සම්බන්ධතා",
       titleTa: "சமூக அணுகல்",
@@ -209,7 +209,7 @@ async function main() {
       order: 5,
     },
     {
-      icon: "📚",
+      icon: "BookOpen",
       titleEn: "Capacity Building",
       titleSi: "ධාරිතා සංවර්ධනය",
       titleTa: "திறன் மேம்பாடு",

@@ -27,13 +27,12 @@ export function PageHero({
       )}
       {/* Deep navy → brand gradient */}
       <div
-        className={`absolute inset-0 bg-gradient-to-br from-navy-950 via-navy-900 to-brand-800 ${
-          image ? "opacity-80" : ""
-        }`}
+        className={`absolute inset-0 bg-gradient-to-br from-navy-950 via-navy-900 to-brand-800 ${image ? "opacity-80" : ""
+          }`}
       />
       {/* Subtle grid pattern */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.06]"
+        className="pointer-events-none absolute inset-0 opacity-[0.02]"
         style={{
           backgroundImage:
             "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
@@ -63,7 +62,6 @@ export function PageHero({
         <span data-hero className="mt-6 block h-1 w-16 rounded-full bg-gradient-to-r from-accent to-brand-400" />
       </div>
 
-      <Curve className="absolute inset-x-0 bottom-0 text-background" />
     </section>
   );
 }

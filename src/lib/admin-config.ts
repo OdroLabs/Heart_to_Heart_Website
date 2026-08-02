@@ -64,7 +64,7 @@ export const entities: EntityDef[] = [
         required: true,
         help: "Shown on cards (home page and projects list).",
       },
-      { name: "image", label: "Main image", type: "image" },
+      { name: "image", label: "Main image", type: "image", required: true },
       {
         name: "content",
         label: "Detail page content",
@@ -136,7 +136,7 @@ export const entities: EntityDef[] = [
         required: true,
         help: "Shown on cards (home page and services list).",
       },
-      { name: "icon", label: "Icon (emoji)", type: "text", help: "e.g. ❤️ 🩺 ⚖️ 📚" },
+      { name: "icon", label: "Icon (Lucide)", type: "text", help: "e.g. Heart, ShieldCheck, Users, Scale" },
       { name: "image", label: "Main image", type: "image" },
       {
         name: "content",
@@ -482,6 +482,27 @@ export const entities: EntityDef[] = [
     listFields: [
       { name: "createdAt", label: "Date", type: "date" },
       { name: "email", label: "Email" },
+    ],
+  },
+  {
+    slug: "team",
+    model: "teamMember",
+    title: "BOD and Staff",
+    titleSingular: "Team Member",
+    description: "Board of Directors and Staff members shown on the About page.",
+    orderBy: { order: "asc" },
+    fields: [
+      { name: "name", label: "Name", type: "text", required: true },
+      { name: "role", label: "Role", type: "text", i18n: true },
+      { name: "image", label: "Photo", type: "image" },
+      { name: "order", label: "Sort order", type: "number" },
+      { name: "published", label: "Published", type: "boolean" },
+    ],
+    listFields: [
+      { name: "image", label: "", type: "image" },
+      { name: "name", label: "Name" },
+      { name: "roleEn", label: "Role" },
+      { name: "published", label: "Published", type: "boolean" },
     ],
   },
 ];

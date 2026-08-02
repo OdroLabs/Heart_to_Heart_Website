@@ -9,6 +9,7 @@ import {
   Phone,
   Plus,
 } from "lucide-react";
+import * as Icons from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { loc, type Locale } from "@/lib/i18n";
 import { getLabels } from "@/lib/labels";
@@ -95,11 +96,14 @@ export default async function ServiceDetailPage({
           )}
 
           <div className="mb-4 flex items-center gap-3">
-            {service.icon && (
-              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-brand-500/10 text-2xl">
-                {service.icon}
-              </span>
-            )}
+            {service.icon && (() => {
+              const IconCmp = (Icons as any)[service.icon];
+              return IconCmp ? (
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-brand-500/10 text-2xl text-primary">
+                  <IconCmp className="h-6 w-6" />
+                </span>
+              ) : null;
+            })()}
             <h2 className="text-2xl font-extrabold tracking-tight md:text-4xl">{title}</h2>
           </div>
 
@@ -191,7 +195,10 @@ export default async function ServiceDetailPage({
                       className="group flex items-center justify-between gap-3 rounded-xl border bg-card px-4 py-3.5 text-sm font-semibold shadow-sm transition-all hover:border-primary/40 hover:text-primary"
                     >
                       <span className="flex items-center gap-2.5">
-                        {sv.icon && <span className="text-lg">{sv.icon}</span>}
+                        {sv.icon && (() => {
+                          const IconCmp = (Icons as any)[sv.icon];
+                          return IconCmp ? <IconCmp className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary" /> : null;
+                        })()}
                         {loc(sv, "title", locale)}
                       </span>
                       <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />

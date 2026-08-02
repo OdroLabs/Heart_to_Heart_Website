@@ -640,6 +640,21 @@ export const settingPages: SettingPage[] = [
           T("about_history_title", "Heading"),
           TA("about_history", "Text"),
           IMG("about_history_image", "Photo"),
+          PAIRS("about_history_timeline", "Timeline milestones", {
+            leftLabel: "Year",
+            rightLabel: "Event",
+            itemLabel: "Milestone",
+            addLabel: "Add a milestone",
+            help: "Shown below the history text. e.g. 2002 :: Founded in Kolonnawa",
+          }),
+        ],
+      },
+      {
+        section: "BOD and Staff",
+        preview: { path: "/about", anchor: "sec-team" },
+        hideNote: "This controls the heading. Manage members under Content -> BOD and Staff.",
+        items: [
+          T("about_team_title", "Heading"),
         ],
       },
       {

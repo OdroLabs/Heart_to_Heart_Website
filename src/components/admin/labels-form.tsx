@@ -56,7 +56,7 @@ export function LabelsForm({ settings }: { settings: SettingsMap }) {
   }
 
   return (
-    <form action={handleSave} className="space-y-5">
+    <form action={handleSave} onSubmit={() => { setSaving(true); setSaved(false); }} className="space-y-5">
       <div className="flex flex-wrap gap-1.5">
         {labelGroups.map((g) => (
           <button

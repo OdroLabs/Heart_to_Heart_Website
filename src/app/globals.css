@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&family=Montserrat:wght@600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -41,14 +41,14 @@
   }
   body {
     @apply text-foreground antialiased;
-    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+    font-family: "Roboto", ui-sans-serif, system-ui, sans-serif;
     background: hsl(var(--background));
   }
   h1,
   h2,
   h3,
   h4 {
-    font-family: "Poppins", ui-sans-serif, system-ui, sans-serif;
+    font-family: "Roboto", ui-sans-serif, system-ui, sans-serif;
   }
   ::selection {
     background: hsl(var(--accent) / 0.25);
@@ -56,11 +56,11 @@
 }
 
 .font-heading {
-  font-family: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  font-family: "Roboto", ui-sans-serif, system-ui, sans-serif;
 }
 
 .font-number {
-  font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  font-family: "Roboto", ui-sans-serif, system-ui, sans-serif;
 }
 
 /* ---------------------------------------------------------------------------
@@ -82,7 +82,7 @@
 
 .prose-basic h2,
 .prose-editor h2 {
-  font-family: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  font-family: "Roboto", ui-sans-serif, system-ui, sans-serif;
   font-size: 1.5rem;
   font-weight: 800;
   line-height: 1.25;
@@ -93,7 +93,7 @@
 
 .prose-basic h3,
 .prose-editor h3 {
-  font-family: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  font-family: "Roboto", ui-sans-serif, system-ui, sans-serif;
   font-size: 1.25rem;
   font-weight: 700;
   line-height: 1.3;

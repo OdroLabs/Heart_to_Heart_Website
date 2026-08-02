@@ -199,7 +199,7 @@ export function SettingsForm({
 
   return (
     <div className="grid items-start gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(0,520px)]">
-      <form action={handleSave} className="min-w-0 space-y-4">
+      <form action={handleSave} onSubmit={() => { setSaving(true); setSaved(false); }} className="min-w-0 space-y-4">
         {/* Child tabs — one per section of this page */}
         <nav
           aria-label={`${page.title} sections`}
@@ -247,7 +247,7 @@ export function SettingsForm({
           </Card>
         ))}
 
-        <div className="sticky bottom-0 -mx-1 flex flex-wrap items-center gap-3 border-t bg-white/80 px-1 py-3 backdrop-blur shadow-[0_-2px_12px_rgba(0,0,0,0.06)]">
+        <div className="sticky -bottom-6 -mx-2 mt-8 flex flex-wrap items-center gap-4 border-t bg-white px-2 py-4 pb-[2rem] shadow-[0_-8px_30px_-15px_rgba(0,0,0,0.1)] z-10">
           <Button
             type="submit"
             size="lg"

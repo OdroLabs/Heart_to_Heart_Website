@@ -140,7 +140,7 @@ export function EntityForm({
   }
 
   return (
-    <form action={handleSave} className="space-y-5">
+    <form action={handleSave} onSubmit={() => { setSaving(true); setSaved(false); }} className="space-y-5">
       {entity.fields.map((field) => (
         <Card key={field.name}>
           <CardContent className="pt-5">

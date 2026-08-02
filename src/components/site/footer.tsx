@@ -78,18 +78,25 @@ export function SiteFooter({
                   className="h-10 w-auto max-w-[170px] object-contain brightness-0 invert"
                 />
               ) : (
-                <>
-                  {logoLetter && (
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand-600 to-accent text-lg font-bold shadow-md">
-                      {logoLetter}
+                logoLetter && (
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand-600 to-accent text-lg font-bold shadow-md">
+                    {logoLetter}
+                  </span>
+                )
+              )}
+              {!logoImage && (shortName || siteName) && (
+                <span className="leading-tight">
+                  {shortName && (
+                    <span className="block text-lg font-extrabold tracking-tight text-white">
+                      {shortName}
                     </span>
                   )}
-                  {(shortName || siteName) && (
-                    <span className="text-lg font-extrabold tracking-tight text-white">
-                      {shortName || siteName}
+                  {siteName && (
+                    <span className="block max-w-[220px] truncate text-[10px] text-white/60">
+                      {siteName}
                     </span>
                   )}
-                </>
+                </span>
               )}
             </Link>
 

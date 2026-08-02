@@ -9,60 +9,58 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  name     String
-  email    String @unique
-  password String
+  id          Int       @id @default(autoincrement())
+  name        String
+  email       String    @unique
+  password    String
   /// owner = full access including users and site settings
   /// editor = content only (news, projects, events, products, inbox)
-  role     String @default("editor")
+  role        String    @default("editor")
   /// Suspended accounts keep their history but cannot sign in.
   active      Boolean   @default(true)
   lastLoginAt DateTime?
   createdAt   DateTime  @default(now())
 }
 
-// Key-value site settings, trilingual where needed
 model Setting {
   id      Int     @id @default(autoincrement())
   key     String  @unique
-  valueEn String? @db.Text
-  valueSi String? @db.Text
-  valueTa String? @db.Text
+  valueEn String?
+  valueSi String?
+  valueTa String?
 }
 
 model Project {
-  id             Int       @id @default(autoincrement())
-  slug           String?   @unique
-  titleEn        String
-  titleSi        String?
-  titleTa        String?
-  descriptionEn  String    @db.Text
-  descriptionSi  String?   @db.Text
-  descriptionTa  String?   @db.Text
-  image          String?
-  // Detail page content
-  contentEn      String?   @db.Text // long description shown on the detail page
-  contentSi      String?   @db.Text
-  contentTa      String?   @db.Text
-  objectivesEn   String?   @db.Text // checklist, one item per line
-  objectivesSi   String?   @db.Text
-  objectivesTa   String?   @db.Text
-  outcomesEn     String?   @db.Text // numbered cards, one per line: "Title :: Text"
-  outcomesSi     String?   @db.Text
-  outcomesTa     String?   @db.Text
+  id              Int       @id @default(autoincrement())
+  slug            String?   @unique
+  titleEn         String
+  titleSi         String?
+  titleTa         String?
+  descriptionEn   String
+  descriptionSi   String?
+  descriptionTa   String?
+  image           String?
+  contentEn       String?
+  contentSi       String?
+  contentTa       String?
+  objectivesEn    String?
+  objectivesSi    String?
+  objectivesTa    String?
+  outcomesEn      String?
+  outcomesSi      String?
+  outcomesTa      String?
   beneficiariesEn String?
   beneficiariesSi String?
   beneficiariesTa String?
-  location       String?
-  image2         String?
-  image3         String?
-  status         String    @default("ongoing") // ongoing | completed | upcoming
-  startDate      DateTime?
-  endDate        DateTime?
-  order          Int       @default(0)
-  published      Boolean   @default(true)
-  createdAt      DateTime  @default(now())
+  location        String?
+  image2          String?
+  image3          String?
+  status          String    @default("ongoing")
+  startDate       DateTime?
+  endDate         DateTime?
+  order           Int       @default(0)
+  published       Boolean   @default(true)
+  createdAt       DateTime  @default(now())
 }
 
 model Service {
@@ -71,24 +69,23 @@ model Service {
   titleEn       String
   titleSi       String?
   titleTa       String?
-  descriptionEn String  @db.Text
-  descriptionSi String? @db.Text
-  descriptionTa String? @db.Text
-  icon          String? // emoji or icon name
+  descriptionEn String
+  descriptionSi String?
+  descriptionTa String?
+  icon          String?
   image         String?
-  // Detail page content
-  contentEn     String? @db.Text // long description shown on the detail page
-  contentSi     String? @db.Text
-  contentTa     String? @db.Text
-  featuresEn    String? @db.Text // checklist, one item per line
-  featuresSi    String? @db.Text
-  featuresTa    String? @db.Text
-  benefitsEn    String? @db.Text // numbered cards, one per line: "Title :: Text"
-  benefitsSi    String? @db.Text
-  benefitsTa    String? @db.Text
-  faqsEn        String? @db.Text // one per line: "Question :: Answer"
-  faqsSi        String? @db.Text
-  faqsTa        String? @db.Text
+  contentEn     String?
+  contentSi     String?
+  contentTa     String?
+  featuresEn    String?
+  featuresSi    String?
+  featuresTa    String?
+  benefitsEn    String?
+  benefitsSi    String?
+  benefitsTa    String?
+  faqsEn        String?
+  faqsSi        String?
+  faqsTa        String?
   image2        String?
   image3        String?
   order         Int     @default(0)
@@ -100,10 +97,10 @@ model Publication {
   titleEn       String
   titleSi       String?
   titleTa       String?
-  descriptionEn String?  @db.Text
-  descriptionSi String?  @db.Text
-  descriptionTa String?  @db.Text
-  category      String   @default("research") // research | report | annual | other
+  descriptionEn String?
+  descriptionSi String?
+  descriptionTa String?
+  category      String   @default("research")
   fileUrl       String?
   coverImage    String?
   publishedAt   DateTime @default(now())
@@ -111,29 +108,28 @@ model Publication {
 }
 
 model News {
-  id          Int      @id @default(autoincrement())
-  slug        String?  @unique
-  titleEn     String
-  titleSi     String?
-  titleTa     String?
-  excerptEn   String?  @db.Text
-  excerptSi   String?  @db.Text
-  excerptTa   String?  @db.Text
-  contentEn   String   @db.Text
-  contentSi   String?  @db.Text
-  contentTa   String?  @db.Text
-  image       String?
-  // Rich detail-page content
-  highlightsEn String? @db.Text // key points checklist, one per line
-  highlightsSi String? @db.Text
-  highlightsTa String? @db.Text
-  quoteEn      String? @db.Text // pull quote, optionally "Quote :: Attribution"
-  quoteSi      String? @db.Text
-  quoteTa      String? @db.Text
+  id           Int      @id @default(autoincrement())
+  slug         String?  @unique
+  titleEn      String
+  titleSi      String?
+  titleTa      String?
+  excerptEn    String?
+  excerptSi    String?
+  excerptTa    String?
+  contentEn    String
+  contentSi    String?
+  contentTa    String?
+  image        String?
+  highlightsEn String?
+  highlightsSi String?
+  highlightsTa String?
+  quoteEn      String?
+  quoteSi      String?
+  quoteTa      String?
   image2       String?
   image3       String?
-  publishedAt DateTime @default(now())
-  published   Boolean  @default(true)
+  publishedAt  DateTime @default(now())
+  published    Boolean  @default(true)
 }
 
 model Event {
@@ -142,21 +138,20 @@ model Event {
   titleEn       String
   titleSi       String?
   titleTa       String?
-  descriptionEn String    @db.Text
-  descriptionSi String?   @db.Text
-  descriptionTa String?   @db.Text
+  descriptionEn String
+  descriptionSi String?
+  descriptionTa String?
   location      String?
   image         String?
-  // Rich detail-page content
-  contentEn     String?   @db.Text // long description shown on the detail page
-  contentSi     String?   @db.Text
-  contentTa     String?   @db.Text
-  highlightsEn  String?   @db.Text // "what to expect" checklist, one per line
-  highlightsSi  String?   @db.Text
-  highlightsTa  String?   @db.Text
-  agendaEn      String?   @db.Text // schedule, one per line: "Time :: Item"
-  agendaSi      String?   @db.Text
-  agendaTa      String?   @db.Text
+  contentEn     String?
+  contentSi     String?
+  contentTa     String?
+  highlightsEn  String?
+  highlightsSi  String?
+  highlightsTa  String?
+  agendaEn      String?
+  agendaSi      String?
+  agendaTa      String?
   image2        String?
   image3        String?
   startDate     DateTime
@@ -179,9 +174,9 @@ model Product {
   nameEn        String
   nameSi        String?
   nameTa        String?
-  descriptionEn String   @db.Text
-  descriptionSi String?  @db.Text
-  descriptionTa String?  @db.Text
+  descriptionEn String
+  descriptionSi String?
+  descriptionTa String?
   price         Decimal? @db.Decimal(10, 2)
   image         String?
   inStock       Boolean  @default(true)
@@ -191,9 +186,9 @@ model Product {
 
 model Testimonial {
   id        Int     @id @default(autoincrement())
-  quoteEn   String  @db.Text
-  quoteSi   String? @db.Text
-  quoteTa   String? @db.Text
+  quoteEn   String
+  quoteSi   String?
+  quoteTa   String?
   authorEn  String
   authorSi  String?
   authorTa  String?
@@ -226,8 +221,8 @@ model Donation {
   phone            String?
   amount           Decimal  @db.Decimal(10, 2)
   currency         String   @default("LKR")
-  message          String?  @db.Text
-  status           String   @default("pending") // pending | success | failed | cancelled | chargeback
+  message          String?
+  status           String   @default("pending")
   payherePaymentId String?
   createdAt        DateTime @default(now())
 }
@@ -236,7 +231,7 @@ model Suggestion {
   id        Int      @id @default(autoincrement())
   name      String?
   email     String?
-  message   String   @db.Text
+  message   String
   read      Boolean  @default(false)
   createdAt DateTime @default(now())
 }
@@ -247,7 +242,7 @@ model ContactMessage {
   email     String
   phone     String?
   subject   String?
-  message   String   @db.Text
+  message   String
   read      Boolean  @default(false)
   createdAt DateTime @default(now())
 }
@@ -256,4 +251,17 @@ model Subscriber {
   id        Int      @id @default(autoincrement())
   email     String   @unique
   createdAt DateTime @default(now())
+}
+
+model TeamMember {
+  id        Int      @id @default(autoincrement())
+  name      String
+  roleEn    String?
+  roleSi    String?
+  roleTa    String?
+  image     String?
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
