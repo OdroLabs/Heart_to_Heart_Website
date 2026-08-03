@@ -1,9 +1,11 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { FileText, Download } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { loc, type Locale } from "@/lib/i18n";
 import { getLabels } from "@/lib/labels";
 import { getSettings, s } from "@/lib/settings";
+import { pageMetadata } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -17,6 +19,18 @@ const categoryLabels: Record<string, string> = {
   annual: "Annual Report",
   other: "Other",
 };
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: Locale };
+}): Promise<Metadata> {
+  const settings = await getSettings();
+  return pageMetadata(settings, params.locale, {
+    title: s(settings, "publications_hero_title", params.locale),
+    description: s(settings, "publications_hero_intro", params.locale),
+  });
+}
 
 export default async function PublicationsPage({ params }: { params: { locale: Locale } }) {
   const { locale } = params;

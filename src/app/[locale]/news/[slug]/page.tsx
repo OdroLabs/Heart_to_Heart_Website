@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
@@ -13,8 +14,27 @@ import { prisma } from "@/lib/prisma";
 import { loc, type Locale } from "@/lib/i18n";
 import { getLabels } from "@/lib/labels";
 import { getSettings, s } from "@/lib/settings";
+import { pageMetadata } from "@/lib/seo";
 import { RichText } from "@/components/site/rich-text";
 import { formatDate } from "@/lib/utils";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: Locale; slug: string };
+}): Promise<Metadata> {
+  const settings = await getSettings();
+  const param = decodeURIComponent(params.slug);
+  const item = await prisma.news.findFirst({
+    where: /^\d+$/.test(param) ? { id: Number(param) } : { slug: param },
+  });
+  if (!item) return pageMetadata(settings, params.locale);
+  return pageMetadata(settings, params.locale, {
+    title: loc(item, "title", params.locale),
+    description: loc(item, "excerpt", params.locale),
+    image: item.image ?? undefined,
+  });
+}
 
 export default async function NewsDetailPage({
   params,

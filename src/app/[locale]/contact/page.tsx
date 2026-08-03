@@ -1,10 +1,24 @@
+import type { Metadata } from "next";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import type { Locale } from "@/lib/i18n";
 import { getLabels } from "@/lib/labels";
 import { buildSocials } from "@/lib/nav";
 import { getSettings, s, show } from "@/lib/settings";
+import { pageMetadata } from "@/lib/seo";
 import { PageHero } from "@/components/site/page-hero";
 import { ContactForm } from "@/components/site/contact-form";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: Locale };
+}): Promise<Metadata> {
+  const settings = await getSettings();
+  return pageMetadata(settings, params.locale, {
+    title: s(settings, "contact_hero_title", params.locale),
+    description: s(settings, "contact_hero_intro", params.locale),
+  });
+}
 
 export default async function ContactPage({ params }: { params: { locale: Locale } }) {
   const { locale } = params;

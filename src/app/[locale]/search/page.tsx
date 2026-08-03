@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -12,6 +13,7 @@ import {
 } from "lucide-react";
 import { getSettings } from "@/lib/settings";
 import { getLabels } from "@/lib/labels";
+import { pageMetadata } from "@/lib/seo";
 import { type Locale } from "@/lib/i18n";
 import { searchSite, totalCount, type SearchResultType } from "@/lib/search";
 import { formatDate } from "@/lib/utils";
@@ -24,6 +26,25 @@ const TYPE_ICON: Record<SearchResultType, typeof Newspaper> = {
   publications: FileText,
   products: ShoppingBag,
 };
+
+export async function generateMetadata({
+  params,
+  searchParams,
+}: {
+  params: { locale: Locale };
+  searchParams: { q?: string };
+}): Promise<Metadata> {
+  const settings = await getSettings();
+  const dict = getLabels(params.locale, settings);
+  const q = (searchParams.q ?? "").trim();
+  return {
+    ...pageMetadata(settings, params.locale, {
+      title: q ? `${dict.common.searchResultsFor} "${q}"` : dict.common.search,
+    }),
+    // Query-dependent result pages aren't useful search-engine landing pages.
+    robots: { index: false, follow: true },
+  };
+}
 
 export default async function SearchPage({
   params,

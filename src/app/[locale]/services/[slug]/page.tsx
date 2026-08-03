@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
@@ -14,8 +15,27 @@ import { prisma } from "@/lib/prisma";
 import { loc, type Locale } from "@/lib/i18n";
 import { getLabels } from "@/lib/labels";
 import { getSettings, s } from "@/lib/settings";
+import { pageMetadata } from "@/lib/seo";
 import { RichText } from "@/components/site/rich-text";
 import { Button } from "@/components/ui/button";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: Locale; slug: string };
+}): Promise<Metadata> {
+  const settings = await getSettings();
+  const param = decodeURIComponent(params.slug);
+  const service = await prisma.service.findFirst({
+    where: /^\d+$/.test(param) ? { id: Number(param) } : { slug: param },
+  });
+  if (!service) return pageMetadata(settings, params.locale);
+  return pageMetadata(settings, params.locale, {
+    title: loc(service, "title", params.locale),
+    description: loc(service, "description", params.locale),
+    image: service.image ?? undefined,
+  });
+}
 
 function parsePairs(text: string) {
   return text
