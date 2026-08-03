@@ -33,11 +33,23 @@ export default async function NewsDetailPage({
   }
   if (!item || !item.published) notFound();
 
-  const latest = await prisma.news.findMany({
-    where: { published: true, id: { not: item.id } },
-    orderBy: { publishedAt: "desc" },
-    take: 4,
-  });
+  const [latest, upcomingEvents, projects] = await Promise.all([
+    prisma.news.findMany({
+      where: { published: true, id: { not: item.id } },
+      orderBy: { publishedAt: "desc" },
+      take: 3,
+    }),
+    prisma.event.findMany({
+      where: { published: true, startDate: { gte: new Date() } },
+      orderBy: { startDate: "asc" },
+      take: 3,
+    }),
+    prisma.project.findMany({
+      where: { published: true },
+      orderBy: { order: "asc" },
+      take: 3,
+    }),
+  ]);
 
   const highlights = loc(item, "highlights", locale).split("\n").map((h) => h.trim()).filter(Boolean);
   const rawQuote = loc(item, "quote", locale);
@@ -132,31 +144,80 @@ export default async function NewsDetailPage({
         </div>
 
         {/* Sidebar */}
-        {latest.length > 0 && (
-          <aside className="lg:sticky lg:top-24 lg:self-start">
-            <div className="rounded-2xl bg-muted p-5">
-              <h3 className="mb-4 px-1 font-bold">
-                {s(settings, "home_news_title", locale)}
-              </h3>
-              <ul className="space-y-2.5">
-                {latest.map((n) => (
-                  <li key={n.id}>
-                    <Link
-                      href={`/${locale}/news/${n.slug ?? n.id}`}
-                      className="group flex items-center justify-between gap-3 rounded-xl border bg-card px-4 py-3.5 text-sm font-semibold shadow-sm transition-all hover:border-primary/40 hover:text-primary"
-                    >
-                      <span>
-                        <span className="line-clamp-2">{loc(n, "title", locale)}</span>
-                        <span className="block text-xs font-normal text-muted-foreground">
-                          {formatDate(n.publishedAt, locale)}
+        {(latest.length > 0 || upcomingEvents.length > 0 || projects.length > 0) && (
+          <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
+            {latest.length > 0 && (
+              <div className="rounded-2xl bg-muted p-5">
+                <h3 className="mb-4 px-1 font-bold">
+                  {s(settings, "home_news_title", locale)}
+                </h3>
+                <ul className="space-y-2.5">
+                  {latest.map((n) => (
+                    <li key={n.id}>
+                      <Link
+                        href={`/${locale}/news/${n.slug ?? n.id}`}
+                        className="group flex items-center justify-between gap-3 rounded-xl border bg-card px-4 py-3.5 text-sm font-semibold shadow-sm transition-all hover:border-primary/40 hover:text-primary"
+                      >
+                        <span>
+                          <span className="line-clamp-2">{loc(n, "title", locale)}</span>
+                          <span className="block text-xs font-normal text-muted-foreground">
+                            {formatDate(n.publishedAt, locale)}
+                          </span>
                         </span>
-                      </span>
-                      <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                        <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {upcomingEvents.length > 0 && (
+              <div className="rounded-2xl bg-muted p-5">
+                <h3 className="mb-4 px-1 font-bold">
+                  {s(settings, "home_events_title", locale)}
+                </h3>
+                <ul className="space-y-2.5">
+                  {upcomingEvents.map((ev) => (
+                    <li key={ev.id}>
+                      <Link
+                        href={`/${locale}/events/${ev.slug ?? ev.id}`}
+                        className="group flex items-center justify-between gap-3 rounded-xl border bg-card px-4 py-3.5 text-sm font-semibold shadow-sm transition-all hover:border-primary/40 hover:text-primary"
+                      >
+                        <span>
+                          <span className="line-clamp-2">{loc(ev, "title", locale)}</span>
+                          <span className="block text-xs font-normal text-muted-foreground">
+                            {formatDate(ev.startDate, locale)}
+                          </span>
+                        </span>
+                        <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {projects.length > 0 && (
+              <div className="rounded-2xl bg-muted p-5">
+                <h3 className="mb-4 px-1 font-bold">
+                  {s(settings, "home_projects_title", locale)}
+                </h3>
+                <ul className="space-y-2.5">
+                  {projects.map((p) => (
+                    <li key={p.id}>
+                      <Link
+                        href={`/${locale}/projects/${p.slug ?? p.id}`}
+                        className="group flex items-center justify-between gap-3 rounded-xl border bg-card px-4 py-3.5 text-sm font-semibold shadow-sm transition-all hover:border-primary/40 hover:text-primary"
+                      >
+                        <span className="line-clamp-2">{loc(p, "title", locale)}</span>
+                        <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </aside>
         )}
       </article>

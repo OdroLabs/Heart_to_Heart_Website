@@ -328,8 +328,15 @@ export const settingPages: SettingPage[] = [
         preview: { path: "", anchor: "sec-header" },
         items: [
           SW("show_header_donate", "Show the donate button in the header"),
-          SW("show_floating_donate", "Show the floating donate button on every page"),
           T("header_donate_label", "Donate button text", "Leave blank to use the standard label."),
+        ],
+      },
+      {
+        section: "Floating WhatsApp button",
+        preview: { path: "", anchor: "sec-header" },
+        hideNote: "Uses the WhatsApp number set under Contact details. Hidden when that's blank.",
+        items: [
+          SW("show_floating_whatsapp", "Show the floating WhatsApp button on every page"),
         ],
       },
     ],

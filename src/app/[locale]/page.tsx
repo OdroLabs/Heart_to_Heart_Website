@@ -273,7 +273,7 @@ export default async function HomePage({
             <div className="relative z-10 flex flex-1 flex-col px-12 py-12 md:px-32 md:py-16">
 
               {/* ── TOP: Trust badge + H1 + CTA button ── */}
-              <div className="flex-1">
+              <div className="flex-1 max-w-[520px]">
                 {/* Trust avatars badge */}
                 {heroTrustBadge && (
                   <div className="mb-6 inline-flex items-center gap-2.5 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 px-3 py-2 pr-4">
@@ -294,9 +294,9 @@ export default async function HomePage({
                   </div>
                 )}
 
-                {/* H1 — white, large, max half the width */}
+                {/* H1 — white, large, narrower content column */}
                 {heroTitle && (
-                  <h1 className="mb-8 max-w-[600px] text-4xl font-extrabold leading-[1.1] tracking-tight text-white drop-shadow-sm md:text-[3.5rem]">
+                  <h1 className="mb-8 text-4xl font-extrabold leading-[1.1] tracking-tight text-white drop-shadow-sm md:text-[3.5rem]">
                     {heroTitle}
                   </h1>
                 )}
