@@ -96,6 +96,7 @@ export function show(map: SettingsMap, toggleKey: string, ...content: unknown[])
 export type SettingType =
   | "text"
   | "textarea"
+  | "password"
   | "image"
   | "file"
   | "boolean"
@@ -171,6 +172,13 @@ const P = (key: string, label: string, help?: string): SettingDef => ({
   key,
   label,
   type: "text",
+  help,
+});
+/** Plain (untranslated) single-line text, masked like a password field. */
+const PW = (key: string, label: string, help?: string): SettingDef => ({
+  key,
+  label,
+  type: "password",
   help,
 });
 /** Plain (untranslated) multi-line text. */
@@ -762,6 +770,36 @@ export const settingPages: SettingPage[] = [
             itemLabel: "Point",
             addLabel: "Add a point",
           }),
+        ],
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------ Email & SMTP */
+  {
+    slug: "email",
+    title: "Email & SMTP",
+    description:
+      "The mail server used to send email, and where new contact form submissions are delivered.",
+    sections: [
+      {
+        section: "SMTP server",
+        items: [
+          P("smtp_host", "SMTP host", "e.g. smtp.gmail.com or mail.yourdomain.com"),
+          P("smtp_port", "SMTP port", "Common ports: 587 (STARTTLS), 465 (SSL), 25."),
+          SW("smtp_secure", "Use SSL", "Turn on for port 465. Leave off for STARTTLS on 587."),
+          P("smtp_username", "SMTP username"),
+          PW("smtp_password", "SMTP password"),
+          P("smtp_from_name", "From name", "Shown as the sender name, e.g. Heart to Heart."),
+          P("smtp_from_email", "From email address", "Must usually be a real mailbox on your SMTP account."),
+        ],
+      },
+      {
+        section: "Contact form notifications",
+        hideNote: "Falls back to the Email address under Contact details if left blank.",
+        items: [
+          P("contact_to_email", "Send new submissions to"),
+          PA("contact_cc_emails", "CC emails", "One address per line. Optional."),
         ],
       },
     ],
