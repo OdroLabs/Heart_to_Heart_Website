@@ -1,10 +1,24 @@
+import type { Metadata } from "next";
 import { Eye, Target, Users, BookOpen, Sparkles, History, Heart } from "lucide-react";
 import { type Locale, loc } from "@/lib/i18n";
 import { getLabels } from "@/lib/labels";
 import { getSettings, s, sPairs } from "@/lib/settings";
+import { pageMetadata } from "@/lib/seo";
 import { prisma } from "@/lib/prisma";
 import { Card, CardContent } from "@/components/ui/card";
 import { PageHero } from "@/components/site/page-hero";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: Locale };
+}): Promise<Metadata> {
+  const settings = await getSettings();
+  return pageMetadata(settings, params.locale, {
+    title: s(settings, "about_hero_title", params.locale),
+    description: s(settings, "about_hero_intro", params.locale),
+  });
+}
 
 export default async function AboutPage({ params }: { params: { locale: Locale } }) {
   const { locale } = params;

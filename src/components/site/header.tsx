@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X, Heart, Phone, Mail, ChevronDown, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LocaleSwitcher } from "./locale-switcher";
+import { SearchOverlay } from "./search-overlay";
 import { cn } from "@/lib/utils";
 import type { Dictionary } from "@/lib/dictionaries";
 import type { NavConfig, NavGroup, NavItem } from "@/lib/nav";
@@ -78,15 +79,15 @@ export function SiteHeader({
 
   const pillClass = (active: boolean) =>
     cn(
-      "relative flex items-center gap-1 whitespace-nowrap rounded-full px-3 py-1.5 text-[13px] font-semibold transition-colors duration-200",
+      "group relative flex items-center gap-1 whitespace-nowrap rounded-full px-3 py-1.5 text-[13px] font-semibold transition-colors duration-200",
       active ? "bg-brand-50 text-primary" : "text-foreground/70 hover:bg-muted hover:text-primary"
     );
 
   const pillUnderline = (active: boolean) => (
     <span
       className={cn(
-        "absolute inset-x-3 -bottom-px h-0.5 rounded-full bg-gradient-to-r from-primary to-accent transition-opacity duration-200",
-        active ? "opacity-100" : "opacity-0"
+        "absolute inset-x-3 -bottom-px h-0.5 origin-left scale-x-0 rounded-full bg-gradient-to-r from-primary to-accent transition-transform duration-300 ease-out group-hover:scale-x-100",
+        active && "scale-x-100"
       )}
     />
   );
@@ -274,7 +275,8 @@ export function SiteHeader({
             )}
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5">
+            <SearchOverlay locale={locale} dict={dict} />
             {showDonate && donateLabel && (
               <Button
                 asChild

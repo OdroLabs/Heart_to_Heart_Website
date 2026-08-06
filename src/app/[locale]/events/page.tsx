@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, CalendarDays, MapPin } from "lucide-react";
@@ -5,11 +6,24 @@ import { prisma } from "@/lib/prisma";
 import { loc, type Locale } from "@/lib/i18n";
 import { getLabels } from "@/lib/labels";
 import { getSettings, s, show } from "@/lib/settings";
+import { pageMetadata } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { PageHero } from "@/components/site/page-hero";
 import { Section } from "@/components/site/section";
 import { EmptyState } from "@/components/site/empty-state";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: Locale };
+}): Promise<Metadata> {
+  const settings = await getSettings();
+  return pageMetadata(settings, params.locale, {
+    title: s(settings, "events_hero_title", params.locale),
+    description: s(settings, "events_hero_intro", params.locale),
+  });
+}
 
 export default async function EventsPage({ params }: { params: { locale: Locale } }) {
   const { locale } = params;

@@ -1,9 +1,23 @@
+import type { Metadata } from "next";
 import { Landmark, Heart, Sparkles } from "lucide-react";
 import type { Locale } from "@/lib/i18n";
 import { getLabels } from "@/lib/labels";
 import { getSettings, s, sList, sPairs, show } from "@/lib/settings";
+import { pageMetadata } from "@/lib/seo";
 import { PageHero } from "@/components/site/page-hero";
 import { DonationForm } from "@/components/site/donation-form";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: Locale };
+}): Promise<Metadata> {
+  const settings = await getSettings();
+  return pageMetadata(settings, params.locale, {
+    title: s(settings, "donate_hero_title", params.locale),
+    description: s(settings, "donate_intro", params.locale),
+  });
+}
 
 export default async function DonatePage({
   params,

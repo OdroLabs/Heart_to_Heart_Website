@@ -1,9 +1,25 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
 import type { Locale } from "@/lib/i18n";
 import { getLabels } from "@/lib/labels";
 import { getSettings } from "@/lib/settings";
+import { pageMetadata } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: Locale };
+}): Promise<Metadata> {
+  const settings = await getSettings();
+  const dict = getLabels(params.locale, settings);
+  return {
+    ...pageMetadata(settings, params.locale, { title: dict.donate.successTitle }),
+    // Transactional confirmation page — nothing for search engines to index.
+    robots: { index: false, follow: false },
+  };
+}
 
 export default async function DonateSuccessPage({ params }: { params: { locale: Locale } }) {
   const settings = await getSettings();

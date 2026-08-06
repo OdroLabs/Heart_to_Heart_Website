@@ -42,6 +42,7 @@ const settingsLinks = [
   { href: "/admin/settings/about", label: "About Page", icon: Info },
   { href: "/admin/settings/contact", label: "Contact Page", icon: Phone },
   { href: "/admin/settings/donate", label: "Donation Page", icon: Heart },
+  { href: "/admin/settings/email", label: "Email & SMTP", icon: Mail },
   { href: "/admin/settings/pages", label: "Other Pages", icon: Files },
   { href: "/admin/settings/labels", label: "Labels & Translations", icon: Languages },
 ];
@@ -58,6 +59,7 @@ const contentLinks = [
   { href: "/admin/content/testimonials", label: "Testimonials", icon: Quote },
   { href: "/admin/content/partners", label: "Partners", icon: Handshake },
   { href: "/admin/content/stats", label: "Impact Stats", icon: BarChart3 },
+  { href: "/admin/content/donation-cards", label: "Donation Cards", icon: Heart },
 ];
 
 const inboxLinks = [
