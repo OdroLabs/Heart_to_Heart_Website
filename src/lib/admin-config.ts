@@ -42,6 +42,8 @@ export interface EntityDef {
   fields: FieldDef[];
   listFields: { name: string; label: string; type?: "date" | "boolean" | "money" | "image" }[];
   readOnly?: boolean; // inbox-style: list + view + delete only
+  /** Shows an "Export CSV" button on the list page, downloading every row. */
+  exportable?: boolean;
   orderBy: Record<string, "asc" | "desc">;
 }
 
@@ -477,6 +479,7 @@ export const entities: EntityDef[] = [
     titleSingular: "Subscriber",
     description: "Newsletter subscribers.",
     readOnly: true,
+    exportable: true,
     orderBy: { createdAt: "desc" },
     fields: [],
     listFields: [

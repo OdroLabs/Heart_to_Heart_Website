@@ -3,12 +3,13 @@ import { notFound } from "next/navigation";
 import { isLocale } from "@/lib/i18n";
 import { getLabels } from "@/lib/labels";
 import { buildNav } from "@/lib/nav";
-import { getSettings, s, sBool } from "@/lib/settings";
+import { getSettings, s, sBool, show } from "@/lib/settings";
+import { pageMetadata } from "@/lib/seo";
 import { SiteHeader } from "@/components/site/header";
 import { SiteFooter } from "@/components/site/footer";
 import { ScrollFX } from "@/components/site/scroll-fx";
 import { ScrollProgress } from "@/components/site/scroll-progress";
-import { FloatingDonate } from "@/components/site/floating-donate";
+import { FloatingWhatsApp } from "@/components/site/floating-whatsapp";
 
 export const dynamic = "force-dynamic";
 
@@ -21,25 +22,16 @@ export async function generateMetadata({
   const locale = isLocale(params.locale) ? params.locale : "en";
   const settings = await getSettings();
 
-  const siteName = s(settings, "site_name", locale);
-  const title = s(settings, "seo_title", locale) || siteName;
-  const description =
-    s(settings, "seo_description", locale) || s(settings, "site_tagline", locale);
   const keywords = s(settings, "seo_keywords");
   const favicon = s(settings, "favicon");
-  const ogImage = s(settings, "og_image");
 
+  // Site-wide defaults. Every page below overrides title/description with
+  // its own copy via its own `generateMetadata`; this is only what's used
+  // when a route doesn't define one of its own.
   return {
-    title: title || undefined,
-    description: description || undefined,
+    ...pageMetadata(settings, locale),
     keywords: keywords ? keywords.split(",").map((k) => k.trim()).filter(Boolean) : undefined,
     icons: favicon ? { icon: favicon } : undefined,
-    openGraph: {
-      title: title || undefined,
-      description: description || undefined,
-      siteName: siteName || undefined,
-      images: ogImage ? [ogImage] : undefined,
-    },
   };
 }
 
@@ -86,8 +78,8 @@ export default async function LocaleLayout({
       <main className="flex-1">{children}</main>
       <SiteFooter locale={locale} dict={dict} settings={settings} />
       {/* Fixed CTA — kept outside <main> and any transformed/animated parent */}
-      {sBool(settings, "show_floating_donate", true) && (
-        <FloatingDonate locale={locale} label={dict.donate.donateNow} />
+      {show(settings, "show_floating_whatsapp", s(settings, "whatsapp")) && (
+        <FloatingWhatsApp number={s(settings, "whatsapp")} label={dict.common.chatOnWhatsapp} />
       )}
     </div>
   );

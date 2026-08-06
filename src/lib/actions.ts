@@ -6,7 +6,8 @@ import { prisma } from "./prisma";
 import { requireAdmin, requireOwner } from "./session";
 import { toRole, type Role } from "./roles";
 import { getEntity, type FieldDef } from "./admin-config";
-import { getSettingPage, type SettingDef } from "./settings";
+import { getSettingPage, getSettings, s, type SettingDef } from "./settings";
+import { sendMail, contactCcList, contactToEmail } from "./mailer";
 import { allLabelDefs } from "./labels";
 import { sanitizeRichText } from "./sanitize";
 import { slugify, uniqueSlug } from "./slug";
@@ -382,16 +383,62 @@ export async function submitContact(formData: FormData) {
   const email = (formData.get("email") as string)?.trim();
   const message = (formData.get("message") as string)?.trim();
   if (!name || !email || !message) return { ok: false };
+  const phone = ((formData.get("phone") as string) || "").trim() || null;
+  const subject = ((formData.get("subject") as string) || "").trim() || null;
+
   await prisma.contactMessage.create({
-    data: {
-      name,
-      email,
-      phone: ((formData.get("phone") as string) || "").trim() || null,
-      subject: ((formData.get("subject") as string) || "").trim() || null,
-      message,
-    },
+    data: { name, email, phone, subject, message },
   });
+
+  // Notify the org by email. Best-effort — a submission is still saved and
+  // shown as successful even if SMTP isn't configured or delivery fails.
+  try {
+    const settings = await getSettings();
+    const to = contactToEmail(settings);
+    if (to) {
+      const siteName = s(settings, "site_name") || "the website";
+      await sendMail(settings, {
+        to,
+        cc: contactCcList(settings),
+        replyTo: email,
+        subject: `New contact form message${subject ? `: ${subject}` : ""}`,
+        text: [
+          `New message from the contact form on ${siteName}.`,
+          "",
+          `Name: ${name}`,
+          `Email: ${email}`,
+          phone ? `Phone: ${phone}` : null,
+          subject ? `Subject: ${subject}` : null,
+          "",
+          message,
+        ]
+          .filter((line) => line !== null)
+          .join("\n"),
+        html: `
+          <p>New message from the contact form on ${siteName}.</p>
+          <table cellpadding="4" cellspacing="0">
+            <tr><td><strong>Name</strong></td><td>${escapeHtml(name)}</td></tr>
+            <tr><td><strong>Email</strong></td><td>${escapeHtml(email)}</td></tr>
+            ${phone ? `<tr><td><strong>Phone</strong></td><td>${escapeHtml(phone)}</td></tr>` : ""}
+            ${subject ? `<tr><td><strong>Subject</strong></td><td>${escapeHtml(subject)}</td></tr>` : ""}
+          </table>
+          <p style="white-space: pre-line;">${escapeHtml(message)}</p>
+        `,
+      });
+    }
+  } catch (error) {
+    console.error("Failed to send contact form notification email:", error);
+  }
+
   return { ok: true };
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
 
 export async function submitSuggestion(formData: FormData) {
