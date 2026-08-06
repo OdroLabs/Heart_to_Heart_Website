@@ -59,6 +59,7 @@ const contentLinks = [
   { href: "/admin/content/testimonials", label: "Testimonials", icon: Quote },
   { href: "/admin/content/partners", label: "Partners", icon: Handshake },
   { href: "/admin/content/stats", label: "Impact Stats", icon: BarChart3 },
+  { href: "/admin/content/donation-cards", label: "Donation Cards", icon: Heart },
 ];
 
 const inboxLinks = [

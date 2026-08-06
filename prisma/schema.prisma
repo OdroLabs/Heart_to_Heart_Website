@@ -265,3 +265,20 @@ model TeamMember {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model DonationCard {
+  id          Int      @id @default(autoincrement())
+  image       String?
+  category    String?
+  title       String
+  author      String?
+  description String
+  linkText    String?
+  linkUrl     String?
+  raised      Decimal  @db.Decimal(10, 2)
+  goal        Decimal  @db.Decimal(10, 2)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+

@@ -27,6 +27,7 @@ import { Badge } from "@/components/ui/badge";
 import { StatCounter } from "@/components/site/stat-counter";
 import { MarqueeTrustBar } from "@/components/site/marquee-trust-bar";
 import { ServicesTabs } from "@/components/site/services-tabs";
+import { DonationSlider } from "@/components/site/donation-slider";
 
 
 import * as Icons from "lucide-react";
@@ -96,7 +97,7 @@ export default async function HomePage({
   const newsCount = sNum(settings, "home_news_count", 3);
   const eventsCount = sNum(settings, "home_events_count", 2);
 
-  const [stats, services, projects, news, events, testimonials, partners] =
+  const [stats, services, projects, news, events, testimonials, partners, donationCards] =
     await Promise.all([
       prisma.stat.findMany({ orderBy: { order: "asc" } }),
       prisma.service.findMany({
@@ -124,6 +125,11 @@ export default async function HomePage({
         orderBy: { order: "asc" },
       }),
       prisma.partner.findMany({ orderBy: { order: "asc" } }),
+      prisma.donationCard.findMany({
+        where: { published: true },
+        orderBy: { createdAt: "desc" },
+        take: 4,
+      }),
     ]);
 
   /* ----------------------------- Content reads ----------------------------- */
@@ -552,6 +558,12 @@ export default async function HomePage({
       )}
 
       {/* ================================================================== */}
+      {/* DONATION CARDS                                                      */}
+      {/* ================================================================== */}
+      <DonationSlider donationCards={donationCards} locale={locale} />
+
+      {/* ================================================================== */}
+
       {/* SERVICES / WHY CHOOSE US                                            */}
       {/* ================================================================== */}
       {showServices && (
