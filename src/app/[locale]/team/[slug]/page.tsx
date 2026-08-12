@@ -78,8 +78,8 @@ export default async function TeamMemberPage({
           {/* Content Section */}
           <div className="p-8 md:p-12 lg:p-16 w-full md:w-7/12 lg:w-2/3 flex flex-col justify-center">
             
-            <p className="font-bold text-xs md:text-sm text-[#2c7a5b] tracking-widest uppercase mb-3 md:mb-4 flex items-center gap-2">
-              <span className="block h-0.5 w-6 rounded-full bg-[#2c7a5b]"></span>
+            <p className="font-bold text-xs md:text-sm text-primary tracking-widest uppercase mb-3 md:mb-4 flex items-center gap-2">
+              <span className="block h-0.5 w-6 rounded-full bg-primary"></span>
               {categoryLabel}
             </p>
             

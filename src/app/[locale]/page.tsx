@@ -265,14 +265,14 @@ export default async function HomePage({
                   className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                   style={{ backgroundImage: `url(${heroImage})` }}
                 />
-                {/* Left gradient overlay — dark teal to transparent so white text is readable */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#1a6b5a]/90 via-[#1a6b5a]/60 to-transparent" />
+                {/* Left gradient overlay — Deep Plum to transparent */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#280026]/95 via-[#280026]/75 to-transparent" />
                 {/* Top fade for visual polish */}
-                <div className="absolute inset-0 bg-gradient-to-b from-[#1a6b5a]/30 via-transparent to-[#0d3d2e]/50" />
+                <div className="absolute inset-0 bg-gradient-to-b from-[#280026]/40 via-transparent to-[#280026]/60" />
               </>
             ) : (
-              /* No image: solid teal-green gradient background */
-              <div className="absolute inset-0 bg-gradient-to-br from-[#1a6b5a] via-[#2d8a72] to-[#3da882]" />
+              /* Solid Deep Plum to Ocean Blue gradient background */
+              <div className="absolute inset-0 bg-gradient-to-br from-[#280026] via-[#510c4f] to-[#1B1BFD]" />
             )}
 
             {/* ── Content layer ── */}
@@ -284,17 +284,20 @@ export default async function HomePage({
                 {heroTrustBadge && (
                   <div className="mb-6 inline-flex items-center gap-2.5 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 px-3 py-2 pr-4">
                     <div className="flex -space-x-2">
-                      {["A", "K", "S", "M"].map((letter, i) => (
-                        <div
-                          key={i}
-                          className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white/60 shadow-sm text-[10px] font-bold text-white"
-                          style={{
-                            backgroundColor: `hsl(${160 + i * 45}, 65%, 40%)`,
-                          }}
-                        >
-                          {letter}
-                        </div>
-                      ))}
+                      {["A", "K", "S", "M"].map((letter, i) => {
+                        const avatarColors = ["#FF0402", "#F77928", "#1B1BFD", "#84C14C"];
+                        return (
+                          <div
+                            key={i}
+                            className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white/60 shadow-sm text-[10px] font-bold text-white"
+                            style={{
+                              backgroundColor: avatarColors[i % avatarColors.length],
+                            }}
+                          >
+                            {letter}
+                          </div>
+                        );
+                      })}
                     </div>
                     <span className="text-xs font-semibold text-white/90">{heroTrustBadge}</span>
                   </div>
@@ -389,7 +392,7 @@ export default async function HomePage({
                         className="absolute inset-0 bg-cover bg-center"
                         style={{ backgroundImage: `url(${aboutImage})` }}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#eaf6f6]/30 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-brand-100/30 to-transparent" />
                     </div>
 
                     <div className="absolute -top-6 -right-6 z-10 rounded-full bg-white/20 backdrop-blur-lg p-5 shadow-xl border border-border/40 max-w-[180px]">

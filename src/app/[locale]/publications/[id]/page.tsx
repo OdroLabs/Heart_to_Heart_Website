@@ -95,7 +95,7 @@ export default async function PublicationDetailPage({
           {/* Details */}
           <div className="p-8 md:p-12 lg:p-16">
             <div className="flex flex-wrap items-center gap-4 mb-6">
-              <div className="flex items-center gap-1.5 text-sm font-medium text-[#2c7a5b] bg-[#2c7a5b]/10 px-3 py-1 rounded-full">
+              <div className="flex items-center gap-1.5 text-sm font-semibold text-primary bg-brand-50 border border-brand-200/50 px-3 py-1 rounded-full">
                 <Tag className="h-4 w-4" />
                 {category}
               </div>

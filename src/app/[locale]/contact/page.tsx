@@ -64,7 +64,7 @@ export default async function ContactPage({ params }: { params: { locale: Locale
   const showMap = show(settings, "show_contact_map", mapEmbed);
 
   return (
-    <div className="bg-[#e9e9e9]/30 min-h-screen flex flex-col">
+    <div className="bg-brand-50/30 min-h-screen flex flex-col">
       <PageHero
         title={s(settings, "contact_hero_title", locale)}
         intro={s(settings, "contact_hero_intro", locale)}

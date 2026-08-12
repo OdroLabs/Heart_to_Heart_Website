@@ -352,10 +352,10 @@ export default async function AboutPage({ params }: { params: { locale: Locale }
         {bodMembers.length > 0 && (
           <section id="sec-bod" data-animate className="pt-6 pb-12">
             <div className="mb-12 flex flex-col items-center justify-center text-center">
-              <p className="font-bold text-xs text-[#2c7a5b] tracking-[0.2em] uppercase mb-4 flex items-center gap-2">
-                <span className="block h-0.5 w-6 rounded-full bg-[#2c7a5b]"></span>
+              <p className="font-bold text-xs text-primary tracking-[0.2em] uppercase mb-4 flex items-center gap-2">
+                <span className="block h-0.5 w-6 rounded-full bg-primary"></span>
                 {bodTitle}
-                <span className="block h-0.5 w-6 rounded-full bg-[#2c7a5b]"></span>
+                <span className="block h-0.5 w-6 rounded-full bg-primary"></span>
               </p>
               <h2 className="text-3xl md:text-[2.75rem] font-extrabold leading-[1.1] tracking-tight text-navy-950 mb-4">{bodTitle}</h2>
               {bodDescription && (
@@ -381,7 +381,7 @@ export default async function AboutPage({ params }: { params: { locale: Locale }
                   </div>
                   <div className="p-5 text-center">
                     <h3 className="font-bold text-navy-950 text-base">{member.name}</h3>
-                    <p className="mt-1 text-[13px] font-medium text-[#2c7a5b]">
+                    <p className="mt-1 text-[13px] font-medium text-primary font-semibold">
                       {loc(member, "role", locale) || "Board Member"}
                     </p>
                   </div>
@@ -394,10 +394,10 @@ export default async function AboutPage({ params }: { params: { locale: Locale }
         {staffMembers.length > 0 && (
           <section id="sec-staff" data-animate className="pt-6 pb-12">
             <div className="mb-12 flex flex-col items-center justify-center text-center">
-              <p className="font-bold text-xs text-[#2c7a5b] tracking-[0.2em] uppercase mb-4 flex items-center gap-2">
-                <span className="block h-0.5 w-6 rounded-full bg-[#2c7a5b]"></span>
+              <p className="font-bold text-xs text-primary tracking-[0.2em] uppercase mb-4 flex items-center gap-2">
+                <span className="block h-0.5 w-6 rounded-full bg-primary"></span>
                 {staffTitle}
-                <span className="block h-0.5 w-6 rounded-full bg-[#2c7a5b]"></span>
+                <span className="block h-0.5 w-6 rounded-full bg-primary"></span>
               </p>
               <h2 className="text-3xl md:text-[2.75rem] font-extrabold leading-[1.1] tracking-tight text-navy-950 mb-4">{staffTitle}</h2>
               {staffDescription && (
@@ -423,7 +423,7 @@ export default async function AboutPage({ params }: { params: { locale: Locale }
                   </div>
                   <div className="p-5 text-center">
                     <h3 className="font-bold text-navy-950 text-base">{member.name}</h3>
-                    <p className="mt-1 text-[13px] font-medium text-[#2c7a5b]">
+                    <p className="mt-1 text-[13px] font-medium text-primary font-semibold">
                       {loc(member, "role", locale) || "Staff Member"}
                     </p>
                   </div>
