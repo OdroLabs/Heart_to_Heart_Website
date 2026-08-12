@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Facebook, Youtube, Instagram, Twitter, Linkedin, Music2, Heart } from "lucide-react";
 import type { Locale } from "@/lib/i18n";
 import { getLabels } from "@/lib/labels";
 import { buildSocials } from "@/lib/nav";
@@ -7,6 +7,15 @@ import { getSettings, s, show } from "@/lib/settings";
 import { pageMetadata } from "@/lib/seo";
 import { PageHero } from "@/components/site/page-hero";
 import { ContactForm } from "@/components/site/contact-form";
+
+const SOCIAL_ICONS: Record<string, typeof Facebook> = {
+  facebook: Facebook,
+  youtube: Youtube,
+  instagram: Instagram,
+  twitter: Twitter,
+  linkedin: Linkedin,
+  tiktok: Music2,
+};
 
 export async function generateMetadata({
   params,
@@ -98,18 +107,21 @@ export default async function ContactPage({ params }: { params: { locale: Locale
               <div className="pt-8 mt-8 border-t border-border/50 max-w-md">
                 <p className="font-bold text-navy-950 mb-5">{dict.contact.followUs || "Follow Us:"}</p>
                 <div className="flex flex-wrap items-center gap-4">
-                  {socials.map((social) => (
-                    <a
-                      key={social.key}
-                      href={social.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white hover:bg-primary/90 transition-transform hover:-translate-y-0.5 shadow-sm"
-                      title={social.label}
-                    >
-                      <span className="text-sm font-bold">{social.label.charAt(0)}</span>
-                    </a>
-                  ))}
+                  {socials.map((social) => {
+                    const Icon = SOCIAL_ICONS[social.key] ?? Heart;
+                    return (
+                      <a
+                        key={social.key}
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white hover:bg-primary/90 transition-transform hover:-translate-y-0.5 shadow-sm"
+                        title={social.label}
+                      >
+                        <Icon className="h-4 w-4" />
+                      </a>
+                    );
+                  })}
                 </div>
               </div>
             )}

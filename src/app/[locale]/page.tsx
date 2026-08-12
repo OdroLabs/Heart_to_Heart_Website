@@ -336,46 +336,24 @@ export default async function HomePage({
                   </div>
                 )}
 
-                {/* Bottom-right: Two frosted glass cards */}
-                {(heroStatsValue || heroTrustPills.length > 0) && (
-                  <div className="flex gap-3 shrink-0 flex-wrap md:flex-nowrap">
-
+                {/* Bottom-right: Stat card */}
+                {heroStatsValue && (
+                  <div className="flex shrink-0 ml-auto md:ml-0 translate-x-2 md:translate-x-4">
                     {/* Card 1: Stat card — "Trusted Care Rate / 97%" */}
-                    {heroStatsValue && (
-                      <div className="w-44 rounded-3xl bg-white/20 backdrop-blur-md border border-white/30 p-5 shadow-xl">
-                        {/* Card heading from hero_trust_badge fallback */}
-                        <p className="mb-2 text-xs font-semibold text-white/75 leading-tight">
-                          {s(settings, "hero_stats_heading") || "Trusted Care Rate"}
+                    <div className="w-44 rounded-3xl bg-white/20 backdrop-blur-md border border-white/30 p-5 shadow-xl">
+                      {/* Card heading from hero_trust_badge fallback */}
+                      <p className="mb-2 text-xs font-semibold text-white/75 leading-tight">
+                        {s(settings, "hero_stats_heading") || "Trusted Care Rate"}
+                      </p>
+                      <p className="font-number text-4xl font-extrabold text-white leading-none">
+                        {heroStatsValue}
+                      </p>
+                      {heroStatsLabel && (
+                        <p className="mt-2 text-[11px] leading-snug text-white/65">
+                          {heroStatsLabel}
                         </p>
-                        <p className="font-number text-4xl font-extrabold text-white leading-none">
-                          {heroStatsValue}
-                        </p>
-                        {heroStatsLabel && (
-                          <p className="mt-2 text-[11px] leading-snug text-white/65">
-                            {heroStatsLabel}
-                          </p>
-                        )}
-                      </div>
-                    )}
-
-                    {/* Card 2: Pill tags card — "Caring / Personalized / Reliable" */}
-                    {heroTrustPills.length > 0 && (
-                      <div className="w-44 rounded-3xl bg-white/15 backdrop-blur-md border border-white/25 p-5 shadow-xl">
-                        <div className="grid grid-cols-2 gap-2">
-                          {heroTrustPills.slice(0, 4).map((pill, i) => (
-                            <span
-                              key={i}
-                              className={`flex items-center justify-center rounded-full px-3 py-2 text-xs font-semibold w-full ${i === 1
-                                ? "col-span-2 bg-white text-navy-950 shadow-sm"
-                                : "bg-white/20 text-white border border-white/30"
-                                }`}
-                            >
-                              {pill}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
                 )}
               </div>
@@ -560,7 +538,7 @@ export default async function HomePage({
       {/* ================================================================== */}
       {/* DONATION CARDS                                                      */}
       {/* ================================================================== */}
-      <DonationSlider donationCards={donationCards} locale={locale} />
+      <DonationSlider donationCards={donationCards} locale={locale} currencySymbol={s(settings, "donation_currency_symbol") || "LKR"} />
 
       {/* ================================================================== */}
 
@@ -750,7 +728,6 @@ export default async function HomePage({
                 {contactCardTitle && (
                   <h3 className="text-2xl font-extrabold">{contactCardTitle}</h3>
                 )}
-                <span className="mx-auto my-4 block h-0.5 w-8 rounded-full bg-white/50" />
                 {address && <p className="whitespace-pre-line text-sm text-white/90">{address}</p>}
                 {phone && (
                   <a
@@ -781,10 +758,6 @@ export default async function HomePage({
                   {contactTitle}
                 </h2>
               )}
-              <span className="mt-4 flex gap-1.5">
-                <span className="block h-1 w-8 rounded-full bg-primary" />
-                <span className="block h-1 w-4 rounded-full bg-primary/60" />
-              </span>
               {contactText && (
                 <p className="mt-6 max-w-xl whitespace-pre-line leading-relaxed text-white/75">
                   {contactText}

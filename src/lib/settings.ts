@@ -246,6 +246,7 @@ export const settingPages: SettingPage[] = [
             "Full name, e.g. Heart to Heart."
           ),
           P("site_short_name", "Short name / abbreviation", "Shown in the logo, e.g. Heart to Heart."),
+          P("donation_currency_symbol", "Donation currency symbol", "Used on donation cards, e.g. $ or LKR."),
           T("site_tagline", "Tagline", "One-line summary used in the footer and About header."),
           IMG("logo_image", "Logo image", "Optional. Replaces the letter mark in header and footer."),
           P("logo_letter", "Logo letter", "Used when no logo image is uploaded. Default: C"),
@@ -652,6 +653,7 @@ export const settingPages: SettingPage[] = [
         preview: { path: "/about", anchor: "sec-history" },
         hideNote: AUTO_HIDE,
         items: [
+
           T("about_history_title", "Heading"),
           TA("about_history", "Text"),
           IMG("about_history_image", "Photo"),
@@ -669,7 +671,10 @@ export const settingPages: SettingPage[] = [
         preview: { path: "/about", anchor: "sec-team" },
         hideNote: "This controls the heading. Manage members under Content -> BOD and Staff.",
         items: [
-          T("about_team_title", "Heading"),
+          T("about_team_title", "BOD Heading"),
+          TA("about_team", "BOD Text"),
+          T("about_staff_title", "Staff Heading"),
+          TA("about_staff", "Staff Text"),
         ],
       },
       {

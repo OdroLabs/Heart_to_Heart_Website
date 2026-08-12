@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Eye, Target, Users, BookOpen, Sparkles, History, Heart } from "lucide-react";
 import { type Locale, loc } from "@/lib/i18n";
 import { getLabels } from "@/lib/labels";
@@ -46,12 +47,18 @@ export default async function AboutPage({ params }: { params: { locale: Locale }
 
   const historyTimeline = sPairs(settings, "about_history_timeline", locale);
 
-  const teamTitle = s(settings, "about_team_title", locale);
-  const teamDescription = s(settings, "about_team_description", locale);
+  const bodTitle = s(settings, "about_bod_title", locale) || "Board of Directors";
+  const bodDescription = s(settings, "about_bod", locale);
+  const staffTitle = s(settings, "about_staff_title", locale) || "Staff Members";
+  const staffDescription = s(settings, "about_staff", locale);
+
   const teamMembers = await (prisma.teamMember ? prisma.teamMember.findMany({
     where: { published: true },
     orderBy: { order: "asc" },
   }) : Promise.resolve([]));
+
+  const bodMembers = teamMembers.filter((m) => m.category === "BOD");
+  const staffMembers = teamMembers.filter((m) => m.category === "STAFF");
 
   const stats = await prisma.stat.findMany({
     orderBy: { order: "asc" },
@@ -273,79 +280,93 @@ export default async function AboutPage({ params }: { params: { locale: Locale }
 
         {historyTimeline.length > 0 && (
           <section id="sec-timeline" data-animate className="mt-12 mb-12">
-            <div className="rounded-[2.5rem] bg-white p-8 md:p-12 shadow-sm ring-1 ring-border/50 relative overflow-hidden">
-              <div className="absolute top-8 left-1/2 -translate-x-1/2 text-2xl font-black uppercase  text-primary select-none pointer-events-none">
+            <div className="rounded-[2.5rem] bg-white pt-16 pb-8 shadow-sm ring-1 ring-border/50 relative overflow-hidden">
+              <div className="absolute top-8 left-1/2 -translate-x-1/2 text-2xl font-black uppercase text-primary select-none pointer-events-none opacity-100">
                 History
               </div>
-              <div className="overflow-x-auto scrollbar-hide -mx-8 px-8 md:mx-0 md:px-0 pt-12">
-                <div className="min-w-max flex flex-col mx-auto px-4 pb-4">
-                  {/* Row 1: Top Content */}
-                  <div className="flex justify-between gap-8 items-end pb-4">
-                    {historyTimeline.map((item, i) => (
-                      <div key={i} className="relative flex w-56 flex-col items-center justify-end h-32 shrink-0">
-                        {i % 2 !== 0 && (
-                          <div className="absolute bottom-0 h-20 w-px bg-primary/20 -z-10" />
-                        )}
-                        {i % 2 === 0 ? (
-                          <div className="text-2xl font-black text-primary">{item.left}</div>
-                        ) : (
-                          <div className="text-center text-sm font-medium text-muted-foreground pb-12 px-4 leading-relaxed">{item.right}</div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
 
-                  {/* Row 2: Circles and Line */}
-                  <div className="relative flex justify-between gap-8 items-center">
-                    <div className="absolute left-28 right-28 top-1/2 h-[2px] -translate-y-1/2 bg-primary/20" />
-                    {historyTimeline.map((item, i) => (
-                      <div key={i} className="relative z-10 flex w-56 justify-center shrink-0">
-                        <div className="flex h-6 w-6 items-center justify-center rounded-full bg-white ring-4 ring-primary/20">
-                          <div className="h-2.5 w-2.5 rounded-full bg-primary" />
+              <div className="w-full overflow-x-auto scrollbar-hide pt-16 pb-8 flex">
+                <div className="flex-1" />
+                <div className="flex items-center shrink-0 px-4 md:px-8">
+                  {historyTimeline.map((item, i) => (
+                    <div key={i} className="relative w-64 h-[400px] shrink-0">
+
+                      {/* Incoming line for first item */}
+                      {i === 0 && (
+                        <div className="absolute top-[150px] right-1/2 w-[50px] h-[4px] -translate-y-1/2 bg-primary/20" />
+                      )}
+
+                      {/* Outgoing line for last item */}
+                      {i === historyTimeline.length - 1 && (
+                        <div
+                          className="absolute left-1/2 w-[50px] h-[4px] -translate-y-1/2 bg-primary/20"
+                          style={{ top: i % 2 === 0 ? '150px' : '250px' }}
+                        />
+                      )}
+
+                      {/* Sine Wave SVG Connector to next item */}
+                      {i < historyTimeline.length - 1 && (
+                        <div className="absolute top-[150px] left-1/2 w-full h-[100px] text-primary/40">
+                          <svg className="w-full h-full overflow-visible" viewBox="0 0 100 100" preserveAspectRatio="none">
+                            {i % 2 === 0 ? (
+                              <path d="M 0 0 C 50 0, 50 100, 100 100" stroke="currentColor" fill="none" strokeWidth="4" strokeLinecap="round" />
+                            ) : (
+                              <path d="M 0 100 C 50 100, 50 0, 100 0" stroke="currentColor" fill="none" strokeWidth="4" strokeLinecap="round" />
+                            )}
+                          </svg>
                         </div>
-                      </div>
-                    ))}
-                  </div>
+                      )}
 
-                  {/* Row 3: Bottom Content */}
-                  <div className="flex justify-between gap-8 items-start pt-4">
-                    {historyTimeline.map((item, i) => (
-                      <div key={i} className="relative flex w-56 flex-col items-center justify-start h-32 shrink-0">
-                        {i % 2 === 0 && (
-                          <div className="absolute top-0 h-20 w-px bg-primary/20 -z-10" />
-                        )}
-                        {i % 2 === 0 ? (
-                          <div className="text-center text-sm font-medium text-muted-foreground pt-12 px-4 leading-relaxed">{item.right}</div>
-                        ) : (
-                          <div className="text-2xl font-black text-primary">{item.left}</div>
-                        )}
+                      {/* Content Area */}
+                      {i % 2 === 0 ? (
+                        <div className="absolute bottom-[270px] left-0 w-full flex flex-col items-center px-4">
+                          <div className="text-3xl font-black text-primary mb-2 drop-shadow-sm">{item.left}</div>
+                          <div className="text-sm font-medium text-muted-foreground text-center leading-relaxed">{item.right}</div>
+                          <div className="absolute -bottom-[20px] left-1/2 -translate-x-1/2 w-[2px] h-[20px] bg-primary/20" />
+                        </div>
+                      ) : (
+                        <div className="absolute top-[270px] left-0 w-full flex flex-col items-center px-4">
+                          <div className="absolute -top-[20px] left-1/2 -translate-x-1/2 w-[2px] h-[20px] bg-primary/20" />
+                          <div className="text-3xl font-black text-primary mb-2 drop-shadow-sm">{item.left}</div>
+                          <div className="text-sm font-medium text-muted-foreground text-center leading-relaxed">{item.right}</div>
+                        </div>
+                      )}
+
+                      {/* Center Dot */}
+                      <div
+                        className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-white ring-[4px] ring-primary/20 shadow-sm z-10"
+                        style={{ top: i % 2 === 0 ? '150px' : '250px' }}
+                      >
+                        <div className="h-3 w-3 rounded-full bg-primary" />
                       </div>
-                    ))}
-                  </div>
+
+                    </div>
+                  ))}
                 </div>
+                <div className="flex-1" />
               </div>
             </div>
           </section>
         )}
 
-        {teamMembers.length > 0 && (
-          <section id="sec-team" data-animate className="pt-6 pb-12">
-            {(teamTitle || teamDescription) && (
-              <div className="mb-12 flex flex-col items-center justify-center text-center">
-                <p className="font-bold text-xs text-[#2c7a5b] tracking-[0.2em] uppercase mb-4 flex items-center gap-2">
-                  <span className="block h-0.5 w-6 rounded-full bg-[#2c7a5b]"></span>
-                  {teamTitle || "BOD and Staff"}
-                  <span className="block h-0.5 w-6 rounded-full bg-[#2c7a5b]"></span>
-                </p>
-                <h2 className="text-3xl md:text-[2.75rem] font-extrabold leading-[1.1] tracking-tight text-navy-950 mb-4">{teamTitle || "BOD and Staff"}</h2>
+        {bodMembers.length > 0 && (
+          <section id="sec-bod" data-animate className="pt-6 pb-12">
+            <div className="mb-12 flex flex-col items-center justify-center text-center">
+              <p className="font-bold text-xs text-[#2c7a5b] tracking-[0.2em] uppercase mb-4 flex items-center gap-2">
+                <span className="block h-0.5 w-6 rounded-full bg-[#2c7a5b]"></span>
+                {bodTitle}
+                <span className="block h-0.5 w-6 rounded-full bg-[#2c7a5b]"></span>
+              </p>
+              <h2 className="text-3xl md:text-[2.75rem] font-extrabold leading-[1.1] tracking-tight text-navy-950 mb-4">{bodTitle}</h2>
+              {bodDescription && (
                 <p className="max-w-2xl text-[15px] text-muted-foreground leading-relaxed">
-                  {teamDescription || "Meet our dedicated board of directors and professional staff who guide our mission and vision with passion and expertise."}
+                  {bodDescription}
                 </p>
-              </div>
-            )}
+              )}
+            </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {teamMembers.map((member) => (
-                <div key={member.id} className="group overflow-hidden rounded-[1.25rem] bg-white border border-border/40 shadow-sm transition-all hover:-translate-y-1.5 hover:shadow-md">
+              {bodMembers.map((member) => (
+                <Link href={`/${locale}/team/${member.slug}`} key={member.id} className="block group overflow-hidden rounded-[1.25rem] bg-white border border-border/40 shadow-sm transition-all hover:-translate-y-1.5 hover:shadow-md cursor-pointer">
                   <div className="relative aspect-[3/4] w-full overflow-hidden bg-muted/30">
                     {member.image ? (
                       <div
@@ -361,10 +382,52 @@ export default async function AboutPage({ params }: { params: { locale: Locale }
                   <div className="p-5 text-center">
                     <h3 className="font-bold text-navy-950 text-base">{member.name}</h3>
                     <p className="mt-1 text-[13px] font-medium text-[#2c7a5b]">
-                      {loc(member, "role", locale) || "Team Member"}
+                      {loc(member, "role", locale) || "Board Member"}
                     </p>
                   </div>
-                </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {staffMembers.length > 0 && (
+          <section id="sec-staff" data-animate className="pt-6 pb-12">
+            <div className="mb-12 flex flex-col items-center justify-center text-center">
+              <p className="font-bold text-xs text-[#2c7a5b] tracking-[0.2em] uppercase mb-4 flex items-center gap-2">
+                <span className="block h-0.5 w-6 rounded-full bg-[#2c7a5b]"></span>
+                {staffTitle}
+                <span className="block h-0.5 w-6 rounded-full bg-[#2c7a5b]"></span>
+              </p>
+              <h2 className="text-3xl md:text-[2.75rem] font-extrabold leading-[1.1] tracking-tight text-navy-950 mb-4">{staffTitle}</h2>
+              {staffDescription && (
+                <p className="max-w-2xl text-[15px] text-muted-foreground leading-relaxed">
+                  {staffDescription}
+                </p>
+              )}
+            </div>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {staffMembers.map((member) => (
+                <Link href={`/${locale}/team/${member.slug}`} key={member.id} className="block group overflow-hidden rounded-[1.25rem] bg-white border border-border/40 shadow-sm transition-all hover:-translate-y-1.5 hover:shadow-md cursor-pointer">
+                  <div className="relative aspect-[3/4] w-full overflow-hidden bg-muted/30">
+                    {member.image ? (
+                      <div
+                        className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                        style={{ backgroundImage: `url(${member.image})` }}
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center transition-transform duration-700 group-hover:scale-105">
+                        <Users className="h-12 w-12 text-primary/20" />
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-5 text-center">
+                    <h3 className="font-bold text-navy-950 text-base">{member.name}</h3>
+                    <p className="mt-1 text-[13px] font-medium text-[#2c7a5b]">
+                      {loc(member, "role", locale) || "Staff Member"}
+                    </p>
+                  </div>
+                </Link>
               ))}
             </div>
           </section>

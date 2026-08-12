@@ -255,10 +255,15 @@ model Subscriber {
 
 model TeamMember {
   id        Int      @id @default(autoincrement())
+  slug      String?  @unique @default(cuid())
+  category  String   @default("STAFF")
   name      String
   roleEn    String?
   roleSi    String?
   roleTa    String?
+  bioEn     String?  @db.Text
+  bioSi     String?  @db.Text
+  bioTa     String?  @db.Text
   image     String?
   order     Int      @default(0)
   published Boolean  @default(true)
