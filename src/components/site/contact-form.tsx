@@ -64,7 +64,7 @@ export function ContactForm({
       </div>
       <Button
         type="submit"
-        className="w-full h-14 bg-gradient-to-b from-primary to-secondary hover:from-primary hover:to-secondary text-white rounded-[1.25rem] text-lg font-bold shadow-[0_4px_14px_0_rgba(81,157,42,0.39)] border-b-[3px] border-[#3b781a] transition-all hover:translate-y-[1px] hover:border-b-[2px] hover:shadow-md"
+        className="w-full h-14 bg-gradient-to-r from-brand-950 via-brand-800 to-ocean hover:opacity-95 text-white rounded-[1.25rem] text-lg font-bold shadow-lg shadow-brand-950/25 border-b-[3px] border-brand-900 transition-all hover:translate-y-[1px] hover:shadow-md"
       >
         Send Message
       </Button>

@@ -19,9 +19,11 @@ function getLocalLink(locale: string, value: string): string {
 export function DonationSlider({
   donationCards,
   locale,
+  currencySymbol = "LKR",
 }: {
   donationCards: any[];
   locale: string;
+  currencySymbol?: string;
 }) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -130,8 +132,8 @@ export function DonationSlider({
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-4">
                   <div>
                     <p className="text-sm font-bold text-navy-950 flex items-baseline gap-1.5">
-                      <span className="text-primary text-2xl">${Number(card.raised).toLocaleString()}</span>
-                      <span className="text-muted-foreground font-medium text-xs uppercase tracking-wide">raised of ${Number(card.goal).toLocaleString()} goal</span>
+                      <span className="text-primary text-2xl">{currencySymbol}{Number(card.raised).toLocaleString()}</span>
+                      <span className="text-muted-foreground font-medium text-xs uppercase tracking-wide">raised of {currencySymbol}{Number(card.goal).toLocaleString()} goal</span>
                     </p>
                   </div>
                 </div>
@@ -149,21 +151,11 @@ export function DonationSlider({
 
                   {/* Action Buttons */}
                   <div className="flex items-center shrink-0 w-full sm:w-auto">
-                    <div className="flex w-full sm:w-auto border border-border/80 rounded-full overflow-hidden h-12 shadow-sm focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all bg-white">
-                      <span className="flex items-center pl-5 pr-2 text-sm font-bold text-muted-foreground bg-transparent">
-                        $
-                      </span>
-                      <input 
-                        type="number" 
-                        placeholder="Amount" 
-                        className="w-24 sm:w-28 px-2 text-sm outline-none font-bold text-navy-950 bg-transparent placeholder:text-muted-foreground/50" 
-                      />
-                      <Button asChild className="h-full rounded-none rounded-r-full bg-primary hover:bg-primary/90 text-white font-bold px-8 uppercase text-xs tracking-wider transition-colors">
-                        <Link href={`/${locale}/donate`}>
-                          Donate
-                        </Link>
-                      </Button>
-                    </div>
+                    <Button asChild className="h-12 rounded-full bg-primary hover:bg-primary/90 text-white font-bold px-8 uppercase text-xs tracking-wider transition-colors shadow-sm w-full sm:w-auto">
+                      <Link href={`/${locale}/donate`}>
+                        Donate
+                      </Link>
+                    </Button>
                   </div>
                 </div>
               </div>

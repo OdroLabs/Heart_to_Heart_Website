@@ -34,10 +34,12 @@ export interface SocialLink {
 export function buildNav(settings: SettingsMap, dict: Dictionary): NavConfig {
   const on = (key: string) => sBool(settings, key, true);
 
-  const primary: NavItem[] = [{ href: "", label: dict.nav.home }];
+  const primary: NavItem[] = [];
   if (on("nav_show_about")) primary.push({ href: "/about", label: dict.nav.about });
-  if (on("nav_show_projects")) primary.push({ href: "/projects", label: dict.nav.projects });
-  if (on("nav_show_services")) primary.push({ href: "/services", label: dict.nav.services });
+
+  const serviceItems: NavItem[] = [];
+  if (on("nav_show_services")) serviceItems.push({ href: "/services", label: dict.nav.services });
+  if (on("nav_show_projects")) serviceItems.push({ href: "/projects", label: dict.nav.projects });
 
   const mediaItems: NavItem[] = [];
   if (on("nav_show_publications"))
@@ -46,12 +48,13 @@ export function buildNav(settings: SettingsMap, dict: Dictionary): NavConfig {
   if (on("nav_show_events")) mediaItems.push({ href: "/events", label: dict.nav.events });
 
   const involvedItems: NavItem[] = [];
-  if (on("nav_show_business"))
-    involvedItems.push({ href: "/business", label: dict.nav.business });
   if (on("nav_show_suggestions"))
     involvedItems.push({ href: "/suggestions", label: dict.nav.suggestions });
+  if (on("nav_show_business"))
+    involvedItems.push({ href: "/business", label: dict.nav.business });
 
   const groups: NavGroup[] = [];
+  if (serviceItems.length) groups.push({ label: dict.nav.services, items: serviceItems });
   if (mediaItems.length) groups.push({ label: dict.nav.media, items: mediaItems });
   if (involvedItems.length) groups.push({ label: dict.nav.getInvolved, items: involvedItems });
 
@@ -60,8 +63,8 @@ export function buildNav(settings: SettingsMap, dict: Dictionary): NavConfig {
   // Footer columns reuse the same visibility rules.
   const explore: NavItem[] = [];
   if (on("nav_show_about")) explore.push({ href: "/about", label: dict.nav.about });
-  if (on("nav_show_projects")) explore.push({ href: "/projects", label: dict.nav.projects });
   if (on("nav_show_services")) explore.push({ href: "/services", label: dict.nav.services });
+  if (on("nav_show_projects")) explore.push({ href: "/projects", label: dict.nav.projects });
   if (on("nav_show_publications"))
     explore.push({ href: "/publications", label: dict.nav.publications });
 
