@@ -64,7 +64,7 @@ export default async function LocaleLayout({
         nav={nav}
         siteName={siteName}
         shortName={shortName}
-        logoImage={logoImage || undefined}
+        logoImage={logoImage || "/logo.png"}
         logoLetter={logoLetter}
         phones={[s(settings, "phone"), s(settings, "phone2")].filter(Boolean)}
         emails={[s(settings, "email"), s(settings, "email2")].filter(Boolean)}

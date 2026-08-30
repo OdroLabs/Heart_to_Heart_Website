@@ -182,8 +182,8 @@ export function SiteHeader({
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={logoImage}
-                alt={siteName || shortName}
-                className="h-10 w-auto max-w-[170px] object-contain transition-transform duration-300 group-hover:scale-105"
+                alt={siteName || shortName || "Heart to Heart"}
+                className="h-11 md:h-14 w-auto max-w-[220px] md:max-w-[260px] object-contain transition-transform duration-300 group-hover:scale-105"
               />
             ) : (
               logoLetter && (

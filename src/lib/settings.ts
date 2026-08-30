@@ -246,8 +246,10 @@ export const settingPages: SettingPage[] = [
             "Full name, e.g. Heart to Heart."
           ),
           P("site_short_name", "Short name / abbreviation", "Shown in the logo, e.g. Heart to Heart."),
+          P("donation_currency_symbol", "Donation currency symbol", "Used on donation cards, e.g. $ or LKR."),
           T("site_tagline", "Tagline", "One-line summary used in the footer and About header."),
-          IMG("logo_image", "Logo image", "Optional. Replaces the letter mark in header and footer."),
+          IMG("logo_image", "Header / Main logo image", "Optional. Primary logo image for top header navigation."),
+          IMG("footer_logo_image", "Footer logo image", "Optional. Separate logo image for footer. Falls back to main logo image if unset."),
           P("logo_letter", "Logo letter", "Used when no logo image is uploaded. Default: C"),
           IMG("favicon", "Favicon", "Small icon shown in the browser tab."),
         ],
@@ -360,7 +362,10 @@ export const settingPages: SettingPage[] = [
         section: "About column",
         preview: { path: "", anchor: "sec-footer" },
         hideNote: "Leave blank to fall back to the tagline; clear both to hide the text.",
-        items: [TA("footer_about", "Text under the logo")],
+        items: [
+          IMG("footer_logo_image", "Footer logo image", "Optional. Upload a separate logo for the footer (e.g., white or dark-background variant). Falls back to main logo if unset."),
+          TA("footer_about", "Text under the logo")
+        ],
       },
       {
         section: "Link columns",
@@ -652,6 +657,7 @@ export const settingPages: SettingPage[] = [
         preview: { path: "/about", anchor: "sec-history" },
         hideNote: AUTO_HIDE,
         items: [
+
           T("about_history_title", "Heading"),
           TA("about_history", "Text"),
           IMG("about_history_image", "Photo"),
@@ -669,7 +675,10 @@ export const settingPages: SettingPage[] = [
         preview: { path: "/about", anchor: "sec-team" },
         hideNote: "This controls the heading. Manage members under Content -> BOD and Staff.",
         items: [
-          T("about_team_title", "Heading"),
+          T("about_team_title", "BOD Heading"),
+          TA("about_team", "BOD Text"),
+          T("about_staff_title", "Staff Heading"),
+          TA("about_staff", "Staff Text"),
         ],
       },
       {

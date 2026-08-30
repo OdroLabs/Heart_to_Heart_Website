@@ -10,7 +10,7 @@ export default async function AdminPanelLayout({ children }: { children: React.R
   if (!admin) redirect("/admin/login");
 
   const settings = await getSettings();
-  const logoImage = s(settings, "logo_image");
+  const logoImage = s(settings, "footer_logo_image") || s(settings, "logo_image") || "/logo.png";
   const logoLetter = s(settings, "logo_letter") || "C";
   const siteName = s(settings, "site_short_name") || s(settings, "site_name") || "Heart to Heart";
 

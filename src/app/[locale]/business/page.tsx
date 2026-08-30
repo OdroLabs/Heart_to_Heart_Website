@@ -41,6 +41,24 @@ export default async function BusinessPage({ params }: { params: { locale: Local
         intro={s(settings, "business_hero_intro", locale)}
         image={s(settings, "business_hero_image") || undefined}
       />
+      
+      {/* Main Services & Shop Me Button Section */}
+      <section className="bg-white py-12 md:py-16 border-b border-border/40">
+        <div className="container max-w-5xl text-center">
+          <h2 className="text-3xl font-bold text-navy-950 mb-6">Our Main Services</h2>
+          <p className="text-lg text-muted-foreground mb-10 max-w-3xl mx-auto leading-relaxed">
+            Heart to Heart Community Business provides high-quality products and services that directly support our charitable initiatives. 
+            By choosing us, you are contributing to our mission to uplift the community.
+          </p>
+          <div className="flex justify-center">
+            <Button asChild size="lg" className="rounded-full px-8 text-base font-bold shadow-md hover:-translate-y-0.5 transition-transform">
+              <a href="https://shop.hearttoheart.lk" target="_blank" rel="noopener noreferrer">
+                Shop Me <ShoppingBag className="ml-2 h-5 w-5" />
+              </a>
+            </Button>
+          </div>
+        </div>
+      </section>
       <div className="container grid gap-6 py-12 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((product) => {
           const name = loc(product, "name", locale);

@@ -104,11 +104,13 @@ export function AdminSidebar({
       <div className="flex h-[72px] items-center gap-3 border-b border-white/10 px-4 py-3">
         {logoImage ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={logoImage}
-            alt={siteName}
-            className="h-full w-auto max-w-[200px] object-contain brightness-0 invert"
-          />
+          <div className=" px-2.5 py-1 rounded-lg shadow-sm backdrop-blur-md">
+            <img
+              src={logoImage}
+              alt={siteName}
+              className="h-8 w-auto max-w-[170px] object-contain"
+            />
+          </div>
         ) : (
           <>
             <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold">
