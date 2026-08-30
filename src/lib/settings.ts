@@ -121,6 +121,13 @@ export interface SettingDef {
   itemLabel?: string;
   /** Text on the add button. */
   addLabel?: string;
+  /**
+   * For "boolean": most visibility toggles default to *on* when never saved,
+   * matching `sBool(..., true)` elsewhere. A handful (like Coming Soon Mode)
+   * must default to *off* instead — set this so the switch doesn't render as
+   * checked before anyone has touched it.
+   */
+  defaultOff?: boolean;
 }
 
 /** Which part of the live site the admin preview panel should isolate. */
@@ -200,11 +207,17 @@ const NUM = (key: string, label: string, help?: string): SettingDef => ({
   type: "number",
   help,
 });
-const SW = (key: string, label: string, help?: string): SettingDef => ({
+const SW = (
+  key: string,
+  label: string,
+  help?: string,
+  opts: { defaultOff?: boolean } = {}
+): SettingDef => ({
   key,
   label,
   type: "boolean",
   help,
+  ...opts,
 });
 /** Repeatable "heading + text" rows. */
 const PAIRS = (
@@ -229,6 +242,30 @@ const AUTO_HIDE = "Clear the text below and this section disappears from the sit
 const AUTO_HIDE_LIST = "Remove every item and this section disappears from the site.";
 
 export const settingPages: SettingPage[] = [
+  /* ------------------------------------------------------------ Coming Soon */
+  {
+    slug: "coming-soon",
+    title: "Coming Soon Mode",
+    description:
+      "Show a single \"coming soon\" page to visitors instead of the site. Signed-in admins keep seeing the real site so you can finish building it.",
+    sections: [
+      {
+        section: "Coming soon page",
+        items: [
+          SW(
+            "show_coming_soon",
+            "Show the coming soon page",
+            "Turns on for everyone except admins signed in to this dashboard.",
+            { defaultOff: true }
+          ),
+          TA("coming_soon_title", "Heading", "One line per row — press Enter to start a new line. Leave blank for the default."),
+          TA("coming_soon_message", "Message", "Leave blank for the default."),
+          IMG("coming_soon_image", "Background image", "Optional. A cinematic dark gradient is used when this is blank."),
+        ],
+      },
+    ],
+  },
+
   /* ---------------------------------------------------------------- General */
   {
     slug: "general",

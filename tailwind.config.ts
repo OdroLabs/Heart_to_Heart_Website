@@ -126,6 +126,35 @@ const config: Config = {
           from: { opacity: "0", transform: "translateY(8px) scale(0.98)" },
           to: { opacity: "1", transform: "translateY(0) scale(1)" },
         },
+        /* Coming Soon — slow ambient background motion, transform/opacity only */
+        "drift-1": {
+          "0%, 100%": { transform: "translate(0, 0) scale(1)" },
+          "50%": { transform: "translate(4%, -6%) scale(1.08)" },
+        },
+        "drift-2": {
+          "0%, 100%": { transform: "translate(0, 0) scale(1)" },
+          "50%": { transform: "translate(-5%, 5%) scale(1.05)" },
+        },
+        "spin-slow": {
+          from: { transform: "rotate(0deg)" },
+          to: { transform: "rotate(360deg)" },
+        },
+        "zoom-slow": {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.06)" },
+        },
+        grain: {
+          "0%, 100%": { transform: "translate(0, 0)" },
+          "10%": { transform: "translate(-2%, -3%)" },
+          "20%": { transform: "translate(-4%, 2%)" },
+          "30%": { transform: "translate(2%, -4%)" },
+          "40%": { transform: "translate(-2%, 5%)" },
+          "50%": { transform: "translate(-4%, 2%)" },
+          "60%": { transform: "translate(3%, 0)" },
+          "70%": { transform: "translate(0, 3%)" },
+          "80%": { transform: "translate(-3%, 0)" },
+          "90%": { transform: "translate(2%, 2%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -133,6 +162,11 @@ const config: Config = {
         "fade-up": "fade-up 0.9s ease both",
         "bounce-soft": "bounce-soft 1.6s ease-in-out infinite",
         "fade-in": "fade-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) both",
+        "drift-1": "drift-1 20s ease-in-out infinite",
+        "drift-2": "drift-2 24s ease-in-out infinite",
+        "spin-slow": "spin-slow 50s linear infinite",
+        "zoom-slow": "zoom-slow 22s ease-in-out infinite",
+        grain: "grain 1.1s steps(8) infinite",
       },
     },
   },

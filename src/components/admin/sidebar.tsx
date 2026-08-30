@@ -31,10 +31,12 @@ import {
   Languages,
   Files,
   UsersRound,
+  Rocket,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const settingsLinks = [
+  { href: "/admin/settings/coming-soon", label: "Coming Soon Mode", icon: Rocket },
   { href: "/admin/settings/general", label: "General", icon: Globe },
   { href: "/admin/settings/header", label: "Header & Menu", icon: PanelTop },
   { href: "/admin/settings/footer", label: "Footer", icon: PanelBottom },

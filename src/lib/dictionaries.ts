@@ -68,6 +68,7 @@ const en = {
     viewAllResults: "View all results",
     noSearchResults: "No results found. Try a different search term.",
     typeToSearch: "Start typing to search the whole site.",
+    comingSoon: "Coming Soon",
   },
   home: {
     makeDonation: "Make a Donation",
@@ -166,6 +167,7 @@ const si: typeof en = {
     viewAllResults: "සියලුම ප්‍රතිඵල බලන්න",
     noSearchResults: "ප්‍රතිඵල හමු නොවීය. වෙනත් වචනයක් උත්සාහ කරන්න.",
     typeToSearch: "වෙබ් අඩවිය පුරා සෙවීමට ටයිප් කිරීම ආරම්භ කරන්න.",
+    comingSoon: "ඉක්මනින් පැමිණේ",
   },
   home: {
     makeDonation: "පරිත්‍යාගයක් කරන්න",
@@ -264,6 +266,7 @@ const ta: typeof en = {
     viewAllResults: "அனைத்து முடிவுகளையும் காண்க",
     noSearchResults: "முடிவுகள் எதுவும் இல்லை. வேறு சொல்லைப் பயன்படுத்தவும்.",
     typeToSearch: "தளம் முழுவதும் தேட தட்டச்சு செய்யத் தொடங்குங்கள்.",
+    comingSoon: "விரைவில் வருகிறது",
   },
   home: {
     makeDonation: "நன்கொடை வழங்க",
