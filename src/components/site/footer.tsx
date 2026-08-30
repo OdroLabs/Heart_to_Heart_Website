@@ -40,7 +40,9 @@ export function SiteFooter({
 
   const shortName = s(settings, "site_short_name");
   const siteName = s(settings, "site_name", locale);
-  const logoImage = s(settings, "logo_image");
+  const mainLogoImage = s(settings, "logo_image") || "/logo.png";
+  const customFooterLogo = s(settings, "footer_logo_image");
+  const logoImage = customFooterLogo || mainLogoImage;
   const logoLetter = s(settings, "logo_letter");
   const tagline = s(settings, "site_tagline", locale);
 
@@ -69,14 +71,24 @@ export function SiteFooter({
           {/* ── Col 1: Brand + tagline + newsletter ──────────────────── */}
           <div>
             {/* Logo */}
-            <Link href={`/${locale}`} className="mb-5 flex items-center gap-2.5 group">
+            <Link href={`/${locale}`} className="mb-5 inline-flex items-center gap-2.5 group">
               {logoImage ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={logoImage}
-                  alt={shortName || siteName}
-                  className="h-10 w-auto max-w-[170px] object-contain brightness-0 invert"
-                />
+                customFooterLogo ? (
+                  <img
+                    src={logoImage}
+                    alt={shortName || siteName || "Heart to Heart"}
+                    className="h-10 md:h-12 w-auto max-w-[220px] object-contain transition-transform duration-300 group-hover:scale-105"
+                  />
+                ) : (
+                  <div className="bg-white/95 px-3 py-1.5 rounded-xl shadow-md backdrop-blur-md transition-transform duration-300 group-hover:scale-105">
+                    <img
+                      src={logoImage}
+                      alt={shortName || siteName || "Heart to Heart"}
+                      className="h-9 md:h-11 w-auto max-w-[200px] object-contain"
+                    />
+                  </div>
+                )
               ) : (
                 logoLetter && (
                   <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand-600 to-accent text-lg font-bold shadow-md">

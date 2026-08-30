@@ -7,22 +7,22 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 165 25% 15%;
+    --foreground: 303 100% 8%; /* Deep Plum #280026 */
     --card: 0 0% 100%;
-    --card-foreground: 165 25% 15%;
-    --primary: 160 55% 40%; /* Medium green — like the MedixWeb teal-green */
+    --card-foreground: 303 100% 8%;
+    --primary: 303 100% 8%; /* Deep Plum #280026 */
     --primary-foreground: 0 0% 100%;
-    --secondary: 165 35% 25%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 160 20% 97%;
-    --muted-foreground: 165 18% 45%;
-    --accent: 162 60% 45%;
+    --secondary: 302 100% 87%; /* Light Purple #FFBBFC */
+    --secondary-foreground: 303 100% 8%;
+    --muted: 302 40% 97%;
+    --muted-foreground: 303 20% 40%;
+    --accent: 240 99% 55%; /* Ocean Blue #1B1BFD */
     --accent-foreground: 0 0% 100%;
-    --destructive: 0 72% 51%;
+    --destructive: 0 100% 50%; /* Ruby Red #FF0402 */
     --destructive-foreground: 0 0% 98%;
-    --border: 160 15% 90%;
-    --input: 160 15% 87%;
-    --ring: 160 55% 40%;
+    --border: 302 20% 90%;
+    --input: 302 20% 87%;
+    --ring: 303 100% 8%;
     --radius: 0.75rem;
   }
 }
@@ -293,9 +293,17 @@
   -webkit-backdrop-filter: blur(16px);
 }
 
-/* Green brand gradient text */
+/* Brand gradient text - Deep Plum to Ocean Blue & Light Purple */
 .text-gradient {
-  background: linear-gradient(100deg, #16a34a 0%, #22c55e 55%, #4ade80 100%);
+  background: linear-gradient(135deg, #280026 0%, #1B1BFD 50%, #FF0402 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Secondary brand spectrum gradient text */
+.text-gradient-vibrant {
+  background: linear-gradient(90deg, #FF0402 0%, #F77928 25%, #84C14C 50%, #1B1BFD 75%, #FFBBFC 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -353,4 +361,43 @@ html.anim [data-stagger] > * {
   .quote-enter {
     animation: none;
   }
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* ---------------------------------------------------------------------------
+   Custom subtle scrollbar styling (primary-color / 20)
+--------------------------------------------------------------------------- */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.2);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.45);
+}
+
+/* Firefox scrollbar support */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--primary) / 0.2) transparent;
 }

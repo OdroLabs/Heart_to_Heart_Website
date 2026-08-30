@@ -27,6 +27,7 @@ import { Badge } from "@/components/ui/badge";
 import { StatCounter } from "@/components/site/stat-counter";
 import { MarqueeTrustBar } from "@/components/site/marquee-trust-bar";
 import { ServicesTabs } from "@/components/site/services-tabs";
+import { DonationSlider } from "@/components/site/donation-slider";
 
 
 import * as Icons from "lucide-react";
@@ -96,7 +97,7 @@ export default async function HomePage({
   const newsCount = sNum(settings, "home_news_count", 3);
   const eventsCount = sNum(settings, "home_events_count", 2);
 
-  const [stats, services, projects, news, events, testimonials, partners] =
+  const [stats, services, projects, news, events, testimonials, partners, donationCards] =
     await Promise.all([
       prisma.stat.findMany({ orderBy: { order: "asc" } }),
       prisma.service.findMany({
@@ -124,6 +125,11 @@ export default async function HomePage({
         orderBy: { order: "asc" },
       }),
       prisma.partner.findMany({ orderBy: { order: "asc" } }),
+      prisma.donationCard.findMany({
+        where: { published: true },
+        orderBy: { createdAt: "desc" },
+        take: 4,
+      }),
     ]);
 
   /* ----------------------------- Content reads ----------------------------- */
@@ -259,14 +265,14 @@ export default async function HomePage({
                   className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                   style={{ backgroundImage: `url(${heroImage})` }}
                 />
-                {/* Left gradient overlay — dark teal to transparent so white text is readable */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#1a6b5a]/90 via-[#1a6b5a]/60 to-transparent" />
+                {/* Left gradient overlay — Deep Plum to transparent */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#280026]/95 via-[#280026]/75 to-transparent" />
                 {/* Top fade for visual polish */}
-                <div className="absolute inset-0 bg-gradient-to-b from-[#1a6b5a]/30 via-transparent to-[#0d3d2e]/50" />
+                <div className="absolute inset-0 bg-gradient-to-b from-[#280026]/40 via-transparent to-[#280026]/60" />
               </>
             ) : (
-              /* No image: solid teal-green gradient background */
-              <div className="absolute inset-0 bg-gradient-to-br from-[#1a6b5a] via-[#2d8a72] to-[#3da882]" />
+              /* Solid Deep Plum to Ocean Blue gradient background */
+              <div className="absolute inset-0 bg-gradient-to-br from-[#280026] via-[#510c4f] to-[#1B1BFD]" />
             )}
 
             {/* ── Content layer ── */}
@@ -278,17 +284,20 @@ export default async function HomePage({
                 {heroTrustBadge && (
                   <div className="mb-6 inline-flex items-center gap-2.5 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 px-3 py-2 pr-4">
                     <div className="flex -space-x-2">
-                      {["A", "K", "S", "M"].map((letter, i) => (
-                        <div
-                          key={i}
-                          className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white/60 shadow-sm text-[10px] font-bold text-white"
-                          style={{
-                            backgroundColor: `hsl(${160 + i * 45}, 65%, 40%)`,
-                          }}
-                        >
-                          {letter}
-                        </div>
-                      ))}
+                      {["A", "K", "S", "M"].map((letter, i) => {
+                        const avatarColors = ["#FF0402", "#F77928", "#1B1BFD", "#84C14C"];
+                        return (
+                          <div
+                            key={i}
+                            className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white/60 shadow-sm text-[10px] font-bold text-white"
+                            style={{
+                              backgroundColor: avatarColors[i % avatarColors.length],
+                            }}
+                          >
+                            {letter}
+                          </div>
+                        );
+                      })}
                     </div>
                     <span className="text-xs font-semibold text-white/90">{heroTrustBadge}</span>
                   </div>
@@ -330,46 +339,24 @@ export default async function HomePage({
                   </div>
                 )}
 
-                {/* Bottom-right: Two frosted glass cards */}
-                {(heroStatsValue || heroTrustPills.length > 0) && (
-                  <div className="flex gap-3 shrink-0 flex-wrap md:flex-nowrap">
-
+                {/* Bottom-right: Stat card */}
+                {heroStatsValue && (
+                  <div className="flex shrink-0 ml-auto md:ml-0 translate-x-2 md:translate-x-4">
                     {/* Card 1: Stat card — "Trusted Care Rate / 97%" */}
-                    {heroStatsValue && (
-                      <div className="w-44 rounded-3xl bg-white/20 backdrop-blur-md border border-white/30 p-5 shadow-xl">
-                        {/* Card heading from hero_trust_badge fallback */}
-                        <p className="mb-2 text-xs font-semibold text-white/75 leading-tight">
-                          {s(settings, "hero_stats_heading") || "Trusted Care Rate"}
+                    <div className="w-44 rounded-3xl bg-white/20 backdrop-blur-md border border-white/30 p-5 shadow-xl">
+                      {/* Card heading from hero_trust_badge fallback */}
+                      <p className="mb-2 text-xs font-semibold text-white/75 leading-tight">
+                        {s(settings, "hero_stats_heading") || "Trusted Care Rate"}
+                      </p>
+                      <p className="font-number text-4xl font-extrabold text-white leading-none">
+                        {heroStatsValue}
+                      </p>
+                      {heroStatsLabel && (
+                        <p className="mt-2 text-[11px] leading-snug text-white/65">
+                          {heroStatsLabel}
                         </p>
-                        <p className="font-number text-4xl font-extrabold text-white leading-none">
-                          {heroStatsValue}
-                        </p>
-                        {heroStatsLabel && (
-                          <p className="mt-2 text-[11px] leading-snug text-white/65">
-                            {heroStatsLabel}
-                          </p>
-                        )}
-                      </div>
-                    )}
-
-                    {/* Card 2: Pill tags card — "Caring / Personalized / Reliable" */}
-                    {heroTrustPills.length > 0 && (
-                      <div className="w-44 rounded-3xl bg-white/15 backdrop-blur-md border border-white/25 p-5 shadow-xl">
-                        <div className="grid grid-cols-2 gap-2">
-                          {heroTrustPills.slice(0, 4).map((pill, i) => (
-                            <span
-                              key={i}
-                              className={`flex items-center justify-center rounded-full px-3 py-2 text-xs font-semibold w-full ${i === 1
-                                ? "col-span-2 bg-white text-navy-950 shadow-sm"
-                                : "bg-white/20 text-white border border-white/30"
-                                }`}
-                            >
-                              {pill}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
                 )}
               </div>
@@ -405,7 +392,7 @@ export default async function HomePage({
                         className="absolute inset-0 bg-cover bg-center"
                         style={{ backgroundImage: `url(${aboutImage})` }}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#eaf6f6]/30 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-brand-100/30 to-transparent" />
                     </div>
 
                     <div className="absolute -top-6 -right-6 z-10 rounded-full bg-white/20 backdrop-blur-lg p-5 shadow-xl border border-border/40 max-w-[180px]">
@@ -552,6 +539,12 @@ export default async function HomePage({
       )}
 
       {/* ================================================================== */}
+      {/* DONATION CARDS                                                      */}
+      {/* ================================================================== */}
+      <DonationSlider donationCards={donationCards} locale={locale} currencySymbol={s(settings, "donation_currency_symbol") || "LKR"} />
+
+      {/* ================================================================== */}
+
       {/* SERVICES / WHY CHOOSE US                                            */}
       {/* ================================================================== */}
       {showServices && (
@@ -738,7 +731,6 @@ export default async function HomePage({
                 {contactCardTitle && (
                   <h3 className="text-2xl font-extrabold">{contactCardTitle}</h3>
                 )}
-                <span className="mx-auto my-4 block h-0.5 w-8 rounded-full bg-white/50" />
                 {address && <p className="whitespace-pre-line text-sm text-white/90">{address}</p>}
                 {phone && (
                   <a
@@ -769,10 +761,6 @@ export default async function HomePage({
                   {contactTitle}
                 </h2>
               )}
-              <span className="mt-4 flex gap-1.5">
-                <span className="block h-1 w-8 rounded-full bg-primary" />
-                <span className="block h-1 w-4 rounded-full bg-primary/60" />
-              </span>
               {contactText && (
                 <p className="mt-6 max-w-xl whitespace-pre-line leading-relaxed text-white/75">
                   {contactText}

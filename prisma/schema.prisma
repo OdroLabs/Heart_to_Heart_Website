@@ -255,13 +255,35 @@ model Subscriber {
 
 model TeamMember {
   id        Int      @id @default(autoincrement())
+  slug      String?  @unique @default(cuid())
+  category  String   @default("STAFF")
   name      String
   roleEn    String?
   roleSi    String?
   roleTa    String?
+  bioEn     String?  @db.Text
+  bioSi     String?  @db.Text
+  bioTa     String?  @db.Text
   image     String?
   order     Int      @default(0)
   published Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model DonationCard {
+  id          Int      @id @default(autoincrement())
+  image       String?
+  category    String?
+  title       String
+  author      String?
+  description String
+  linkText    String?
+  linkUrl     String?
+  raised      Decimal  @db.Decimal(10, 2)
+  goal        Decimal  @db.Decimal(10, 2)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+

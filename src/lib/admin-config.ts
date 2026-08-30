@@ -508,6 +508,31 @@ export const entities: EntityDef[] = [
       { name: "published", label: "Published", type: "boolean" },
     ],
   },
+  {
+    slug: "donation-cards",
+    model: "donationCard",
+    title: "Donation Cards",
+    titleSingular: "Donation Card",
+    description: "Donation progress cards shown on the Home page after Impact Stats.",
+    orderBy: { createdAt: "desc" },
+    fields: [
+      { name: "title", label: "Title", type: "text", required: true, help: "e.g., GlobalGiving Project of the Month Club" },
+      { name: "category", label: "Category / Tag", type: "text", help: "e.g., GENDER EQUALITY | UNITED STATES" },
+      { name: "author", label: "Author / Byline", type: "text", help: "e.g., by GlobalGiving" },
+      { name: "description", label: "Description", type: "textarea", required: true },
+      { name: "image", label: "Card Image", type: "image", required: true },
+      { name: "linkText", label: "Link Text", type: "text", help: "e.g., read more" },
+      { name: "linkUrl", label: "Link URL", type: "text" },
+      { name: "raised", label: "Amount Raised", type: "number", required: true },
+      { name: "goal", label: "Goal Amount", type: "number", required: true },
+      { name: "published", label: "Published", type: "boolean", help: "Enable or disable this card on the home page." },
+    ],
+    listFields: [
+      { name: "image", label: "", type: "image" },
+      { name: "title", label: "Title" },
+      { name: "published", label: "Published", type: "boolean" },
+    ],
+  },
 ];
 
 export function getEntity(slug: string): EntityDef | undefined {
