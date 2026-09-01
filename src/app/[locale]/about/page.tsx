@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Eye, Target, Users, BookOpen, Sparkles, History, Heart } from "lucide-react";
+import {
+  Eye,
+  Target,
+  Users,
+  BookOpen,
+  Sparkles,
+  History,
+  Heart,
+} from "lucide-react";
 import { type Locale, loc } from "@/lib/i18n";
 import { getLabels } from "@/lib/labels";
 import { getSettings, s, sPairs } from "@/lib/settings";
@@ -21,7 +29,11 @@ export async function generateMetadata({
   });
 }
 
-export default async function AboutPage({ params }: { params: { locale: Locale } }) {
+export default async function AboutPage({
+  params,
+}: {
+  params: { locale: Locale };
+}) {
   const { locale } = params;
   const settings = await getSettings();
   const dict = getLabels(locale, settings);
@@ -46,16 +58,29 @@ export default async function AboutPage({ params }: { params: { locale: Locale }
   const historyImage = s(settings, "about_history_image");
 
   const historyTimeline = sPairs(settings, "about_history_timeline", locale);
+  const TIMELINE_ROW_SIZE = 2;
+  const historyTimelineRows = Array.from(
+    { length: Math.ceil(historyTimeline.length / TIMELINE_ROW_SIZE) },
+    (_, i) =>
+      historyTimeline.slice(
+        i * TIMELINE_ROW_SIZE,
+        i * TIMELINE_ROW_SIZE + TIMELINE_ROW_SIZE,
+      ),
+  );
 
-  const bodTitle = s(settings, "about_bod_title", locale) || "Board of Directors";
+  const bodTitle =
+    s(settings, "about_bod_title", locale) || "Board of Directors";
   const bodDescription = s(settings, "about_bod", locale);
-  const staffTitle = s(settings, "about_staff_title", locale) || "Staff Members";
+  const staffTitle =
+    s(settings, "about_staff_title", locale) || "Staff Members";
   const staffDescription = s(settings, "about_staff", locale);
 
-  const teamMembers = await (prisma.teamMember ? prisma.teamMember.findMany({
-    where: { published: true },
-    orderBy: { order: "asc" },
-  }) : Promise.resolve([]));
+  const teamMembers = await (prisma.teamMember
+    ? prisma.teamMember.findMany({
+        where: { published: true },
+        orderBy: { order: "asc" },
+      })
+    : Promise.resolve([]));
 
   const bodMembers = teamMembers.filter((m) => m.category === "BOD");
   const staffMembers = teamMembers.filter((m) => m.category === "STAFF");
@@ -101,15 +126,27 @@ export default async function AboutPage({ params }: { params: { locale: Locale }
                 <span className="block h-0.5 w-6 rounded-full bg-primary"></span>
                 {title}
               </p>
-              <h2 className="text-3xl md:text-[2.75rem] font-extrabold leading-[1.1] tracking-tight text-navy-950">{title}</h2>
+              <h2 className="text-3xl md:text-[2.75rem] font-extrabold leading-[1.1] tracking-tight text-navy-950">
+                {title}
+              </h2>
             </div>
           )}
-          <p className="whitespace-pre-line leading-relaxed text-muted-foreground">{text}</p>
+          <p className="whitespace-pre-line leading-relaxed text-muted-foreground">
+            {text}
+          </p>
         </div>
         {image && (
-          <div data-animate data-delay="0.12" className="overflow-hidden rounded-3xl shadow-card">
+          <div
+            data-animate
+            data-delay="0.12"
+            className="overflow-hidden rounded-3xl shadow-card"
+          >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={image} alt={title} className="aspect-[4/3] w-full object-cover" />
+            <img
+              src={image}
+              alt={title}
+              className="aspect-[4/3] w-full object-cover"
+            />
           </div>
         )}
       </section>
@@ -126,13 +163,23 @@ export default async function AboutPage({ params }: { params: { locale: Locale }
 
       <div className="container space-y-12 py-12 md:space-y-16 md:py-16">
         {overview && (
-          <section id="sec-overview" className="grid gap-12 lg:grid-cols-2 items-center mb-16 mt-8">
+          <section
+            id="sec-overview"
+            className="grid gap-12 lg:grid-cols-2 items-center mb-16 mt-8"
+          >
             {/* Left Image Side */}
             {overviewImage ? (
-              <div data-animate className="relative max-w-md mx-auto lg:max-w-none">
+              <div
+                data-animate
+                className="relative max-w-md mx-auto lg:max-w-none"
+              >
                 <div className="overflow-hidden rounded-[2.5rem] aspect-square lg:aspect-[5/4] shadow-sm">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={overviewImage} alt="Overview" className="h-full w-full object-cover" />
+                  <img
+                    src={overviewImage}
+                    alt="Overview"
+                    className="h-full w-full object-cover"
+                  />
                 </div>
                 {/* Floating Card */}
                 {/* <div className="absolute -bottom-6 -right-6 md:bottom-8 md:-right-8 lg:bottom-12 lg:-right-8 rounded-3xl bg-white p-5 shadow-xl border border-border/40 max-w-[260px] flex items-start gap-4 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
@@ -158,7 +205,8 @@ export default async function AboutPage({ params }: { params: { locale: Locale }
                 About Us
               </p>
               <h2 className="text-3xl md:text-[2.5rem] font-extrabold text-navy-950 leading-[1.15] mb-6">
-                {overviewTitle || "Our Practice Excellent Care, Humane Principles"}
+                {overviewTitle ||
+                  "Our Practice Excellent Care, Humane Principles"}
               </h2>
               <p className="text-muted-foreground text-[15px] leading-relaxed mb-10 whitespace-pre-line">
                 {overview}
@@ -170,14 +218,29 @@ export default async function AboutPage({ params }: { params: { locale: Locale }
                   {stats.map((stat, i) => (
                     <div
                       key={stat.id}
-                      className={`rounded-2xl p-4 md:p-5 flex flex-col justify-center transition-transform hover:-translate-y-1 ${i === 0 ? "bg-navy-950 text-white shadow-md" : "bg-muted/40 text-navy-950 border border-border/40"
-                        }`}
+                      className={`rounded-2xl p-4 md:p-5 flex flex-col justify-center transition-transform hover:-translate-y-1 ${
+                        i === 0
+                          ? "bg-navy-950 text-white shadow-md"
+                          : "bg-muted/40 text-navy-950 border border-border/40"
+                      }`}
                     >
-                      <div className={`mb-3 flex h-10 w-10 items-center justify-center rounded-full ${i === 0 ? "bg-white/10 text-white" : "bg-white text-primary shadow-sm"}`}>
-                        {i === 0 ? <Users className="h-5 w-5" /> : i === 1 ? <Target className="h-5 w-5" /> : <Heart className="h-5 w-5" />}
+                      <div
+                        className={`mb-3 flex h-10 w-10 items-center justify-center rounded-full ${i === 0 ? "bg-white/10 text-white" : "bg-white text-primary shadow-sm"}`}
+                      >
+                        {i === 0 ? (
+                          <Users className="h-5 w-5" />
+                        ) : i === 1 ? (
+                          <Target className="h-5 w-5" />
+                        ) : (
+                          <Heart className="h-5 w-5" />
+                        )}
                       </div>
-                      <div className="font-black text-xl md:text-2xl mb-1">{stat.value}</div>
-                      <div className={`text-[11px] font-medium uppercase tracking-wider ${i === 0 ? "text-white/70" : "text-muted-foreground"}`}>
+                      <div className="font-black text-xl md:text-2xl mb-1">
+                        {stat.value}
+                      </div>
+                      <div
+                        className={`text-[11px] font-medium uppercase tracking-wider ${i === 0 ? "text-white/70" : "text-muted-foreground"}`}
+                      >
                         {loc(stat, "label", locale)}
                       </div>
                     </div>
@@ -191,14 +254,20 @@ export default async function AboutPage({ params }: { params: { locale: Locale }
         {blocks.length > 0 && (
           <div id="sec-visionmission" className="grid gap-6 md:grid-cols-2">
             {blocks.map((block) => (
-              <Card key={block.title || block.text} className="overflow-hidden" data-animate>
+              <Card
+                key={block.title || block.text}
+                className="overflow-hidden"
+                data-animate
+              >
                 <CardContent className="pt-6">
                   <div
                     className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full ${block.color} text-white`}
                   >
                     <block.icon className="h-6 w-6" />
                   </div>
-                  {block.title && <h3 className="mb-2 text-lg font-bold">{block.title}</h3>}
+                  {block.title && (
+                    <h3 className="mb-2 text-lg font-bold">{block.title}</h3>
+                  )}
                   <p className="whitespace-pre-line leading-relaxed text-muted-foreground">
                     {block.text}
                   </p>
@@ -216,7 +285,9 @@ export default async function AboutPage({ params }: { params: { locale: Locale }
                   <span className="block h-0.5 w-6 rounded-full bg-primary"></span>
                   {valuesTitle}
                 </p>
-                <h2 className="text-3xl md:text-[2.75rem] font-extrabold leading-[1.1] tracking-tight text-navy-950">{valuesTitle}</h2>
+                <h2 className="text-3xl md:text-[2.75rem] font-extrabold leading-[1.1] tracking-tight text-navy-950">
+                  {valuesTitle}
+                </h2>
               </div>
             )}
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -240,10 +311,18 @@ export default async function AboutPage({ params }: { params: { locale: Locale }
           </section>
         )}
 
-        <TextBlock id="sec-community" icon={Users} title={communityTitle} text={community} />
+        <TextBlock
+          id="sec-community"
+          icon={Users}
+          title={communityTitle}
+          text={community}
+        />
 
         {history && (
-          <section id="sec-history" className="relative mt-24 mb-16 overflow-hidden bg-navy-950 text-white rounded-[2.5rem] shadow-xl">
+          <section
+            id="sec-history"
+            className="relative mt-24 mb-16 overflow-hidden bg-navy-950 text-white rounded-[2.5rem] shadow-xl"
+          >
             {historyImage && (
               <div
                 data-parallax="5"
@@ -251,7 +330,9 @@ export default async function AboutPage({ params }: { params: { locale: Locale }
                 style={{ backgroundImage: `url(${historyImage})` }}
               />
             )}
-            <div className={`absolute inset-0 bg-gradient-to-br from-navy-950 via-navy-900 to-brand-800 ${historyImage ? "opacity-80" : ""}`} />
+            <div
+              className={`absolute inset-0 bg-gradient-to-br from-navy-950 via-navy-900 to-brand-800 ${historyImage ? "opacity-80" : ""}`}
+            />
             {/* <div
               className="pointer-events-none absolute inset-0 opacity-[0.03]"
               style={{
@@ -268,7 +349,9 @@ export default async function AboutPage({ params }: { params: { locale: Locale }
                   Our Story
                 </p>
                 {historyTitle && (
-                  <h2 className="text-3xl md:text-[2.75rem] font-extrabold leading-[1.1] tracking-tight mb-8 text-white">{historyTitle}</h2>
+                  <h2 className="text-3xl md:text-[2.75rem] font-extrabold leading-[1.1] tracking-tight mb-8 text-white">
+                    {historyTitle}
+                  </h2>
                 )}
                 <p className="whitespace-pre-line leading-relaxed text-white/80 md:text-lg">
                   {history}
@@ -280,70 +363,105 @@ export default async function AboutPage({ params }: { params: { locale: Locale }
 
         {historyTimeline.length > 0 && (
           <section id="sec-timeline" data-animate className="mt-12 mb-12">
-            <div className="rounded-[2.5rem] bg-white pt-16 pb-8 shadow-sm ring-1 ring-border/50 relative overflow-hidden">
+            <div className="rounded-[2.5rem] bg-white pt-16 pb-16 shadow-sm ring-1 ring-border/50 relative overflow-hidden">
               <div className="absolute top-8 left-1/2 -translate-x-1/2 text-2xl font-black uppercase text-primary select-none pointer-events-none opacity-100">
                 History
               </div>
 
-              <div className="w-full overflow-x-auto scrollbar-hide pt-16 pb-8 flex">
-                <div className="flex-1" />
-                <div className="flex items-center shrink-0 px-4 md:px-8">
-                  {historyTimeline.map((item, i) => (
-                    <div key={i} className="relative w-64 h-[400px] shrink-0">
+              {/* Mobile & tablet: single continuous vertical line, alternating sides from md: up */}
+              <div className="relative mx-auto max-w-4xl py-5 px-6 md:px-8 lg:hidden">
+                <div className="absolute top-0 bottom-0 left-[15px] md:left-1/2 w-[2px] md:-translate-x-1/2 bg-primary/20" />
 
-                      {/* Incoming line for first item */}
-                      {i === 0 && (
-                        <div className="absolute top-[150px] right-1/2 w-[50px] h-[4px] -translate-y-1/2 bg-primary/20" />
-                      )}
-
-                      {/* Outgoing line for last item */}
-                      {i === historyTimeline.length - 1 && (
-                        <div
-                          className="absolute left-1/2 w-[50px] h-[4px] -translate-y-1/2 bg-primary/20"
-                          style={{ top: i % 2 === 0 ? '150px' : '250px' }}
-                        />
-                      )}
-
-                      {/* Sine Wave SVG Connector to next item */}
-                      {i < historyTimeline.length - 1 && (
-                        <div className="absolute top-[150px] left-1/2 w-full h-[100px] text-primary/40">
-                          <svg className="w-full h-full overflow-visible" viewBox="0 0 100 100" preserveAspectRatio="none">
-                            {i % 2 === 0 ? (
-                              <path d="M 0 0 C 50 0, 50 100, 100 100" stroke="currentColor" fill="none" strokeWidth="4" strokeLinecap="round" />
-                            ) : (
-                              <path d="M 0 100 C 50 100, 50 0, 100 0" stroke="currentColor" fill="none" strokeWidth="4" strokeLinecap="round" />
-                            )}
-                          </svg>
-                        </div>
-                      )}
-
-                      {/* Content Area */}
-                      {i % 2 === 0 ? (
-                        <div className="absolute bottom-[270px] left-0 w-full flex flex-col items-center px-4">
-                          <div className="text-3xl font-black text-primary mb-2 drop-shadow-sm">{item.left}</div>
-                          <div className="text-sm font-medium text-muted-foreground text-center leading-relaxed">{item.right}</div>
-                          <div className="absolute -bottom-[20px] left-1/2 -translate-x-1/2 w-[2px] h-[20px] bg-primary/20" />
-                        </div>
-                      ) : (
-                        <div className="absolute top-[270px] left-0 w-full flex flex-col items-center px-4">
-                          <div className="absolute -top-[20px] left-1/2 -translate-x-1/2 w-[2px] h-[20px] bg-primary/20" />
-                          <div className="text-3xl font-black text-primary mb-2 drop-shadow-sm">{item.left}</div>
-                          <div className="text-sm font-medium text-muted-foreground text-center leading-relaxed">{item.right}</div>
-                        </div>
-                      )}
-
-                      {/* Center Dot */}
+                <div className="flex flex-col gap-y-12 md:gap-y-16">
+                  {historyTimeline.map((item, i) => {
+                    const isEven = i % 2 === 0;
+                    return (
                       <div
-                        className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-white ring-[4px] ring-primary/20 shadow-sm z-10"
-                        style={{ top: i % 2 === 0 ? '150px' : '250px' }}
+                        key={i}
+                        className="relative grid grid-cols-[32px_1fr] items-start gap-x-6 md:grid-cols-[1fr_32px_1fr] md:items-center md:gap-x-10"
                       >
-                        <div className="h-3 w-3 rounded-full bg-primary" />
+                        {/* Center Dot */}
+                        <div className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white ring-[4px] ring-primary/20 shadow-sm md:order-2 md:justify-self-center">
+                          <div className="h-3 w-3 rounded-full bg-primary" />
+                        </div>
+
+                        {/* Mobile: single content column to the right of the line. Desktop: alternates left/right. */}
+                        <div
+                          className={
+                            isEven
+                              ? "md:order-1 md:text-right"
+                              : "md:order-3 md:text-left"
+                          }
+                        >
+                          <div className="text-2xl md:text-3xl font-black text-primary mb-1 drop-shadow-sm">
+                            {item.left}
+                          </div>
+                          <div className="text-sm font-medium text-muted-foreground leading-relaxed">
+                            {item.right}
+                          </div>
+                        </div>
+
+                        {/* Desktop-only empty spacer on the opposite side to preserve the alternating grid */}
+                        <div
+                          className={
+                            isEven
+                              ? "hidden md:block md:order-3"
+                              : "hidden md:block md:order-1"
+                          }
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Desktop: snaking flow — rows of 2, alternating direction, connected by a straight line below the text */}
+              <div className="hidden lg:block relative mx-auto max-w-5xl px-8">
+                {historyTimelineRows.map((row, r) => {
+                  const reversed = r % 2 === 1;
+                  const visualRow = reversed ? [...row].reverse() : row;
+                  const isLastRow = r === historyTimelineRows.length - 1;
+                  return (
+                    <div key={r}>
+                      <div className="grid grid-cols-2">
+                        {visualRow.map((item, idx) => (
+                          <div
+                            key={idx}
+                            className="relative flex flex-col items-center px-6"
+                          >
+                            {idx < visualRow.length - 1 && (
+                              <div className="absolute left-1/2 top-4 h-[2px] w-full bg-primary/20" />
+                            )}
+                            <div className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white ring-[4px] ring-primary/20 shadow-sm">
+                              <div className="h-3 w-3 rounded-full bg-primary" />
+                            </div>
+                            <div className="mt-4 text-3xl font-black text-primary text-center drop-shadow-sm">
+                              {item.left}
+                            </div>
+                            <div className="mt-2 max-w-[240px] text-center text-sm font-medium leading-relaxed text-muted-foreground">
+                              {item.right}
+                            </div>
+                          </div>
+                        ))}
                       </div>
 
+                      {/* Straight line below the text, down to the next row — never overlaps the words */}
+                      {!isLastRow && (
+                        <div className="grid grid-cols-2">
+                          <div
+                            className={
+                              reversed
+                                ? "col-start-1 flex justify-center"
+                                : "col-start-2 flex justify-center"
+                            }
+                          >
+                            <div className="h-16 w-[2px] rounded-full bg-primary/20" />
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  ))}
-                </div>
-                <div className="flex-1" />
+                  );
+                })}
               </div>
             </div>
           </section>
@@ -357,7 +475,9 @@ export default async function AboutPage({ params }: { params: { locale: Locale }
                 {bodTitle}
                 <span className="block h-0.5 w-6 rounded-full bg-primary"></span>
               </p>
-              <h2 className="text-3xl md:text-[2.75rem] font-extrabold leading-[1.1] tracking-tight text-navy-950 mb-4">{bodTitle}</h2>
+              <h2 className="text-3xl md:text-[2.75rem] font-extrabold leading-[1.1] tracking-tight text-navy-950 mb-4">
+                {bodTitle}
+              </h2>
               {bodDescription && (
                 <p className="max-w-2xl text-[15px] text-muted-foreground leading-relaxed">
                   {bodDescription}
@@ -366,7 +486,11 @@ export default async function AboutPage({ params }: { params: { locale: Locale }
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {bodMembers.map((member) => (
-                <Link href={`/${locale}/team/${member.slug}`} key={member.id} className="block group overflow-hidden rounded-[1.25rem] bg-white border border-border/40 shadow-sm transition-all hover:-translate-y-1.5 hover:shadow-md cursor-pointer">
+                <Link
+                  href={`/${locale}/team/${member.slug}`}
+                  key={member.id}
+                  className="block group overflow-hidden rounded-[1.25rem] bg-white border border-border/40 shadow-sm transition-all hover:-translate-y-1.5 hover:shadow-md cursor-pointer"
+                >
                   <div className="relative aspect-[3/4] w-full overflow-hidden bg-muted/30">
                     {member.image ? (
                       <div
@@ -380,7 +504,9 @@ export default async function AboutPage({ params }: { params: { locale: Locale }
                     )}
                   </div>
                   <div className="p-5 text-center">
-                    <h3 className="font-bold text-navy-950 text-base">{member.name}</h3>
+                    <h3 className="font-bold text-navy-950 text-base">
+                      {member.name}
+                    </h3>
                     <p className="mt-1 text-[13px] font-medium text-primary font-semibold">
                       {loc(member, "role", locale) || "Board Member"}
                     </p>
@@ -399,7 +525,9 @@ export default async function AboutPage({ params }: { params: { locale: Locale }
                 {staffTitle}
                 <span className="block h-0.5 w-6 rounded-full bg-primary"></span>
               </p>
-              <h2 className="text-3xl md:text-[2.75rem] font-extrabold leading-[1.1] tracking-tight text-navy-950 mb-4">{staffTitle}</h2>
+              <h2 className="text-3xl md:text-[2.75rem] font-extrabold leading-[1.1] tracking-tight text-navy-950 mb-4">
+                {staffTitle}
+              </h2>
               {staffDescription && (
                 <p className="max-w-2xl text-[15px] text-muted-foreground leading-relaxed">
                   {staffDescription}
@@ -408,7 +536,11 @@ export default async function AboutPage({ params }: { params: { locale: Locale }
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {staffMembers.map((member) => (
-                <Link href={`/${locale}/team/${member.slug}`} key={member.id} className="block group overflow-hidden rounded-[1.25rem] bg-white border border-border/40 shadow-sm transition-all hover:-translate-y-1.5 hover:shadow-md cursor-pointer">
+                <Link
+                  href={`/${locale}/team/${member.slug}`}
+                  key={member.id}
+                  className="block group overflow-hidden rounded-[1.25rem] bg-white border border-border/40 shadow-sm transition-all hover:-translate-y-1.5 hover:shadow-md cursor-pointer"
+                >
                   <div className="relative aspect-[3/4] w-full overflow-hidden bg-muted/30">
                     {member.image ? (
                       <div
@@ -422,7 +554,9 @@ export default async function AboutPage({ params }: { params: { locale: Locale }
                     )}
                   </div>
                   <div className="p-5 text-center">
-                    <h3 className="font-bold text-navy-950 text-base">{member.name}</h3>
+                    <h3 className="font-bold text-navy-950 text-base">
+                      {member.name}
+                    </h3>
                     <p className="mt-1 text-[13px] font-medium text-primary font-semibold">
                       {loc(member, "role", locale) || "Staff Member"}
                     </p>
@@ -439,7 +573,11 @@ export default async function AboutPage({ params }: { params: { locale: Locale }
             data-animate
             className="rounded-[2rem] bg-gradient-to-br from-navy-900 via-brand-800 to-brand-600 p-10 text-white shadow-glow md:p-14"
           >
-            {extraTitle && <h2 className="text-2xl font-extrabold md:text-3xl">{extraTitle}</h2>}
+            {extraTitle && (
+              <h2 className="text-2xl font-extrabold md:text-3xl">
+                {extraTitle}
+              </h2>
+            )}
             <p className="mt-3 max-w-3xl whitespace-pre-line leading-relaxed text-white/80">
               {extraText}
             </p>
