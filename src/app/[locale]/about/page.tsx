@@ -16,6 +16,7 @@ import { pageMetadata } from "@/lib/seo";
 import { prisma } from "@/lib/prisma";
 import { Card, CardContent } from "@/components/ui/card";
 import { PageHero } from "@/components/site/page-hero";
+import { HistoryTimelineCurve } from "@/components/site/history-timeline-curve";
 
 export async function generateMetadata({
   params,
@@ -58,15 +59,6 @@ export default async function AboutPage({
   const historyImage = s(settings, "about_history_image");
 
   const historyTimeline = sPairs(settings, "about_history_timeline", locale);
-  const TIMELINE_ROW_SIZE = 2;
-  const historyTimelineRows = Array.from(
-    { length: Math.ceil(historyTimeline.length / TIMELINE_ROW_SIZE) },
-    (_, i) =>
-      historyTimeline.slice(
-        i * TIMELINE_ROW_SIZE,
-        i * TIMELINE_ROW_SIZE + TIMELINE_ROW_SIZE,
-      ),
-  );
 
   const bodTitle =
     s(settings, "about_bod_title", locale) || "Board of Directors";
@@ -415,53 +407,9 @@ export default async function AboutPage({
                 </div>
               </div>
 
-              {/* Desktop: snaking flow — rows of 2, alternating direction, connected by a straight line below the text */}
+              {/* Desktop: snaking flow with a curved connecting line, first row of 2 then rows of 4 */}
               <div className="hidden lg:block relative mx-auto max-w-5xl px-8">
-                {historyTimelineRows.map((row, r) => {
-                  const reversed = r % 2 === 1;
-                  const visualRow = reversed ? [...row].reverse() : row;
-                  const isLastRow = r === historyTimelineRows.length - 1;
-                  return (
-                    <div key={r}>
-                      <div className="grid grid-cols-2">
-                        {visualRow.map((item, idx) => (
-                          <div
-                            key={idx}
-                            className="relative flex flex-col items-center px-6"
-                          >
-                            {idx < visualRow.length - 1 && (
-                              <div className="absolute left-1/2 top-4 h-[2px] w-full bg-primary/20" />
-                            )}
-                            <div className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white ring-[4px] ring-primary/20 shadow-sm">
-                              <div className="h-3 w-3 rounded-full bg-primary" />
-                            </div>
-                            <div className="mt-4 text-3xl font-black text-primary text-center drop-shadow-sm">
-                              {item.left}
-                            </div>
-                            <div className="mt-2 max-w-[240px] text-center text-sm font-medium leading-relaxed text-muted-foreground">
-                              {item.right}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* Straight line below the text, down to the next row — never overlaps the words */}
-                      {!isLastRow && (
-                        <div className="grid grid-cols-2">
-                          <div
-                            className={
-                              reversed
-                                ? "col-start-1 flex justify-center"
-                                : "col-start-2 flex justify-center"
-                            }
-                          >
-                            <div className="h-16 w-[2px] rounded-full bg-primary/20" />
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
+                <HistoryTimelineCurve items={historyTimeline} />
               </div>
             </div>
           </section>
