@@ -10,17 +10,20 @@ export const ROLES = ["owner", "editor"] as const;
 export type Role = (typeof ROLES)[number];
 
 export const ROLE_LABELS: Record<Role, string> = {
-  owner: "Owner",
+  owner: "Administrator",
   editor: "Editor",
 };
 
 export const ROLE_DESCRIPTIONS: Record<Role, string> = {
   owner: "Full access — content, site settings, and managing admin users.",
-  editor: "Can add and edit content and read the inbox. Cannot change settings or users.",
+  editor:
+    "Can add and edit content and read the inbox. Cannot change settings or users.",
 };
 
 export function isRole(value: unknown): value is Role {
-  return typeof value === "string" && (ROLES as readonly string[]).includes(value);
+  return (
+    typeof value === "string" && (ROLES as readonly string[]).includes(value)
+  );
 }
 
 /** Unknown or legacy values fall back to the least privileged role. */

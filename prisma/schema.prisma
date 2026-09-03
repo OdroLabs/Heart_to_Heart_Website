@@ -165,6 +165,9 @@ model GalleryImage {
   captionSi String?
   captionTa String?
   image     String
+  /// "image" or "video" — video/reel items use `videoUrl` for playback.
+  type      String   @default("image")
+  videoUrl  String?
   order     Int      @default(0)
   createdAt DateTime @default(now())
 }

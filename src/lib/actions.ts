@@ -381,10 +381,10 @@ export async function deleteUser(id: number): Promise<ActionResult> {
 export async function submitContact(formData: FormData) {
   const name = (formData.get("name") as string)?.trim();
   const email = (formData.get("email") as string)?.trim();
+  const subject = (formData.get("subject") as string)?.trim();
   const message = (formData.get("message") as string)?.trim();
-  if (!name || !email || !message) return { ok: false };
+  if (!name || !email || !subject || !message) return { ok: false };
   const phone = ((formData.get("phone") as string) || "").trim() || null;
-  const subject = ((formData.get("subject") as string) || "").trim() || null;
 
   await prisma.contactMessage.create({
     data: { name, email, phone, subject, message },
@@ -431,6 +431,40 @@ export async function submitContact(formData: FormData) {
   }
 
   return { ok: true };
+}
+
+export async function replyToContactMessage(
+  messageId: number,
+  formData: FormData
+): Promise<ActionResult> {
+  try {
+    await requireAdmin();
+    const contact = await prisma.contactMessage.findUnique({ where: { id: messageId } });
+    if (!contact) throw new Error("That message no longer exists.");
+
+    const subject = (formData.get("subject") as string)?.trim();
+    const body = (formData.get("body") as string)?.trim();
+    if (!subject || !body) return { ok: false, error: "Subject and message are required." };
+
+    const settings = await getSettings();
+    const result = await sendMail(settings, {
+      to: contact.email,
+      subject,
+      text: body,
+      html: `<p style="white-space: pre-line;">${escapeHtml(body)}</p>`,
+    });
+    if (!result.sent) {
+      return {
+        ok: false,
+        error:
+          result.error ||
+          "Email isn't set up yet. Add SMTP details under Site Settings → Email & SMTP.",
+      };
+    }
+    return { ok: true };
+  } catch (error) {
+    return { ok: false, error: toMessage(error, "Could not send the reply. Please try again.") };
+  }
 }
 
 function escapeHtml(value: string): string {

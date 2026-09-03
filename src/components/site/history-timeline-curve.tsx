@@ -76,7 +76,7 @@ function buildSnakePath(
 export function HistoryTimelineCurve({ items }: { items: TimelineItem[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const anchorRef = useRef<HTMLDivElement>(null);
-  const dotRefs = useRef(new Map<number, HTMLDivElement>());
+  const yearRefs = useRef(new Map<number, HTMLDivElement>());
   const [pathD, setPathD] = useState("");
 
   const rows = chunkRows(items);
@@ -103,12 +103,12 @@ export function HistoryTimelineCurve({ items }: { items: TimelineItem[] }) {
       // trailing across the full width.
       const anchor = toPoint(anchorEl);
 
-      // One y-position per row, taken from that row's first dot (all dots
-      // within a row share the same y since they sit in the same grid row).
+      // One y-position per row, taken from that row's first year label (all
+      // years within a row share the same y since they sit in the same grid row).
       const rowYs: number[] = [];
       let rowStartIndex = 0;
       for (const row of rows) {
-        const el = dotRefs.current.get(rowStartIndex);
+        const el = yearRefs.current.get(rowStartIndex);
         if (el) rowYs.push(toPoint(el).y);
         rowStartIndex += row.length;
       }
@@ -175,15 +175,12 @@ export function HistoryTimelineCurve({ items }: { items: TimelineItem[] }) {
                 >
                   <div
                     ref={(el) => {
-                      if (el) dotRefs.current.set(itemIndex, el);
-                      else dotRefs.current.delete(itemIndex);
+                      if (el) yearRefs.current.set(itemIndex, el);
+                      else yearRefs.current.delete(itemIndex);
                       return undefined;
                     }}
-                    className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white ring-[4px] ring-primary/20 shadow-sm"
+                    className="relative z-10 bg-white px-3 text-3xl font-black text-primary text-center drop-shadow-sm"
                   >
-                    <div className="h-3 w-3 rounded-full bg-primary" />
-                  </div>
-                  <div className="mt-4 text-3xl font-black text-primary text-center drop-shadow-sm">
                     {item.left}
                   </div>
                   <div className="mt-2 max-w-[240px] text-center text-sm font-medium leading-relaxed text-muted-foreground">

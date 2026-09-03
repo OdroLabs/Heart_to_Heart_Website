@@ -284,17 +284,31 @@ export default async function HomePage({
                 {heroTrustBadge && (
                   <div className="mb-6 inline-flex items-center gap-2.5 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 px-3 py-2 pr-4">
                     <div className="flex -space-x-2">
-                      {["A", "K", "S", "M"].map((letter, i) => {
-                        const avatarColors = ["#FF0402", "#F77928", "#1B1BFD", "#84C14C"];
-                        return (
+                      {partners.slice(0, 5).map((partner, i) => {
+                        const avatarColors = [
+                          "#FF0402",
+                          "#F77928",
+                          "#1B1BFD",
+                          "#84C14C",
+                          "#7C3AED",
+                        ];
+                        return partner.logo ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            key={partner.id}
+                            src={partner.logo}
+                            alt={partner.name}
+                            className="h-7 w-7 rounded-full border-2 border-white/60 object-cover shadow-sm"
+                          />
+                        ) : (
                           <div
-                            key={i}
+                            key={partner.id}
                             className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white/60 shadow-sm text-[10px] font-bold text-white"
                             style={{
                               backgroundColor: avatarColors[i % avatarColors.length],
                             }}
                           >
-                            {letter}
+                            {partner.name.charAt(0).toUpperCase()}
                           </div>
                         );
                       })}
