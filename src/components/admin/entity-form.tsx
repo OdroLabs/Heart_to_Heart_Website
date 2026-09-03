@@ -34,11 +34,14 @@ function SingleField({
   name,
   defaultValue,
   required,
+  onValueChange,
 }: {
   field: FieldDef;
   name: string;
   defaultValue: any;
   required?: boolean;
+  /** Only wired up for fields other fields' `showWhen` depends on. */
+  onValueChange?: (value: string) => void;
 }) {
   switch (field.type) {
     case "textarea":
@@ -75,6 +78,7 @@ function SingleField({
         <select
           name={name}
           defaultValue={toInputValue(field, defaultValue) || field.options?.[0]?.value}
+          onChange={onValueChange ? (e) => onValueChange(e.target.value) : undefined}
           className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm"
         >
           {field.options?.map((o) => (
@@ -100,6 +104,20 @@ export function EntityForm({
   const [saved, setSaved] = useState(false);
   const { toast, update } = useToast();
   const router = useRouter();
+
+  // Tracks the current value of any field that another field's `showWhen`
+  // depends on, so those dependent fields can be shown/hidden live.
+  const [watched, setWatched] = useState<Record<string, string>>(() => {
+    const initial: Record<string, string> = {};
+    for (const field of entity.fields) {
+      if (!field.showWhen) continue;
+      const controller = entity.fields.find((f) => f.name === field.showWhen!.field);
+      const raw = record?.[field.showWhen!.field];
+      initial[field.showWhen!.field] =
+        raw != null ? String(raw) : controller?.options?.[0]?.value ?? "";
+    }
+    return initial;
+  });
 
   async function handleSave(fd: FormData) {
     setSaving(true);
@@ -141,7 +159,13 @@ export function EntityForm({
 
   return (
     <form action={handleSave} onSubmit={() => { setSaving(true); setSaved(false); }} className="space-y-5">
-      {entity.fields.map((field) => (
+      {entity.fields.map((field) => {
+        if (field.showWhen && watched[field.showWhen.field] !== field.showWhen.equals) {
+          return null;
+        }
+        const isController = entity.fields.some((f) => f.showWhen?.field === field.name);
+
+        return (
         <Card key={field.name}>
           <CardContent className="pt-5">
             <Label className="mb-3 block font-semibold">
@@ -208,11 +232,17 @@ export function EntityForm({
                 name={field.name}
                 defaultValue={record?.[field.name]}
                 required={field.required}
+                onValueChange={
+                  isController
+                    ? (value) => setWatched((prev) => ({ ...prev, [field.name]: value }))
+                    : undefined
+                }
               />
             )}
           </CardContent>
         </Card>
-      ))}
+        );
+      })}
       <div className="flex gap-3">
         <Button
           type="submit"
