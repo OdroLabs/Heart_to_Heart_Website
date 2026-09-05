@@ -11,7 +11,7 @@ export async function generateMetadata({
 }: {
   params: { locale: Locale; slug: string };
 }): Promise<Metadata> {
-  const { slug } = params;
+  const { locale, slug } = params;
   const member = await prisma.teamMember.findUnique({
     where: { slug },
   });
@@ -21,7 +21,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${member.name} | Heart to Heart`,
+    title: `${loc(member, "name", locale)} | Heart to Heart`,
     description: member.roleEn || member.roleSi || member.roleTa || "Team Member",
   };
 }
@@ -84,7 +84,7 @@ export default async function TeamMemberPage({
             </p>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-navy-950 mb-3 md:mb-4 tracking-tight leading-none">
-              {member.name}
+              {loc(member, "name", locale)}
             </h1>
             
             <p className="text-xl md:text-2xl font-medium text-muted-foreground mb-8">

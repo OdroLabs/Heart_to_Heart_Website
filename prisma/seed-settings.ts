@@ -441,6 +441,11 @@ const content: Record<string, Val> = {
     si: "අපගේ විස්තර",
     ta: "எங்கள் விவரங்கள்",
   },
+  contact_details_intro: {
+    en: "Reach out to us directly using the details below, or send a message and we'll respond as soon as we can.",
+    si: "පහත විස්තර භාවිතයෙන් අප හා සෘජුවම සම්බන්ධ වන්න, නැතහොත් පණිවිඩයක් යවන්න — අපි හැකි ඉක්මනින් ප්‍රතිචාර දක්වන්නෙමු.",
+    ta: "கீழே உள்ள விவரங்களைப் பயன்படுத்தி எங்களை நேரடியாக அணுகவும், அல்லது ஒரு செய்தி அனுப்புங்கள் — நாங்கள் விரைவில் பதிலளிப்போம்.",
+  },
   show_contact_map: ON,
 
   /* =================================================== Donate page ======== */

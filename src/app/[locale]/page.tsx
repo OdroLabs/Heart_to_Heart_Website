@@ -101,7 +101,7 @@ export default async function HomePage({
     await Promise.all([
       prisma.stat.findMany({ orderBy: { order: "asc" } }),
       prisma.service.findMany({
-        where: { published: true },
+        where: { published: true, featured: true },
         orderBy: { order: "asc" },
         take: servicesCount,
       }),

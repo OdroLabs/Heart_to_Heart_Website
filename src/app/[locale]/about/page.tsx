@@ -453,7 +453,7 @@ export default async function AboutPage({
                   </div>
                   <div className="p-5 text-center">
                     <h3 className="font-bold text-navy-950 text-base">
-                      {member.name}
+                      {loc(member, "name", locale)}
                     </h3>
                     <p className="mt-1 text-[13px] font-medium text-primary font-semibold">
                       {loc(member, "role", locale) || "Board Member"}
@@ -503,7 +503,7 @@ export default async function AboutPage({
                   </div>
                   <div className="p-5 text-center">
                     <h3 className="font-bold text-navy-950 text-base">
-                      {member.name}
+                      {loc(member, "name", locale)}
                     </h3>
                     <p className="mt-1 text-[13px] font-medium text-primary font-semibold">
                       {loc(member, "role", locale) || "Staff Member"}

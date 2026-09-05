@@ -90,6 +90,7 @@ model Service {
   image3        String?
   order         Int     @default(0)
   published     Boolean @default(true)
+  featured      Boolean @default(true)
 }
 
 model Publication {
@@ -260,7 +261,9 @@ model TeamMember {
   id        Int      @id @default(autoincrement())
   slug      String?  @unique @default(cuid())
   category  String   @default("STAFF")
-  name      String
+  nameEn    String
+  nameSi    String?
+  nameTa    String?
   roleEn    String?
   roleSi    String?
   roleTa    String?
