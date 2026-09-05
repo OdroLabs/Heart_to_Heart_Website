@@ -220,11 +220,18 @@ export const entities: EntityDef[] = [
       { name: "image3", label: "Gallery image 2", type: "image" },
       { name: "order", label: "Sort order", type: "number" },
       { name: "published", label: "Published", type: "boolean" },
+      {
+        name: "featured",
+        label: "Featured on Home page",
+        type: "boolean",
+        help: "Only featured services appear in the Home page services section.",
+      },
     ],
     listFields: [
       { name: "icon", label: "" },
       { name: "titleEn", label: "Title" },
       { name: "published", label: "Published", type: "boolean" },
+      { name: "featured", label: "Featured", type: "boolean" },
     ],
   },
   {
@@ -621,7 +628,7 @@ export const entities: EntityDef[] = [
       "Board of Directors and Staff members shown on the About page.",
     orderBy: { order: "asc" },
     fields: [
-      { name: "name", label: "Name", type: "text", required: true },
+      { name: "name", label: "Name", type: "text", i18n: true, required: true },
       { name: "role", label: "Role", type: "text", i18n: true },
       { name: "image", label: "Photo", type: "image" },
       { name: "order", label: "Sort order", type: "number" },
@@ -629,7 +636,7 @@ export const entities: EntityDef[] = [
     ],
     listFields: [
       { name: "image", label: "", type: "image" },
-      { name: "name", label: "Name" },
+      { name: "nameEn", label: "Name" },
       { name: "roleEn", label: "Role" },
       { name: "published", label: "Published", type: "boolean" },
     ],

@@ -6,7 +6,7 @@ async function main() {
   // Add 4 BOD members
   const bodMembers = [
     {
-      name: "Dr. Rajitha Y",
+      nameEn: "Dr. Rajitha Y",
       slug: "dr-rajitha-y",
       category: "BOD",
       roleEn: "President & Founder",
@@ -15,7 +15,7 @@ async function main() {
       order: 1,
     },
     {
-      name: "Dr. Ruvan Ekanayaka",
+      nameEn: "Dr. Ruvan Ekanayaka",
       slug: "dr-ruvan-ekanayaka",
       category: "BOD",
       roleEn: "Vice President",
@@ -24,7 +24,7 @@ async function main() {
       order: 2,
     },
     {
-      name: "Prof. Anura P",
+      nameEn: "Prof. Anura P",
       slug: "prof-anura-p",
       category: "BOD",
       roleEn: "Chief Medical Officer",
@@ -33,7 +33,7 @@ async function main() {
       order: 3,
     },
     {
-      name: "Ms. Kumudini W",
+      nameEn: "Ms. Kumudini W",
       slug: "ms-kumudini-w",
       category: "BOD",
       roleEn: "Director of Operations",
@@ -46,7 +46,7 @@ async function main() {
   // Add 4 Staff members
   const staffMembers = [
     {
-      name: "Sarah Jenkins",
+      nameEn: "Sarah Jenkins",
       slug: "sarah-jenkins",
       category: "STAFF",
       roleEn: "Head Nurse",
@@ -55,7 +55,7 @@ async function main() {
       order: 1,
     },
     {
-      name: "Michael Chen",
+      nameEn: "Michael Chen",
       slug: "michael-chen",
       category: "STAFF",
       roleEn: "Project Coordinator",
@@ -64,7 +64,7 @@ async function main() {
       order: 2,
     },
     {
-      name: "Amila Perera",
+      nameEn: "Amila Perera",
       slug: "amila-perera",
       category: "STAFF",
       roleEn: "Clinical Psychologist",
@@ -73,7 +73,7 @@ async function main() {
       order: 3,
     },
     {
-      name: "Nethmi Silva",
+      nameEn: "Nethmi Silva",
       slug: "nethmi-silva",
       category: "STAFF",
       roleEn: "Administrative Assistant",

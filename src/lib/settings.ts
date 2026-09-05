@@ -721,6 +721,7 @@ export const settingPages: SettingPage[] = [
         items: [
           SW("show_contact_details", "Show address, phone, email and office hours"),
           T("contact_details_title", "Panel heading"),
+          TA("contact_details_intro", "Panel intro text", "Optional."),
         ],
       },
       {
