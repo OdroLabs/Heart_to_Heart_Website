@@ -25,6 +25,10 @@ const en = {
     media: "News & Media",
     getInvolved: "Get Involved",
     menu: "Menu",
+    latestNews: "Latest News",
+    social: "Social",
+    gallery: "Gallery",
+    quickLinks: "Quick Links",
   },
   common: {
     readMore: "Read More",
@@ -123,6 +127,10 @@ const si: typeof en = {
     media: "පුවත් සහ මාධ්‍ය",
     getInvolved: "සම්බන්ධ වන්න",
     menu: "මෙනුව",
+    latestNews: "නවතම පුවත්",
+    social: "සමාජ මාධ්‍ය",
+    gallery: "ගැලරිය",
+    quickLinks: "ඉක්මන් සබැඳි",
   },
   common: {
     readMore: "වැඩිදුර කියවන්න",
@@ -221,6 +229,10 @@ const ta: typeof en = {
     media: "செய்திகள் & ஊடகம்",
     getInvolved: "பங்கேற்க",
     menu: "பட்டியல்",
+    latestNews: "சமீபத்திய செய்திகள்",
+    social: "சமூக ஊடகம்",
+    gallery: "படத்தொகுப்பு",
+    quickLinks: "விரைவு இணைப்புகள்",
   },
   common: {
     readMore: "மேலும் வாசிக்க",
