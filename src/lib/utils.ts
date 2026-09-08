@@ -4,19 +4,37 @@ import { twMerge } from "tailwind-merge";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+const SI_MONTHS = [
+  "ජනවාරි",
+  "පෙබරවාරි",
+  "මාර්තු",
+  "අප්‍රේල්",
+  "මැයි",
+  "ජූනි",
+  "ජූලි",
+  "අගෝස්තු",
+  "සැප්තැම්බර්",
+  "ඔක්තෝබර්",
+  "නොවැම්බර්",
+  "දෙසැම්බර්",
+];
 
-export function formatDate(date: Date | string | null | undefined, locale = "en") {
+export function formatDate(
+  date: Date | string | null | undefined,
+  locale = "en",
+) {
   if (!date) return "";
   const d = typeof date === "string" ? new Date(date) : date;
-  const map: Record<string, string> = { en: "en-GB", si: "si-LK", ta: "ta-LK" };
+
+  if (locale === "si") {
+    return `${d.getDate()} ${SI_MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+  }
+
+  const map: Record<string, string> = { en: "en-GB", ta: "ta-LK" };
   return d.toLocaleDateString(map[locale] ?? "en-GB", {
     year: "numeric",
     month: "short",
     day: "numeric",
-    // Sri Lanka's locale data defaults to the Buddhist/Lith calendar, which
-    // renders traditional month names. Force the standard Gregorian
-    // calendar so months read as ජනවාරි–දෙසැම්බර් instead.
-    calendar: "gregory",
   });
 }
 
