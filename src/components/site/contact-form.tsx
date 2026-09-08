@@ -125,7 +125,7 @@ export function ContactForm({
           placeholder="Enter your message here ..."
           className="bg-white border-border/80 rounded-xl shadow-sm focus-visible:ring-brand-500 resize-none"
           required
-          rows={4}
+          rows={7}
         />
       </div>
       <Button
