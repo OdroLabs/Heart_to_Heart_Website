@@ -5,7 +5,7 @@ import { useLayoutEffect, useRef, useState } from "react";
 type TimelineItem = { left: string; right: string };
 
 const FIRST_ROW_SIZE = 2;
-const OTHER_ROW_SIZE = 4;
+const OTHER_ROW_SIZE = 3;
 
 function chunkRows(items: TimelineItem[]): TimelineItem[][] {
   if (items.length === 0) return [];
@@ -20,7 +20,7 @@ type Point = { x: number; y: number };
 
 /** Corner radius and edge inset used for the snake path, derived from the container width. */
 function getGeometry(containerWidth: number) {
-  const radius = Math.max(24, Math.min(64, containerWidth * 0.05));
+  const radius = Math.max(32, Math.min(80, containerWidth * 0.06));
   const inset = Math.max(radius + 16, containerWidth * 0.035);
   return { radius, inset };
 }
@@ -131,7 +131,7 @@ export function HistoryTimelineCurve({ items }: { items: TimelineItem[] }) {
   let globalIndex = 0;
 
   return (
-    <div ref={containerRef} className="relative flex flex-col gap-16 pt-10">
+    <div ref={containerRef} className="relative flex flex-col gap-24 pt-10 pb-4">
       <svg className="pointer-events-none absolute inset-0 z-0 h-full w-full">
         <path
           d={pathD}
@@ -159,7 +159,7 @@ export function HistoryTimelineCurve({ items }: { items: TimelineItem[] }) {
           <div
             key={r}
             className={`relative grid ${
-              r === 0 ? "ml-auto w-1/2 grid-cols-2" : "grid-cols-4"
+              r === 0 ? "ml-auto w-1/3 grid-cols-2" : "grid-cols-3"
             }`}
           >
             {visualRow.map((item, visualIdx) => {
