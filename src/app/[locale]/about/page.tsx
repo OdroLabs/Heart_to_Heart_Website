@@ -117,6 +117,7 @@ export default async function AboutPage({
               <p className="font-bold text-xs text-primary tracking-[0.2em] uppercase mb-4 flex items-center gap-2">
                 <span className="block h-0.5 w-6 rounded-full bg-primary"></span>
                 {title}
+                <span className="block h-0.5 w-6 rounded-full bg-primary"></span>
               </p>
               <h2 className="text-3xl md:text-[2.75rem] font-extrabold leading-[1.1] tracking-tight text-navy-950">
                 {title}

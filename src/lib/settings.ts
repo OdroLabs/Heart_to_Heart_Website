@@ -373,6 +373,7 @@ export const settingPages: SettingPage[] = [
         items: [
           SW("show_footer_explore", "Show the Explore column"),
           SW("show_footer_involved", "Show the Get Involved column"),
+          SW("show_footer_legal", "Show the Legal column (Terms & Privacy Policy)"),
           SW("show_footer_social", "Show social media icons"),
         ],
       },
@@ -892,6 +893,30 @@ export const settingPages: SettingPage[] = [
           TA("suggestions_hero_intro", "Intro text"),
           IMG("suggestions_hero_image", "Header background image"),
           T("suggestions_success_message", "Message shown after sending"),
+        ],
+      },
+      {
+        section: "Terms & Conditions",
+        preview: { path: "/terms", anchor: "sec-page-header" },
+        hideNote: AUTO_HIDE,
+        items: [
+          T("terms_hero_title", "Page title"),
+          TA("terms_hero_intro", "Intro text"),
+          IMG("terms_hero_image", "Header background image"),
+          T("terms_updated", "Last updated line", "e.g. Last updated: 1 March 2026."),
+          TA("terms_body", "Page content", "Blank line between paragraphs. Linked from the footer Legal column."),
+        ],
+      },
+      {
+        section: "Privacy Policy",
+        preview: { path: "/privacy", anchor: "sec-page-header" },
+        hideNote: AUTO_HIDE,
+        items: [
+          T("privacy_hero_title", "Page title"),
+          TA("privacy_hero_intro", "Intro text"),
+          IMG("privacy_hero_image", "Header background image"),
+          T("privacy_updated", "Last updated line", "e.g. Last updated: 1 March 2026."),
+          TA("privacy_body", "Page content", "Blank line between paragraphs. Linked from the footer Legal column."),
         ],
       },
     ],

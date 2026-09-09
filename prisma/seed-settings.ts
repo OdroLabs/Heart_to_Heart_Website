@@ -117,6 +117,7 @@ const content: Record<string, Val> = {
   },
   show_footer_explore: ON,
   show_footer_involved: ON,
+  show_footer_legal: ON,
   show_footer_social: ON,
   show_footer_newsletter: ON,
   footer_newsletter_title: {
@@ -577,6 +578,126 @@ const content: Record<string, Val> = {
     en: "Your suggestion has been submitted. Thank you!",
     si: "ඔබගේ යෝජනාව යොමු කරන ලදී. ස්තූතියි!",
     ta: "உங்கள் ஆலோசனை சமர்ப்பிக்கப்பட்டது. நன்றி!",
+  },
+
+  /* ── Legal pages (linked from the footer Legal column) ── */
+  terms_hero_title: {
+    en: "Terms & Conditions",
+    si: "නියම හා කොන්දේසි",
+    ta: "விதிமுறைகள் மற்றும் நிபந்தனைகள்",
+  },
+  terms_hero_intro: {
+    en: "The terms that apply when you use this website and the services offered through it.",
+    si: "මෙම වෙබ් අඩවිය සහ එය හරහා ලබා දෙන සේවාවන් භාවිතා කරන විට අදාළ වන නියමයන්.",
+    ta: "இந்த இணையதளத்தையும் அதன் வழியாக வழங்கப்படும் சேவைகளையும் பயன்படுத்தும்போது பொருந்தும் விதிமுறைகள்.",
+  },
+  terms_hero_image: BLANK,
+  terms_updated: { en: "Last updated: 9 September 2026" },
+  terms_body: {
+    en: `1. Acceptance of these terms
+
+By accessing or using this website you agree to these Terms & Conditions. If you do not agree with them, please do not use the site.
+
+2. About our services
+
+Heart to Heart Lanka provides community-based health, rights and support services. Information published on this site is provided for general awareness only.
+
+3. Not medical advice
+
+Content on this website is not a substitute for professional medical advice, diagnosis or treatment. Always seek the guidance of a qualified healthcare provider with any questions about a medical condition. If you believe you are facing a medical emergency, contact emergency services immediately.
+
+4. Using this website
+
+You agree to use this site lawfully and not to attempt to disrupt it, gain unauthorised access to it, or use it to harass, abuse or harm any other person or community.
+
+5. Information you submit
+
+When you contact us, subscribe to our newsletter, or send a suggestion, you confirm that the information you provide is accurate and that you are entitled to share it. How we handle that information is described in our Privacy Policy.
+
+6. Donations
+
+Donations made through this site are processed by our payment provider. Donations are voluntary and, unless required by law, are non-refundable. If you believe a payment was made in error, contact us and we will review it.
+
+7. Intellectual property
+
+Unless stated otherwise, the content, design and materials on this site belong to Heart to Heart Lanka and may not be reproduced for commercial purposes without written permission.
+
+8. Third-party links
+
+This site may link to external websites. We are not responsible for their content, accuracy or privacy practices.
+
+9. Changes to these terms
+
+We may update these terms from time to time. The date above shows when they were last revised.
+
+10. Contact
+
+For questions about these terms, please reach us using the contact details on our Contact page.`,
+  },
+
+  privacy_hero_title: {
+    en: "Privacy Policy",
+    si: "රහස්‍යතා ප්‍රතිපත්තිය",
+    ta: "தனியுரிமைக் கொள்கை",
+  },
+  privacy_hero_intro: {
+    en: "How we collect, use and protect your personal information — and the choices you have.",
+    si: "අපි ඔබගේ පෞද්ගලික තොරතුරු එකතු කරන, භාවිතා කරන සහ ආරක්ෂා කරන ආකාරය සහ ඔබට ඇති තේරීම්.",
+    ta: "உங்கள் தனிப்பட்ட தகவலை நாங்கள் எவ்வாறு சேகரிக்கிறோம், பயன்படுத்துகிறோம், பாதுகாக்கிறோம் என்பதும் உங்களுக்குள்ள தேர்வுகளும்.",
+  },
+  privacy_hero_image: BLANK,
+  privacy_updated: { en: "Last updated: 9 September 2026" },
+  privacy_body: {
+    en: `1. Our commitment
+
+Heart to Heart Lanka works with communities who may face stigma or discrimination. We treat privacy as a matter of safety, not just compliance, and we collect as little personal information as possible.
+
+2. Information we collect
+
+We only collect information you choose to give us through this website:
+
+Contact form — your name, email address, phone number, subject and message.
+Newsletter sign-up — your email address.
+Suggestions form — your name, email address and message.
+Donations — your name, email address and donation amount.
+
+We do not publish client or service-user records on this website, and we do not ask you to share health information through this site.
+
+3. How we use your information
+
+We use it to reply to your message, to send you the newsletter you asked for, to process and acknowledge donations, and to improve our services.
+
+4. Payment information
+
+Donations are processed by our third-party payment provider. Card and banking details are entered on the provider's own secure systems. We do not receive or store your full card details.
+
+5. Sharing your information
+
+We do not sell or rent your personal information. We share it only with service providers who help us operate this site (such as our payment provider and email delivery services), or where we are required to do so by law.
+
+6. Keeping your information
+
+We keep personal information only as long as needed for the purpose it was collected, or as required by law, and then delete it.
+
+7. Security
+
+We use reasonable technical and organisational measures to protect the information we hold. No system is completely secure, so we cannot guarantee absolute security.
+
+8. Your choices
+
+You can unsubscribe from our newsletter at any time using the link in the email. You may also ask us to access, correct or delete the personal information we hold about you.
+
+9. Children
+
+This website is not directed at children, and we do not knowingly collect information from them through the site.
+
+10. Changes to this policy
+
+We may update this policy from time to time. The date above shows when it was last revised.
+
+11. Contact
+
+For any privacy question or request, please reach us using the contact details on our Contact page.`,
   },
 };
 
