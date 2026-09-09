@@ -109,11 +109,11 @@ export default async function AboutPage({
     return (
       <section
         id={id}
-        className={`grid items-start gap-8 ${image ? "lg:grid-cols-2" : "max-w-3xl"}`}
+        className={`grid items-start gap-8 ${image ? "lg:grid-cols-2" : "mx-auto max-w-3xl text-center"}`}
       >
         <div data-animate>
           {title && (
-            <div className="mb-8">
+            <div className={`mb-8 ${image ? "" : "flex flex-col items-center"}`}>
               <p className="font-bold text-xs text-primary tracking-[0.2em] uppercase mb-4 flex items-center gap-2">
                 <span className="block h-0.5 w-6 rounded-full bg-primary"></span>
                 {title}
@@ -408,7 +408,7 @@ export default async function AboutPage({
               </div>
 
               {/* Desktop: snaking flow with a curved connecting line, first row of 2 then rows of 4 */}
-              <div className="hidden lg:block relative mx-auto max-w-5xl px-8">
+              <div className="hidden lg:block relative mx-auto max-w-6xl px-8 min-h-[420px]">
                 <HistoryTimelineCurve items={historyTimeline} />
               </div>
             </div>

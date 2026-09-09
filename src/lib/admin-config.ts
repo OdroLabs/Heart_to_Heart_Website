@@ -45,7 +45,7 @@ export interface EntityDef {
   listFields: {
     name: string;
     label: string;
-    type?: "date" | "boolean" | "money" | "image" | "longtext";
+    type?: "date" | "boolean" | "money" | "image" | "longtext" | "phone";
   }[];
   readOnly?: boolean; // inbox-style: list + view + delete only
   /** Shows an "Export CSV" button on the list page, downloading every row. */
@@ -566,6 +566,7 @@ export const entities: EntityDef[] = [
       { name: "createdAt", label: "Date", type: "date" },
       { name: "name", label: "Name" },
       { name: "email", label: "Email" },
+      { name: "phone", label: "Phone", type: "phone" },
       { name: "amount", label: "Amount", type: "money" },
       { name: "status", label: "Status" },
     ],
@@ -583,7 +584,7 @@ export const entities: EntityDef[] = [
       { name: "createdAt", label: "Date", type: "date" },
       { name: "name", label: "Name" },
       { name: "email", label: "Email" },
-      { name: "message", label: "Message" },
+      { name: "message", label: "Message", type: "longtext" },
     ],
   },
   {
@@ -599,8 +600,8 @@ export const entities: EntityDef[] = [
       { name: "createdAt", label: "Date", type: "date" },
       { name: "name", label: "Name" },
       { name: "email", label: "Email" },
-      { name: "phone", label: "Phone" },
-      { name: "subject", label: "Subject" },
+      { name: "phone", label: "Phone", type: "phone" },
+      { name: "subject", label: "Subject", type: "longtext" },
       { name: "message", label: "Message", type: "longtext" },
     ],
   },

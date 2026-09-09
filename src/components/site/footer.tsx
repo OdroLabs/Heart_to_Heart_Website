@@ -241,7 +241,15 @@ export function SiteFooter({
             {copyright ? ` ${copyright}` : siteName ? ` ${siteName}. All rights reserved.` : ""}
             <Heart className="h-3 w-3 fill-primary/60 text-primary/60" />
           </p>
-          {credit && <p>{credit}</p>}
+          <div className="flex items-center gap-4">
+            <Link href={`/${locale}/terms`} className="transition-colors hover:text-white">
+              {dict.footer.terms}
+            </Link>
+            <Link href={`/${locale}/privacy`} className="transition-colors hover:text-white">
+              {dict.footer.privacy}
+            </Link>
+            {credit && <p>{credit}</p>}
+          </div>
         </div>
       </div>
     </footer>

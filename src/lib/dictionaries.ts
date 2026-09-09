@@ -104,6 +104,8 @@ const en = {
     explore: "Explore",
     getInvolved: "Get Involved",
     rights: "All rights reserved.",
+    terms: "Terms & Conditions",
+    privacy: "Privacy Policy",
   },
 };
 
@@ -202,6 +204,8 @@ const si: typeof en = {
     explore: "ගවේෂණය",
     getInvolved: "සම්බන්ධ වන්න",
     rights: "සියලුම හිමිකම් ඇවිරිණි.",
+    terms: "නියම සහ කොන්දේසි",
+    privacy: "පෞද්ගලිකත්ව ප්‍රතිපත්තිය",
   },
 };
 
@@ -300,6 +304,8 @@ const ta: typeof en = {
     explore: "மேலும் பார்க்க",
     getInvolved: "பங்கேற்க",
     rights: "அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
+    terms: "விதிமுறைகள் & நிபந்தனைகள்",
+    privacy: "தனியுரிமைக் கொள்கை",
   },
 };
 
