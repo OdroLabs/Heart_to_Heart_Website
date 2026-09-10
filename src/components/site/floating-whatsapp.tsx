@@ -25,10 +25,7 @@ export function FloatingWhatsApp({
   const href = `https://wa.me/${digits}${message ? `?text=${encodeURIComponent(message)}` : ""}`;
 
   return (
-    <div
-      className="pointer-events-none fixed right-4 z-[80] md:bottom-6 md:right-6"
-      style={{ bottom: "max(1rem, calc(0.75rem + env(safe-area-inset-bottom)))" }}
-    >
+    <div className="pointer-events-none fixed bottom-[max(2rem,calc(1.75rem_+_env(safe-area-inset-bottom)))] right-4 z-[80] md:bottom-[max(3rem,calc(2.75rem_+_env(safe-area-inset-bottom)))] md:right-6">
       <a
         href={href}
         target="_blank"
