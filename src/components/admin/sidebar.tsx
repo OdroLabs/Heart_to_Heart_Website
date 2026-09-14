@@ -84,6 +84,11 @@ export function AdminSidebar({
   // Site settings and user management are owner-only.
   const isOwner = role === "owner";
 
+  async function handleSignOut() {
+    await signOut({ redirect: false });
+    window.location.assign("/admin/login");
+  }
+
   const NavLink = ({ href, label, icon: Icon }: { href: string; label: string; icon: any }) => (
     <Link
       href={href}
@@ -167,7 +172,7 @@ export function AdminSidebar({
           <ExternalLink className="h-4 w-4" /> View Site
         </a>
         <button
-          onClick={() => signOut({ callbackUrl: "/admin/login" })}
+          onClick={handleSignOut}
           className="flex w-full items-center gap-2.5 rounded-md px-3 py-1.5 text-sm text-white/70 hover:bg-white/10 hover:text-white"
         >
           <LogOut className="h-4 w-4" /> Sign Out
