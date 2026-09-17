@@ -36,7 +36,9 @@ export function DonationForm({
 
   const purposeOptions =
     purposes && purposes.length > 0
-      ? purposes.map((p) => ({ value: p, label: p }))
+      ? purposes
+          .filter((p) => p && !p.toLowerCase().includes("lorem ipsum"))
+          .map((p) => ({ value: p, label: p }))
       : [
           { value: "general", label: d.purposeGeneral },
           { value: "health", label: d.purposeHealth },

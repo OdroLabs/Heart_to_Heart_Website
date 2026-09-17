@@ -36,7 +36,9 @@ export default async function DonatePage({
 
   const impactTitle = s(settings, "donate_impact_title", locale);
   const impactItems = sPairs(settings, "donate_impact_items", locale);
-  const dynamicPurposes = impactItems.map((item) => item.left).filter(Boolean);
+  const dynamicPurposes = impactItems
+    .map((item) => item.left)
+    .filter((title) => Boolean(title) && !title.toLowerCase().includes("lorem ipsum"));
 
   const presets = sList(settings, "donate_amounts")
     .map((line) => Number(line.replace(/[^\d.]/g, "")))
