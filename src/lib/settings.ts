@@ -672,6 +672,18 @@ export const settingPages: SettingPage[] = [
         ],
       },
       {
+        section: "Our Founder",
+        preview: { path: "/about", anchor: "sec-founder" },
+        hideNote: AUTO_HIDE,
+        items: [
+          T("about_founder_title", "Section Heading", "e.g. Our Founder"),
+          T("about_founder_name", "Founder Name"),
+          T("about_founder_role", "Founder Role / Designation"),
+          TA("about_founder_bio", "Founder Bio / Brief Paragraph"),
+          IMG("about_founder_image", "Founder Photo"),
+        ],
+      },
+      {
         section: "BOD and Staff",
         preview: { path: "/about", anchor: "sec-team" },
         hideNote: "This controls the heading. Manage members under Content -> BOD and Staff.",

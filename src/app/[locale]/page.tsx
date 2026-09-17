@@ -22,6 +22,7 @@ import { loc, type Locale } from "@/lib/i18n";
 import { getLabels } from "@/lib/labels";
 import { getSettings, s, sList, sPairs, sNum, show } from "@/lib/settings";
 import { formatDate } from "@/lib/utils";
+import { toPlainText } from "@/lib/sanitize";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { StatCounter } from "@/components/site/stat-counter";
@@ -265,10 +266,10 @@ export default async function HomePage({
                   className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                   style={{ backgroundImage: `url(${heroImage})` }}
                 />
-                {/* Left gradient overlay — Deep Plum to transparent */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#280026]/95 via-[#280026]/75 to-transparent" />
-                {/* Top fade for visual polish */}
-                <div className="absolute inset-0 bg-gradient-to-b from-[#280026]/40 via-transparent to-[#280026]/60" />
+                {/* Left gradient overlay — Deep Plum to transparent with reduced opacity */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#280026]/85 via-[#280026]/40 to-transparent" />
+                {/* Subtle top/bottom fade */}
+                <div className="absolute inset-0 bg-gradient-to-b from-[#280026]/20 via-transparent to-[#280026]/30" />
               </>
             ) : (
               /* Solid Deep Plum to Ocean Blue gradient background */
@@ -923,7 +924,7 @@ export default async function HomePage({
                       {loc(item, "title", locale)}
                     </h3>
                     <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
-                      {loc(item, "excerptEn" as any, locale) || loc(item, "content" as any, locale)?.substring(0, 110)}...
+                      {loc(item, "excerpt", locale) || toPlainText(loc(item, "content", locale), 120)}
                     </p>
                     <div className="mt-auto flex items-center justify-between border-t border-border/40 pt-4">
                       <span className="flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all">

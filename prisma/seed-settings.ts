@@ -409,6 +409,16 @@ const content: Record<string, Val> = {
     ta: "2002 :: கொலன்னாவையில் நிறுவப்பட்டது\n2010 :: 5 மாவட்டங்களுக்கு விரிவுபடுத்தப்பட்டது\n2022 :: 20 ஆண்டு தாக்கத்தை கொண்டாடுகிறது",
   },
 
+  about_founder_title: { en: "Our Founder", si: "අපගේ නිර්මාතෘ", ta: "எங்கள் நிறுவனர்" },
+  about_founder_name: { en: "Dr. Rajitha Y", si: "වෛද්‍ය රාජිත වයි", ta: "டாக்டர் ரஜிதா வை" },
+  about_founder_role: { en: "Founder & Visionary Leader", si: "නිර්මාතෘ සහ දැක්මැති නායකයා", ta: "நிறுவனர் மற்றும் தொலைநோக்கு தலைவர்" },
+  about_founder_bio: {
+    en: "A visionary leader with over 20 years of experience in community health and advocacy. Founded the organization with a compassionate mission to bring healthcare, rights, and dignity to marginalized women across Sri Lanka.",
+    si: "ප්‍රජා සෞඛ්‍යය සහ පෙනී සිටීම පිළිබඳ වසර 20කට වැඩි පළපුරුද්දක් ඇති දැක්මැති නායකයෙකි. ශ්‍රී ලංකාව පුරා කොන් වූ කාන්තාවන් වෙත සෞඛ්‍ය සේවා, අයිතිවාසිකම් සහ ගෞරවය ගෙන ඒමේ උදාර මෙහෙවරකින් සංවිධානය ආරම්භ කරන ලදී.",
+    ta: "சமூக சுகாதாரம் மற்றும் வாதிடலில் 20 ஆண்டுகளுக்கும் மேலான அனுபவம் கொண்ட தொலைநோக்கு பார்வை கொண்ட தலைவர். இலங்கை முழுவதும் ஓரங்கட்டப்பட்ட பெண்களுக்கு சுகாதாரம், உரிமைகள் மற்றும் கண்ணியத்தை கொண்டு சேர்க்கும் கருணையான நோக்கத்துடன் அமைப்பை நிறுவினார்.",
+  },
+  about_founder_image: { en: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" },
+
   about_team_title: { en: "BOD and Staff", si: "අධ්‍යක්ෂ මණ්ඩලය සහ කාර්ය මණ්ඩලය", ta: "இயக்குநர்கள் சபை மற்றும் ஊழியர்கள்" },
 
   about_extra_title: BLANK,
@@ -509,7 +519,7 @@ const content: Record<string, Val> = {
     ta: "இன்னும் சேவைகள் வெளியிடப்படவில்லை. விரைவில் மீண்டும் பார்க்கவும்.",
   },
 
-  publications_hero_title: { en: "Publications", si: "ප්‍රකාශන", ta: "வெளியீடுகள்" },
+  publications_hero_title: { en: "Resources", si: "සම්පත්", ta: "வளங்கள்" },
   publications_hero_intro: {
     en: "Research, reports and annual reviews available to download.",
     si: "බාගත කිරීමට ඇති පර්යේෂණ, වාර්තා සහ වාර්ෂික සමාලෝචන.",

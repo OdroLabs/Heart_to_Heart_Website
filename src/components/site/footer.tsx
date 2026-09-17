@@ -208,8 +208,7 @@ export function SiteFooter({
               </h4>
               <ul className="space-y-3 text-sm text-white/55">
                 {address && (
-                  <li className="flex items-start gap-2.5">
-                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                  <li>
                     <span className="whitespace-pre-line leading-relaxed">{address}</span>
                   </li>
                 )}
@@ -217,9 +216,9 @@ export function SiteFooter({
                   <li key={phone}>
                     <a
                       href={`tel:${phone.replace(/\s/g, "")}`}
-                      className="flex items-center gap-2.5 transition-colors hover:text-white"
+                      className="block transition-colors hover:text-white"
                     >
-                      <Phone className="h-4 w-4 shrink-0 text-primary" /> {phone}
+                      {phone}
                     </a>
                   </li>
                 ))}
@@ -227,9 +226,9 @@ export function SiteFooter({
                   <li key={email}>
                     <a
                       href={`mailto:${email}`}
-                      className="flex items-center gap-2.5 transition-colors hover:text-white"
+                      className="block transition-colors hover:text-white"
                     >
-                      <Mail className="h-4 w-4 shrink-0 text-primary" /> {email}
+                      {email}
                     </a>
                   </li>
                 ))}

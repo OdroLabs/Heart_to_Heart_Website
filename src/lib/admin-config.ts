@@ -632,6 +632,13 @@ export const entities: EntityDef[] = [
       { name: "name", label: "Name", type: "text", i18n: true, required: true },
       { name: "role", label: "Role", type: "text", i18n: true },
       { name: "image", label: "Photo", type: "image" },
+      {
+        name: "bio",
+        label: "Bio / Description",
+        type: "textarea",
+        i18n: true,
+        help: "Biography paragraph shown on the team member detail page.",
+      },
       { name: "order", label: "Sort order", type: "number" },
       { name: "published", label: "Published", type: "boolean" },
     ],

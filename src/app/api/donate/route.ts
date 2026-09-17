@@ -18,17 +18,20 @@ export async function POST(request: NextRequest) {
     education: "Education & awareness",
     community: "Community programs",
   };
-  const purpose = purposeLabels[purposeRaw];
+  const purpose = purposeLabels[purposeRaw] || purposeRaw;
 
   if (!name || !email || !amountRaw || amountRaw <= 0) {
-    return NextResponse.json({ error: "Invalid input" }, { status: 400 });
+    return NextResponse.redirect(
+      new URL(`/${locale}/donate?error=invalid_input`, request.url),
+      303
+    );
   }
 
   const merchantId = process.env.PAYHERE_MERCHANT_ID;
   if (!merchantId || !process.env.PAYHERE_MERCHANT_SECRET) {
-    return NextResponse.json(
-      { error: "Online payments are not configured yet. Please use bank transfer." },
-      { status: 503 }
+    return NextResponse.redirect(
+      new URL(`/${locale}/donate?payment_unconfigured=1`, request.url),
+      303
     );
   }
 
