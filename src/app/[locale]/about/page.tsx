@@ -64,7 +64,7 @@ export default async function AboutPage({
   const founderName = s(settings, "about_founder_name", locale) || "Dr. Rajitha Y";
   const founderRole = s(settings, "about_founder_role", locale) || "Founder & Visionary Leader";
   const founderBio = s(settings, "about_founder_bio", locale) || "Dr. Rajitha Y is a visionary leader with over 20 years of experience in the medical and community health field. He founded the organization with a mission to bring compassionate care, equal rights, and dignity to everyone.";
-  const founderImage = s(settings, "about_founder_image") || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80";
+  const founderImage = s(settings, "about_founder_image") || "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80";
 
   const bodTitle =
     s(settings, "about_bod_title", locale) || "Board of Directors";
