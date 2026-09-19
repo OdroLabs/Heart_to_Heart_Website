@@ -43,7 +43,7 @@ export default async function TeamMemberPage({
 
   const role = loc(member, "role", locale) || "Team Member";
   const bio = loc(member, "bio", locale);
-  const categoryLabel = member.category === "BOD" ? "Board of Directors" : "Our Staff";
+  const categoryLabel = member.isBoardMember ? "Board of Directors" : "Our Staff";
 
   return (
     <main className="min-h-screen bg-muted/20 py-20 lg:py-24">
