@@ -41,10 +41,13 @@ export default async function PublicationsPage({ params }: { params: { locale: L
   ]);
   const dict = getLabels(locale, settings);
 
+  const heroTitle = s(settings, "publications_hero_title", locale);
+  const displayTitle = !heroTitle || heroTitle === "Publications" ? "Resources" : heroTitle;
+
   return (
     <>
       <PageHero
-        title={s(settings, "publications_hero_title", locale)}
+        title={displayTitle}
         intro={s(settings, "publications_hero_intro", locale)}
         image={s(settings, "publications_hero_image") || undefined}
       />

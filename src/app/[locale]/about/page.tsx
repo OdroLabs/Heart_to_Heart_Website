@@ -60,6 +60,12 @@ export default async function AboutPage({
 
   const historyTimeline = sPairs(settings, "about_history_timeline", locale);
 
+  const founderTitle = s(settings, "about_founder_title", locale) || "Our Founder";
+  const founderName = s(settings, "about_founder_name", locale) || "Dr. Rajitha Y";
+  const founderRole = s(settings, "about_founder_role", locale) || "Founder & Visionary Leader";
+  const founderBio = s(settings, "about_founder_bio", locale) || "Dr. Rajitha Y is a visionary leader with over 20 years of experience in the medical and community health field. He founded the organization with a mission to bring compassionate care, equal rights, and dignity to everyone.";
+  const founderImage = s(settings, "about_founder_image") || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80";
+
   const bodTitle =
     s(settings, "about_bod_title", locale) || "Board of Directors";
   const bodDescription = s(settings, "about_bod", locale);
@@ -411,6 +417,52 @@ export default async function AboutPage({
               {/* Desktop: snaking flow with a curved connecting line, first row of 2 then rows of 4 */}
               <div className="hidden lg:block relative mx-auto max-w-6xl px-8 min-h-[420px]">
                 <HistoryTimelineCurve items={historyTimeline} />
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Our Founder Section */}
+        {(founderBio || founderName) && (
+          <section id="sec-founder" data-animate className="mt-8 mb-12">
+            <div className="rounded-[2.5rem] bg-white p-8 md:p-12 lg:p-14 border border-border/50 shadow-sm relative overflow-hidden">
+              <div className="grid gap-10 lg:grid-cols-12 items-center">
+                {/* Photo Column */}
+                <div className="lg:col-span-5 flex justify-center">
+                  <div className="relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-[2rem] bg-muted/30 shadow-md">
+                    {founderImage ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={founderImage}
+                        alt={founderName}
+                        className="h-full w-full object-cover"
+                      />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center">
+                        <Users className="h-20 w-20 text-primary/20" />
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Details Column */}
+                <div className="lg:col-span-7">
+                  <p className="font-bold text-xs text-primary tracking-[0.2em] uppercase mb-4 flex items-center gap-2">
+                    <span className="block h-0.5 w-6 rounded-full bg-primary"></span>
+                    {founderTitle}
+                  </p>
+                  <h2 className="text-3xl md:text-4xl font-extrabold text-navy-950 tracking-tight mb-2">
+                    {founderName}
+                  </h2>
+                  {founderRole && (
+                    <p className="text-base font-semibold text-primary mb-6">
+                      {founderRole}
+                    </p>
+                  )}
+                  <p className="whitespace-pre-line text-[15px] md:text-base leading-relaxed text-muted-foreground">
+                    {founderBio}
+                  </p>
+                </div>
               </div>
             </div>
           </section>

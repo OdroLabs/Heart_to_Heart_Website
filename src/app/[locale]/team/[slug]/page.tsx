@@ -42,7 +42,7 @@ export default async function TeamMemberPage({
   }
 
   const role = loc(member, "role", locale) || "Team Member";
-  const bio = loc(member, "bio", locale) || "Biography is currently unavailable.";
+  const bio = loc(member, "bio", locale);
   const categoryLabel = member.isBoardMember ? "Board of Directors" : "Our Staff";
 
   return (
@@ -91,9 +91,11 @@ export default async function TeamMemberPage({
               {role}
             </p>
             
-            <div className="prose prose-navy max-w-none prose-lg text-muted-foreground leading-relaxed whitespace-pre-line">
-              {bio}
-            </div>
+            {bio && (
+              <div className="prose prose-navy max-w-none prose-lg text-muted-foreground leading-relaxed whitespace-pre-line">
+                {bio}
+              </div>
+            )}
             
           </div>
         </div>

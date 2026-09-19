@@ -71,7 +71,7 @@ export default async function PublicationDetailPage({
           className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors mb-8"
         >
           <ChevronLeft className="h-4 w-4" />
-          Back to Publications
+          Back to Resources
         </Link>
 
         {/* Content Container */}
