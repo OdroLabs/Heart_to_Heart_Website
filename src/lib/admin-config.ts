@@ -33,6 +33,8 @@ export interface FieldDef {
   addLabel?: string;
   /** Only render this field in the form when another field's value matches. */
   showWhen?: { field: string; equals: string };
+  /** For "boolean": checkbox state for a brand-new record. Default true. */
+  defaultChecked?: boolean;
 }
 
 export interface EntityDef {
@@ -631,6 +633,13 @@ export const entities: EntityDef[] = [
     fields: [
       { name: "name", label: "Name", type: "text", i18n: true, required: true },
       { name: "role", label: "Role", type: "text", i18n: true },
+      {
+        name: "isBoardMember",
+        label: "Board Member",
+        type: "boolean",
+        help: "Checked: shown in Board of Directors. Unchecked: shown in Staff.",
+        defaultChecked: false,
+      },
       { name: "image", label: "Photo", type: "image" },
       {
         name: "bio",
@@ -646,6 +655,7 @@ export const entities: EntityDef[] = [
       { name: "image", label: "", type: "image" },
       { name: "nameEn", label: "Name" },
       { name: "roleEn", label: "Role" },
+      { name: "isBoardMember", label: "Board Member", type: "boolean" },
       { name: "published", label: "Published", type: "boolean" },
     ],
   },

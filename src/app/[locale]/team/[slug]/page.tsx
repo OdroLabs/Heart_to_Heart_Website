@@ -51,7 +51,7 @@ export default async function TeamMemberPage({
         
         {/* Back Link */}
         <Link 
-          href={`/${locale}/about#sec-${member.category === "BOD" ? "bod" : "staff"}`} 
+          href={`/${locale}/about#sec-${member.isBoardMember ? "bod" : "staff"}`}
           className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors mb-8"
         >
           <ChevronLeft className="h-4 w-4" />

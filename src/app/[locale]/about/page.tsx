@@ -80,8 +80,8 @@ export default async function AboutPage({
       })
     : Promise.resolve([]));
 
-  const bodMembers = teamMembers.filter((m) => m.category === "BOD");
-  const staffMembers = teamMembers.filter((m) => m.category === "STAFF");
+  const bodMembers = teamMembers.filter((m) => m.isBoardMember);
+  const staffMembers = teamMembers.filter((m) => !m.isBoardMember);
 
   const stats = await prisma.stat.findMany({
     orderBy: { order: "asc" },

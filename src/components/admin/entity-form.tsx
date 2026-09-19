@@ -69,7 +69,7 @@ function SingleField({
         <input
           type="checkbox"
           name={name}
-          defaultChecked={defaultValue == null ? true : Boolean(defaultValue)}
+          defaultChecked={defaultValue == null ? field.defaultChecked !== false : Boolean(defaultValue)}
           className="h-4 w-4 accent-primary"
         />
       );
