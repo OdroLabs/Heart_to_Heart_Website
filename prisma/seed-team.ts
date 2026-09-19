@@ -11,7 +11,7 @@ async function main() {
       isBoardMember: true,
       roleEn: "President & Founder",
       bioEn: "Dr. Rajitha Y is a visionary leader with over 20 years of experience in the medical field. He founded the organization with a mission to bring compassionate care to everyone.",
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop",
+      image: "/founder.jpg",
       order: 1,
     },
     {
