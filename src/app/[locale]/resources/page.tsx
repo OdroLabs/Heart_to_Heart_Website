@@ -33,7 +33,7 @@ export async function generateMetadata({
   });
 }
 
-export default async function PublicationsPage({ params }: { params: { locale: Locale } }) {
+export default async function ResourcesPage({ params }: { params: { locale: Locale } }) {
   const { locale } = params;
   const [settings, publications] = await Promise.all([
     getSettings(),
@@ -42,7 +42,7 @@ export default async function PublicationsPage({ params }: { params: { locale: L
   const dict = getLabels(locale, settings);
 
   const heroTitle = s(settings, "publications_hero_title", locale);
-  const displayTitle = !heroTitle || heroTitle === "Publications" ? "Resources" : heroTitle;
+  const displayTitle = !heroTitle || heroTitle === "Publications" || heroTitle === "Resources" ? "Resources" : heroTitle;
 
   return (
     <>
@@ -55,11 +55,11 @@ export default async function PublicationsPage({ params }: { params: { locale: L
         {publications.map((pub) => (
           <Card key={pub.id} className="group flex flex-col overflow-hidden">
             {pub.coverImage ? (
-              <Link href={`/${locale}/publications/${pub.id}`} className="relative h-44 w-full block overflow-hidden">
+              <Link href={`/${locale}/resources/${pub.id}`} className="relative h-44 w-full block overflow-hidden">
                 <Image src={pub.coverImage} alt="" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
               </Link>
             ) : (
-              <Link href={`/${locale}/publications/${pub.id}`} className="flex h-32 items-center justify-center bg-muted transition-colors hover:bg-muted/80">
+              <Link href={`/${locale}/resources/${pub.id}`} className="flex h-32 items-center justify-center bg-muted transition-colors hover:bg-muted/80">
                 <FileText className="h-10 w-10 text-muted-foreground/40" />
               </Link>
             )}
@@ -70,7 +70,7 @@ export default async function PublicationsPage({ params }: { params: { locale: L
                   {formatDate(pub.publishedAt, locale)}
                 </span>
               </div>
-              <Link href={`/${locale}/publications/${pub.id}`} className="hover:underline hover:text-primary transition-colors">
+              <Link href={`/${locale}/resources/${pub.id}`} className="hover:underline hover:text-primary transition-colors">
                 <h2 className="mb-2 font-bold leading-snug">{loc(pub, "title", locale)}</h2>
               </Link>
               <p className="mb-4 line-clamp-3 text-sm text-muted-foreground">
@@ -78,7 +78,7 @@ export default async function PublicationsPage({ params }: { params: { locale: L
               </p>
               <div className="mt-auto flex flex-wrap items-center gap-3">
                 <Button asChild variant="default" size="sm" className="w-fit">
-                  <Link href={`/${locale}/publications/${pub.id}`}>
+                  <Link href={`/${locale}/resources/${pub.id}`}>
                     {dict.common.readMore || "Read More"}
                   </Link>
                 </Button>

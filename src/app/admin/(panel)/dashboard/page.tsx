@@ -31,7 +31,7 @@ export default async function DashboardPage() {
     { label: "Projects", value: projects, icon: FolderKanban, href: "/admin/content/projects" },
     { label: "News Articles", value: news, icon: Newspaper, href: "/admin/content/news" },
     { label: "Events", value: events, icon: CalendarDays, href: "/admin/content/events" },
-    { label: "Publications", value: publications, icon: FileText, href: "/admin/content/publications" },
+    { label: "Resources", value: publications, icon: FileText, href: "/admin/content/resources" },
     { label: "Products", value: products, icon: ShoppingBag, href: "/admin/content/products" },
     { label: "Successful Donations", value: donations, icon: Heart, href: "/admin/content/donations" },
     { label: "New Suggestions", value: suggestions, icon: Lightbulb, href: "/admin/content/suggestions" },

@@ -43,7 +43,7 @@ export function buildNav(settings: SettingsMap, dict: Dictionary): NavConfig {
 
   const mediaItems: NavItem[] = [];
   if (on("nav_show_publications"))
-    mediaItems.push({ href: "/publications", label: dict.nav.publications });
+    mediaItems.push({ href: "/resources", label: dict.nav.publications });
   if (on("nav_show_news")) mediaItems.push({ href: "/news", label: dict.nav.news });
   if (on("nav_show_events")) mediaItems.push({ href: "/events", label: dict.nav.events });
 
@@ -66,7 +66,7 @@ export function buildNav(settings: SettingsMap, dict: Dictionary): NavConfig {
   if (on("nav_show_services")) explore.push({ href: "/services", label: dict.nav.services });
   if (on("nav_show_projects")) explore.push({ href: "/projects", label: dict.nav.projects });
   if (on("nav_show_publications"))
-    explore.push({ href: "/publications", label: dict.nav.publications });
+    explore.push({ href: "/resources", label: dict.nav.publications });
 
   const involved: NavItem[] = [];
   if (on("nav_show_events")) involved.push({ href: "/events", label: dict.nav.events });

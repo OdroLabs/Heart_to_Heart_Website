@@ -155,7 +155,7 @@ export async function searchSite(
       title: loc(p, "title", locale),
       excerpt: loc(p, "description", locale),
       image: p.coverImage,
-      url: `/${locale}/publications`,
+      url: `/${locale}/resources`,
       date: p.publishedAt,
     })),
     products: products.map((p) => ({

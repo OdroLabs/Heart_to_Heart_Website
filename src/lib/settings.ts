@@ -362,7 +362,7 @@ export const settingPages: SettingPage[] = [
           SW("nav_show_about", "About Us"),
           SW("nav_show_projects", "Projects"),
           SW("nav_show_services", "Our Services"),
-          SW("nav_show_publications", "Publications"),
+          SW("nav_show_publications", "Resources"),
           SW("nav_show_news", "News"),
           SW("nav_show_events", "Events & Gallery"),
           SW("nav_show_business", "Community Business"),
@@ -893,8 +893,8 @@ export const settingPages: SettingPage[] = [
         ],
       },
       {
-        section: "Publications",
-        preview: { path: "/publications", anchor: "sec-page-header" },
+        section: "Resources",
+        preview: { path: "/resources", anchor: "sec-page-header" },
         items: [
           T("publications_hero_title", "Page title"),
           TA("publications_hero_intro", "Intro text"),
