@@ -17,6 +17,7 @@ import { getSettings, s } from "@/lib/settings";
 import { pageMetadata } from "@/lib/seo";
 import { RichText } from "@/components/site/rich-text";
 import { formatDate } from "@/lib/utils";
+import { toPlainText } from "@/lib/sanitize";
 
 export async function generateMetadata({
   params,
@@ -31,7 +32,7 @@ export async function generateMetadata({
   if (!item) return pageMetadata(settings, params.locale);
   return pageMetadata(settings, params.locale, {
     title: loc(item, "title", params.locale),
-    description: loc(item, "excerpt", params.locale),
+    description: toPlainText(loc(item, "excerpt", params.locale)),
     image: item.image ?? undefined,
   });
 }

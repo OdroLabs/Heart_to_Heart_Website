@@ -924,7 +924,7 @@ export default async function HomePage({
                       {loc(item, "title", locale)}
                     </h3>
                     <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
-                      {loc(item, "excerpt", locale) || toPlainText(loc(item, "content", locale), 120)}
+                      {toPlainText(loc(item, "excerpt", locale), 120) || toPlainText(loc(item, "content", locale), 120)}
                     </p>
                     <div className="mt-auto flex items-center justify-between border-t border-border/40 pt-4">
                       <span className="flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all">

@@ -65,7 +65,7 @@ export default async function NewsPage({ params }: { params: { locale: Locale } 
               </h2>
               <p className="mb-4 line-clamp-3 text-sm text-muted-foreground">
                 {/* The body is HTML now, so flatten it for the card preview. */}
-                {loc(item, "excerpt", locale) || toPlainText(loc(item, "content", locale), 220)}
+                {toPlainText(loc(item, "excerpt", locale), 220) || toPlainText(loc(item, "content", locale), 220)}
               </p>
               <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
                 {dict.common.readMore}
