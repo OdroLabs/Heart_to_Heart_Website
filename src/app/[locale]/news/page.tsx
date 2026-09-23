@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, CalendarDays } from "lucide-react";
+import { ArrowRight, CalendarDays, Newspaper } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { loc, type Locale } from "@/lib/i18n";
 import { getLabels } from "@/lib/labels";
@@ -46,17 +46,21 @@ export default async function NewsPage({ params }: { params: { locale: Locale } 
             href={`/${locale}/news/${item.slug ?? item.id}`}
             className="group flex flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-brand-500/10"
           >
-            {item.image && (
-              <div className="relative aspect-[16/10] w-full overflow-hidden">
+            <div className="relative aspect-[16/10] w-full overflow-hidden">
+              {item.image ? (
                 <Image
                   src={item.image}
                   alt=""
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-              </div>
-            )}
-            <div className={`flex flex-1 flex-col p-6 ${!item.image ? "justify-center py-10 min-h-[280px]" : ""}`}>
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-brand-100 via-brand-50 to-white">
+                  <Newspaper className="h-14 w-14 text-primary/25" />
+                </div>
+              )}
+            </div>
+            <div className="flex flex-1 flex-col p-6">
               <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-primary">
                 <CalendarDays className="h-3.5 w-3.5" /> {formatDate(item.publishedAt, locale)}
               </p>
@@ -67,7 +71,7 @@ export default async function NewsPage({ params }: { params: { locale: Locale } 
                 {/* The body is HTML now, so flatten it for the card preview. */}
                 {toPlainText(loc(item, "excerpt", locale), 220) || toPlainText(loc(item, "content", locale), 220)}
               </p>
-              <span className={`inline-flex items-center gap-1.5 text-sm font-semibold text-primary ${item.image ? "mt-auto" : "mt-4"}`}>
+              <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
                 {dict.common.readMore}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </span>
