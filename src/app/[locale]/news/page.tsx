@@ -67,7 +67,7 @@ export default async function NewsPage({ params }: { params: { locale: Locale } 
                 {/* The body is HTML now, so flatten it for the card preview. */}
                 {toPlainText(loc(item, "excerpt", locale), 220) || toPlainText(loc(item, "content", locale), 220)}
               </p>
-              <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
+              <span className={`inline-flex items-center gap-1.5 text-sm font-semibold text-primary ${item.image ? "mt-auto" : "mt-4"}`}>
                 {dict.common.readMore}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </span>

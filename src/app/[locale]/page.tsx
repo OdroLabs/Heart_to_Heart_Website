@@ -9,7 +9,6 @@ import {
   MapPin,
   PhoneCall,
   Mail,
-  Sparkles,
   Star,
   CheckCircle2,
   Building2,
@@ -905,28 +904,24 @@ export default async function HomePage({
                   className="group flex flex-col"
                 >
                   {/* Card image */}
-                  <div className="mb-4 h-52 w-full overflow-hidden rounded-3xl bg-brand-100 relative">
-                    {item.image ? (
+                  {item.image && (
+                    <div className="mb-4 h-52 w-full overflow-hidden rounded-3xl bg-brand-100 relative">
                       <div
                         className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
                         style={{ backgroundImage: `url(${item.image})` }}
                       />
-                    ) : (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <Sparkles className="h-12 w-12 text-primary/20" />
-                      </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
 
                   {/* Text */}
-                  <div className="flex flex-1 flex-col">
+                  <div className={`flex flex-1 flex-col ${!item.image ? "justify-center py-10 min-h-[280px]" : ""}`}>
                     <h3 className="mb-2 text-base font-bold leading-snug text-navy-950 transition-colors group-hover:text-primary">
                       {loc(item, "title", locale)}
                     </h3>
                     <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
                       {toPlainText(loc(item, "excerpt", locale), 120) || toPlainText(loc(item, "content", locale), 120)}
                     </p>
-                    <div className="mt-auto flex items-center justify-between border-t border-border/40 pt-4">
+                    <div className={`flex items-center justify-between border-t border-border/40 pt-4 ${item.image ? "mt-auto" : "mt-4"}`}>
                       <span className="flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all">
                         Read More <ArrowRight className="h-3.5 w-3.5" />
                       </span>
