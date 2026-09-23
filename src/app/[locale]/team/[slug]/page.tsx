@@ -11,7 +11,7 @@ export async function generateMetadata({
 }: {
   params: { locale: Locale; slug: string };
 }): Promise<Metadata> {
-  const { slug } = params;
+  const { locale, slug } = params;
   const member = await prisma.teamMember.findUnique({
     where: { slug },
   });
@@ -21,7 +21,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${member.name} | Heart to Heart`,
+    title: `${loc(member, "name", locale)} | Heart to Heart`,
     description: member.roleEn || member.roleSi || member.roleTa || "Team Member",
   };
 }
@@ -42,8 +42,8 @@ export default async function TeamMemberPage({
   }
 
   const role = loc(member, "role", locale) || "Team Member";
-  const bio = loc(member, "bio", locale) || "Biography is currently unavailable.";
-  const categoryLabel = member.category === "BOD" ? "Board of Directors" : "Our Staff";
+  const bio = loc(member, "bio", locale);
+  const categoryLabel = member.isBoardMember ? "Board of Directors" : "Our Staff";
 
   return (
     <main className="min-h-screen bg-muted/20 py-20 lg:py-24">
@@ -51,7 +51,7 @@ export default async function TeamMemberPage({
         
         {/* Back Link */}
         <Link 
-          href={`/${locale}/about#sec-${member.category === "BOD" ? "bod" : "staff"}`} 
+          href={`/${locale}/about#sec-${member.isBoardMember ? "bod" : "staff"}`}
           className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors mb-8"
         >
           <ChevronLeft className="h-4 w-4" />
@@ -84,16 +84,18 @@ export default async function TeamMemberPage({
             </p>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-navy-950 mb-3 md:mb-4 tracking-tight leading-none">
-              {member.name}
+              {loc(member, "name", locale)}
             </h1>
             
             <p className="text-xl md:text-2xl font-medium text-muted-foreground mb-8">
               {role}
             </p>
             
-            <div className="prose prose-navy max-w-none prose-lg text-muted-foreground leading-relaxed whitespace-pre-line">
-              {bio}
-            </div>
+            {bio && (
+              <div className="prose prose-navy max-w-none prose-lg text-muted-foreground leading-relaxed whitespace-pre-line">
+                {bio}
+              </div>
+            )}
             
           </div>
         </div>

@@ -56,7 +56,7 @@ export default async function NewsPage({ params }: { params: { locale: Locale } 
                 />
               </div>
             )}
-            <div className="flex flex-1 flex-col p-6">
+            <div className={`flex flex-1 flex-col p-6 ${!item.image ? "justify-center py-10 min-h-[280px]" : ""}`}>
               <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-primary">
                 <CalendarDays className="h-3.5 w-3.5" /> {formatDate(item.publishedAt, locale)}
               </p>
@@ -65,7 +65,7 @@ export default async function NewsPage({ params }: { params: { locale: Locale } 
               </h2>
               <p className="mb-4 line-clamp-3 text-sm text-muted-foreground">
                 {/* The body is HTML now, so flatten it for the card preview. */}
-                {loc(item, "excerpt", locale) || toPlainText(loc(item, "content", locale), 220)}
+                {toPlainText(loc(item, "excerpt", locale), 220) || toPlainText(loc(item, "content", locale), 220)}
               </p>
               <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
                 {dict.common.readMore}

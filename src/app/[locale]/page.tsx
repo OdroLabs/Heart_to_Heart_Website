@@ -22,6 +22,7 @@ import { loc, type Locale } from "@/lib/i18n";
 import { getLabels } from "@/lib/labels";
 import { getSettings, s, sList, sPairs, sNum, show } from "@/lib/settings";
 import { formatDate } from "@/lib/utils";
+import { toPlainText } from "@/lib/sanitize";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { StatCounter } from "@/components/site/stat-counter";
@@ -101,7 +102,7 @@ export default async function HomePage({
     await Promise.all([
       prisma.stat.findMany({ orderBy: { order: "asc" } }),
       prisma.service.findMany({
-        where: { published: true },
+        where: { published: true, featured: true },
         orderBy: { order: "asc" },
         take: servicesCount,
       }),
@@ -265,10 +266,10 @@ export default async function HomePage({
                   className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                   style={{ backgroundImage: `url(${heroImage})` }}
                 />
-                {/* Left gradient overlay — Deep Plum to transparent */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#280026]/95 via-[#280026]/75 to-transparent" />
-                {/* Top fade for visual polish */}
-                <div className="absolute inset-0 bg-gradient-to-b from-[#280026]/40 via-transparent to-[#280026]/60" />
+                {/* Left gradient overlay — Deep Plum to transparent with reduced opacity */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#280026]/85 via-[#280026]/40 to-transparent" />
+                {/* Subtle top/bottom fade */}
+                <div className="absolute inset-0 bg-gradient-to-b from-[#280026]/20 via-transparent to-[#280026]/30" />
               </>
             ) : (
               /* Solid Deep Plum to Ocean Blue gradient background */
@@ -284,17 +285,31 @@ export default async function HomePage({
                 {heroTrustBadge && (
                   <div className="mb-6 inline-flex items-center gap-2.5 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 px-3 py-2 pr-4">
                     <div className="flex -space-x-2">
-                      {["A", "K", "S", "M"].map((letter, i) => {
-                        const avatarColors = ["#FF0402", "#F77928", "#1B1BFD", "#84C14C"];
-                        return (
+                      {partners.slice(0, 5).map((partner, i) => {
+                        const avatarColors = [
+                          "#FF0402",
+                          "#F77928",
+                          "#1B1BFD",
+                          "#84C14C",
+                          "#7C3AED",
+                        ];
+                        return partner.logo ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            key={partner.id}
+                            src={partner.logo}
+                            alt={partner.name}
+                            className="h-7 w-7 rounded-full border-2 border-white/60 object-cover shadow-sm"
+                          />
+                        ) : (
                           <div
-                            key={i}
+                            key={partner.id}
                             className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white/60 shadow-sm text-[10px] font-bold text-white"
                             style={{
                               backgroundColor: avatarColors[i % avatarColors.length],
                             }}
                           >
-                            {letter}
+                            {partner.name.charAt(0).toUpperCase()}
                           </div>
                         );
                       })}
@@ -909,7 +924,7 @@ export default async function HomePage({
                       {loc(item, "title", locale)}
                     </h3>
                     <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
-                      {loc(item, "excerptEn" as any, locale) || loc(item, "content" as any, locale)?.substring(0, 110)}...
+                      {toPlainText(loc(item, "excerpt", locale), 120) || toPlainText(loc(item, "content", locale), 120)}
                     </p>
                     <div className="mt-auto flex items-center justify-between border-t border-border/40 pt-4">
                       <span className="flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all">

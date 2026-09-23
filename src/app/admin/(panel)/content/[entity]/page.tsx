@@ -1,14 +1,29 @@
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { Plus, Pencil, CheckCircle2, XCircle, Download } from "lucide-react";
+import { Plus, Pencil, CheckCircle2, XCircle, Download, Mail } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { getEntity, type EntityDef } from "@/lib/admin-config";
-import { formatDate, formatMoney } from "@/lib/utils";
+import { formatDate, formatMoney, formatPhone } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { DeleteButton } from "@/components/admin/delete-button";
+import { ExpandableText } from "@/components/admin/expandable-text";
+import { ReplyMessageButton } from "@/components/admin/reply-message-button";
+
+/** A mailto: link that opens this row's sender in the admin's own mail app to view or handle it there. */
+function buildMailboxLink(row: Record<string, any>): string {
+  const subject = row.subject ? `Re: ${row.subject}` : "Re: your message";
+  const quoted = [
+    "",
+    "",
+    "---",
+    `Original message from ${row.name ?? row.email} <${row.email}>:`,
+    row.message,
+  ].join("\n");
+  return `mailto:${row.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(quoted)}`;
+}
 
 export default async function EntityListPage({ params }: { params: { entity: string } }) {
   const entity = getEntity(params.entity);
@@ -36,7 +51,10 @@ export default async function EntityListPage({ params }: { params: { entity: str
     }
     if (col.type === "date") return <span className="whitespace-nowrap">{formatDate(value)}</span>;
     if (col.type === "money") return value != null ? formatMoney(String(value)) : "—";
+    if (col.type === "phone")
+      return value ? <span className="whitespace-nowrap">{formatPhone(String(value))}</span> : "—";
     if (value == null || value === "") return "—";
+    if (col.type === "longtext") return <ExpandableText text={String(value)} />;
     return <span className="line-clamp-2 max-w-md">{String(value)}</span>;
   }
 
@@ -88,6 +106,21 @@ export default async function EntityListPage({ params }: { params: { entity: str
                           <Link href={`/admin/content/${entity.slug}/${row.id}`}>
                             <Pencil className="h-4 w-4" />
                           </Link>
+                        </Button>
+                      )}
+                      {entity.slug === "messages" && (
+                        <ReplyMessageButton
+                          messageId={row.id}
+                          toEmail={row.email}
+                          toName={row.name}
+                          subject={row.subject}
+                        />
+                      )}
+                      {row.email && (
+                        <Button asChild variant="ghost" size="icon" aria-label="Reply by email">
+                          <a href={buildMailboxLink(row)}>
+                            <Mail className="h-4 w-4" />
+                          </a>
                         </Button>
                       )}
                       <DeleteButton slug={entity.slug} id={row.id} />

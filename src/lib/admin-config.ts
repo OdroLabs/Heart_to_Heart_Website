@@ -31,6 +31,10 @@ export interface FieldDef {
   itemLabel?: string;
   /** Text on the add button. */
   addLabel?: string;
+  /** Only render this field in the form when another field's value matches. */
+  showWhen?: { field: string; equals: string };
+  /** For "boolean": checkbox state for a brand-new record. Default true. */
+  defaultChecked?: boolean;
 }
 
 export interface EntityDef {
@@ -40,7 +44,11 @@ export interface EntityDef {
   titleSingular: string;
   description: string;
   fields: FieldDef[];
-  listFields: { name: string; label: string; type?: "date" | "boolean" | "money" | "image" }[];
+  listFields: {
+    name: string;
+    label: string;
+    type?: "date" | "boolean" | "money" | "image" | "longtext" | "phone";
+  }[];
   readOnly?: boolean; // inbox-style: list + view + delete only
   /** Shows an "Export CSV" button on the list page, downloading every row. */
   exportable?: boolean;
@@ -56,8 +64,19 @@ export const entities: EntityDef[] = [
     description: "Ongoing and completed projects shown on the Projects page.",
     orderBy: { order: "asc" },
     fields: [
-      { name: "title", label: "Title", type: "text", i18n: true, required: true },
-      { name: "slug", label: "URL slug", type: "text", help: "Used in the page URL. Leave empty to auto-generate from the English title." },
+      {
+        name: "title",
+        label: "Title",
+        type: "text",
+        i18n: true,
+        required: true,
+      },
+      {
+        name: "slug",
+        label: "URL slug",
+        type: "text",
+        help: "Used in the page URL. Leave empty to auto-generate from the English title.",
+      },
       {
         name: "description",
         label: "Short description",
@@ -95,7 +114,13 @@ export const entities: EntityDef[] = [
         help: "Each one becomes a numbered card on the project page.",
       },
       { name: "location", label: "Location / districts", type: "text" },
-      { name: "beneficiaries", label: "Beneficiaries", type: "text", i18n: true, help: "e.g. 1,200 women across 6 districts" },
+      {
+        name: "beneficiaries",
+        label: "Beneficiaries",
+        type: "text",
+        i18n: true,
+        help: "e.g. 1,200 women across 6 districts",
+      },
       { name: "image2", label: "Gallery image 1", type: "image" },
       { name: "image3", label: "Gallery image 2", type: "image" },
       {
@@ -128,8 +153,19 @@ export const entities: EntityDef[] = [
     description: "Services listed on the Our Services page and home page.",
     orderBy: { order: "asc" },
     fields: [
-      { name: "title", label: "Title", type: "text", i18n: true, required: true },
-      { name: "slug", label: "URL slug", type: "text", help: "Used in the page URL. Leave empty to auto-generate from the English title." },
+      {
+        name: "title",
+        label: "Title",
+        type: "text",
+        i18n: true,
+        required: true,
+      },
+      {
+        name: "slug",
+        label: "URL slug",
+        type: "text",
+        help: "Used in the page URL. Leave empty to auto-generate from the English title.",
+      },
       {
         name: "description",
         label: "Short description",
@@ -138,7 +174,12 @@ export const entities: EntityDef[] = [
         required: true,
         help: "Shown on cards (home page and services list).",
       },
-      { name: "icon", label: "Icon (Lucide)", type: "text", help: "e.g. Heart, ShieldCheck, Users, Scale" },
+      {
+        name: "icon",
+        label: "Icon (Lucide)",
+        type: "text",
+        help: "e.g. Heart, ShieldCheck, Users, Scale",
+      },
       { name: "image", label: "Main image", type: "image" },
       {
         name: "content",
@@ -181,11 +222,18 @@ export const entities: EntityDef[] = [
       { name: "image3", label: "Gallery image 2", type: "image" },
       { name: "order", label: "Sort order", type: "number" },
       { name: "published", label: "Published", type: "boolean" },
+      {
+        name: "featured",
+        label: "Featured on Home page",
+        type: "boolean",
+        help: "Only featured services appear in the Home page services section.",
+      },
     ],
     listFields: [
       { name: "icon", label: "" },
       { name: "titleEn", label: "Title" },
       { name: "published", label: "Published", type: "boolean" },
+      { name: "featured", label: "Featured", type: "boolean" },
     ],
   },
   {
@@ -196,8 +244,19 @@ export const entities: EntityDef[] = [
     description: "Research publications and reports (PDF downloads).",
     orderBy: { publishedAt: "desc" },
     fields: [
-      { name: "title", label: "Title", type: "text", i18n: true, required: true },
-      { name: "description", label: "Description", type: "textarea", i18n: true },
+      {
+        name: "title",
+        label: "Title",
+        type: "text",
+        i18n: true,
+        required: true,
+      },
+      {
+        name: "description",
+        label: "Description",
+        type: "textarea",
+        i18n: true,
+      },
       {
         name: "category",
         label: "Category",
@@ -229,8 +288,19 @@ export const entities: EntityDef[] = [
     description: "News articles shown on the News page.",
     orderBy: { publishedAt: "desc" },
     fields: [
-      { name: "title", label: "Title", type: "text", i18n: true, required: true },
-      { name: "slug", label: "URL slug", type: "text", help: "Used in the page URL. Leave empty to auto-generate from the English title." },
+      {
+        name: "title",
+        label: "Title",
+        type: "text",
+        i18n: true,
+        required: true,
+      },
+      {
+        name: "slug",
+        label: "URL slug",
+        type: "text",
+        help: "Used in the page URL. Leave empty to auto-generate from the English title.",
+      },
       { name: "excerpt", label: "Excerpt", type: "textarea", i18n: true },
       {
         name: "content",
@@ -277,8 +347,19 @@ export const entities: EntityDef[] = [
     description: "Upcoming and past events.",
     orderBy: { startDate: "desc" },
     fields: [
-      { name: "title", label: "Title", type: "text", i18n: true, required: true },
-      { name: "slug", label: "URL slug", type: "text", help: "Used in the page URL. Leave empty to auto-generate from the English title." },
+      {
+        name: "title",
+        label: "Title",
+        type: "text",
+        i18n: true,
+        required: true,
+      },
+      {
+        name: "slug",
+        label: "URL slug",
+        type: "text",
+        help: "Used in the page URL. Leave empty to auto-generate from the English title.",
+      },
       {
         name: "description",
         label: "Short description",
@@ -318,7 +399,12 @@ export const entities: EntityDef[] = [
       },
       { name: "image2", label: "Gallery image 1", type: "image" },
       { name: "image3", label: "Gallery image 2", type: "image" },
-      { name: "startDate", label: "Start date & time", type: "datetime", required: true },
+      {
+        name: "startDate",
+        label: "Start date & time",
+        type: "datetime",
+        required: true,
+      },
       { name: "endDate", label: "End date & time", type: "datetime" },
       { name: "published", label: "Published", type: "boolean" },
     ],
@@ -333,16 +419,34 @@ export const entities: EntityDef[] = [
     slug: "gallery",
     model: "galleryImage",
     title: "Gallery",
-    titleSingular: "Gallery Image",
-    description: "Photos shown in the gallery.",
+    titleSingular: "Gallery Image or Video",
+    description: "Photos, videos, and reels shown in the gallery.",
     orderBy: { order: "asc" },
     fields: [
-      { name: "image", label: "Image", type: "image", required: true },
+      {
+        name: "type",
+        label: "Type",
+        type: "select",
+        required: true,
+        options: [
+          { value: "image", label: "Image" },
+          { value: "video", label: "Video / Reel" },
+        ],
+      },
+      { name: "image", label: "Image / Thumbnail", type: "image", required: true },
+      {
+        name: "videoUrl",
+        label: "Video URL",
+        type: "text",
+        help: "YouTube, Instagram Reel, Facebook, or TikTok link.",
+        showWhen: { field: "type", equals: "video" },
+      },
       { name: "caption", label: "Caption", type: "text", i18n: true },
       { name: "order", label: "Sort order", type: "number" },
     ],
     listFields: [
       { name: "image", label: "", type: "image" },
+      { name: "type", label: "Type" },
       { name: "captionEn", label: "Caption" },
     ],
   },
@@ -355,7 +459,13 @@ export const entities: EntityDef[] = [
     orderBy: { order: "asc" },
     fields: [
       { name: "name", label: "Name", type: "text", i18n: true, required: true },
-      { name: "description", label: "Description", type: "textarea", i18n: true, required: true },
+      {
+        name: "description",
+        label: "Description",
+        type: "textarea",
+        i18n: true,
+        required: true,
+      },
       { name: "price", label: "Price (LKR)", type: "number" },
       { name: "image", label: "Image", type: "image" },
       { name: "inStock", label: "In stock", type: "boolean" },
@@ -377,8 +487,20 @@ export const entities: EntityDef[] = [
     description: "Community voices / success stories.",
     orderBy: { order: "asc" },
     fields: [
-      { name: "quote", label: "Quote", type: "textarea", i18n: true, required: true },
-      { name: "author", label: "Author / attribution", type: "text", i18n: true, required: true },
+      {
+        name: "quote",
+        label: "Quote",
+        type: "textarea",
+        i18n: true,
+        required: true,
+      },
+      {
+        name: "author",
+        label: "Author / attribution",
+        type: "text",
+        i18n: true,
+        required: true,
+      },
       { name: "order", label: "Sort order", type: "number" },
       { name: "published", label: "Published", type: "boolean" },
     ],
@@ -413,8 +535,19 @@ export const entities: EntityDef[] = [
     description: "Impact numbers shown on the home page.",
     orderBy: { order: "asc" },
     fields: [
-      { name: "label", label: "Label", type: "text", i18n: true, required: true },
-      { name: "value", label: "Value (e.g. 5,000+)", type: "text", required: true },
+      {
+        name: "label",
+        label: "Label",
+        type: "text",
+        i18n: true,
+        required: true,
+      },
+      {
+        name: "value",
+        label: "Value (e.g. 5,000+)",
+        type: "text",
+        required: true,
+      },
       { name: "order", label: "Sort order", type: "number" },
     ],
     listFields: [
@@ -435,6 +568,7 @@ export const entities: EntityDef[] = [
       { name: "createdAt", label: "Date", type: "date" },
       { name: "name", label: "Name" },
       { name: "email", label: "Email" },
+      { name: "phone", label: "Phone", type: "phone" },
       { name: "amount", label: "Amount", type: "money" },
       { name: "status", label: "Status" },
     ],
@@ -452,7 +586,7 @@ export const entities: EntityDef[] = [
       { name: "createdAt", label: "Date", type: "date" },
       { name: "name", label: "Name" },
       { name: "email", label: "Email" },
-      { name: "message", label: "Message" },
+      { name: "message", label: "Message", type: "longtext" },
     ],
   },
   {
@@ -468,8 +602,9 @@ export const entities: EntityDef[] = [
       { name: "createdAt", label: "Date", type: "date" },
       { name: "name", label: "Name" },
       { name: "email", label: "Email" },
-      { name: "subject", label: "Subject" },
-      { name: "message", label: "Message" },
+      { name: "phone", label: "Phone", type: "phone" },
+      { name: "subject", label: "Subject", type: "longtext" },
+      { name: "message", label: "Message", type: "longtext" },
     ],
   },
   {
@@ -492,19 +627,35 @@ export const entities: EntityDef[] = [
     model: "teamMember",
     title: "BOD and Staff",
     titleSingular: "Team Member",
-    description: "Board of Directors and Staff members shown on the About page.",
+    description:
+      "Board of Directors and Staff members shown on the About page.",
     orderBy: { order: "asc" },
     fields: [
-      { name: "name", label: "Name", type: "text", required: true },
+      { name: "name", label: "Name", type: "text", i18n: true, required: true },
       { name: "role", label: "Role", type: "text", i18n: true },
+      {
+        name: "isBoardMember",
+        label: "Board Member",
+        type: "boolean",
+        help: "Checked: shown in Board of Directors. Unchecked: shown in Staff.",
+        defaultChecked: false,
+      },
       { name: "image", label: "Photo", type: "image" },
+      {
+        name: "bio",
+        label: "Bio / Description",
+        type: "textarea",
+        i18n: true,
+        help: "Biography paragraph shown on the team member detail page.",
+      },
       { name: "order", label: "Sort order", type: "number" },
       { name: "published", label: "Published", type: "boolean" },
     ],
     listFields: [
       { name: "image", label: "", type: "image" },
-      { name: "name", label: "Name" },
+      { name: "nameEn", label: "Name" },
       { name: "roleEn", label: "Role" },
+      { name: "isBoardMember", label: "Board Member", type: "boolean" },
       { name: "published", label: "Published", type: "boolean" },
     ],
   },
@@ -513,19 +664,56 @@ export const entities: EntityDef[] = [
     model: "donationCard",
     title: "Donation Cards",
     titleSingular: "Donation Card",
-    description: "Donation progress cards shown on the Home page after Impact Stats.",
+    description:
+      "Donation progress cards shown on the Home page after Impact Stats.",
     orderBy: { createdAt: "desc" },
     fields: [
-      { name: "title", label: "Title", type: "text", required: true, help: "e.g., GlobalGiving Project of the Month Club" },
-      { name: "category", label: "Category / Tag", type: "text", help: "e.g., GENDER EQUALITY | UNITED STATES" },
-      { name: "author", label: "Author / Byline", type: "text", help: "e.g., by GlobalGiving" },
-      { name: "description", label: "Description", type: "textarea", required: true },
+      {
+        name: "title",
+        label: "Title",
+        type: "text",
+        required: true,
+        help: "e.g., GlobalGiving Project of the Month Club",
+      },
+      {
+        name: "category",
+        label: "Category / Tag",
+        type: "text",
+        help: "e.g., GENDER EQUALITY | UNITED STATES",
+      },
+      {
+        name: "author",
+        label: "Author / Byline",
+        type: "text",
+        help: "e.g., by GlobalGiving",
+      },
+      {
+        name: "description",
+        label: "Description",
+        type: "textarea",
+        required: true,
+      },
       { name: "image", label: "Card Image", type: "image", required: true },
-      { name: "linkText", label: "Link Text", type: "text", help: "e.g., read more" },
+      {
+        name: "linkText",
+        label: "Link Text",
+        type: "text",
+        help: "e.g., read more",
+      },
       { name: "linkUrl", label: "Link URL", type: "text" },
-      { name: "raised", label: "Amount Raised", type: "number", required: true },
+      {
+        name: "raised",
+        label: "Amount Raised",
+        type: "number",
+        required: true,
+      },
       { name: "goal", label: "Goal Amount", type: "number", required: true },
-      { name: "published", label: "Published", type: "boolean", help: "Enable or disable this card on the home page." },
+      {
+        name: "published",
+        label: "Published",
+        type: "boolean",
+        help: "Enable or disable this card on the home page.",
+      },
     ],
     listFields: [
       { name: "image", label: "", type: "image" },

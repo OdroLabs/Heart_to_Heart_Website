@@ -90,6 +90,7 @@ model Service {
   image3        String?
   order         Int     @default(0)
   published     Boolean @default(true)
+  featured      Boolean @default(true)
 }
 
 model Publication {
@@ -165,6 +166,9 @@ model GalleryImage {
   captionSi String?
   captionTa String?
   image     String
+  /// "image" or "video" — video/reel items use `videoUrl` for playback.
+  type      String   @default("image")
+  videoUrl  String?
   order     Int      @default(0)
   createdAt DateTime @default(now())
 }
@@ -254,10 +258,12 @@ model Subscriber {
 }
 
 model TeamMember {
-  id        Int      @id @default(autoincrement())
-  slug      String?  @unique @default(cuid())
-  category  String   @default("STAFF")
-  name      String
+  id            Int      @id @default(autoincrement())
+  slug          String?  @unique @default(cuid())
+  isBoardMember Boolean  @default(false)
+  nameEn    String
+  nameSi    String?
+  nameTa    String?
   roleEn    String?
   roleSi    String?
   roleTa    String?

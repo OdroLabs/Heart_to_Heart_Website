@@ -52,8 +52,8 @@ export default async function ContactPage({ params }: { params: { locale: Locale
     { icon: Clock, label: dict.contact.hours, value: s(settings, "office_hours", locale) },
   ].filter((item) => item.value);
 
-  const contactTitle = "Get In Touch";
-  const contactIntro = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet accumsan eros, sit amet auctor nunc. Nullam ac purus.";
+  const contactTitle = s(settings, "contact_details_title", locale);
+  const contactIntro = s(settings, "contact_details_intro", locale);
   
   const formTitle = s(settings, "contact_form_title", locale) || "Send a Message";
   const formNote = s(settings, "contact_form_note", locale);
@@ -74,7 +74,7 @@ export default async function ContactPage({ params }: { params: { locale: Locale
         <div className="grid gap-16 lg:grid-cols-2 lg:gap-16 items-start max-w-6xl mx-auto">
           
           {/* Left Column: Details */}
-          <div className="space-y-8 lg:pr-8" data-animate>
+          <div id="sec-details" className="space-y-8 lg:pr-8" data-animate>
             <div>
               <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-navy-950 mb-4">
                 {contactTitle}

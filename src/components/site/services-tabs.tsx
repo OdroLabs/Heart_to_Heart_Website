@@ -48,11 +48,18 @@ export function ServicesTabs({
           {services.map((service, idx) => {
             const isActive = idx === activeIdx;
             return (
-              <button
+              <div
                 key={service.id}
-                type="button"
+                role="button"
+                tabIndex={0}
                 onClick={() => setActiveIdx(idx)}
-                className={`group flex w-full items-center justify-between rounded-2xl px-5 py-4 text-left transition-all duration-300 ${isActive
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setActiveIdx(idx);
+                  }
+                }}
+                className={`group flex w-full items-center justify-between rounded-2xl px-5 py-4 text-left transition-all duration-300 cursor-pointer ${isActive
                   ? "bg-white shadow-md border border-border text-primary"
                   : "hover:bg-brand-50/70 border border-transparent text-navy-800 hover:text-primary"
                   }`}
@@ -73,10 +80,22 @@ export function ServicesTabs({
                     {service.title}
                   </span>
                 </div>
-                {isActive && (
-                  <Icons.ArrowRight className="h-4 w-4 text-primary opacity-70" />
+                {isActive ? (
+                  <Link
+                    href={service.href}
+                    onClick={(e) => e.stopPropagation()}
+                    className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-border/70 bg-white text-primary shadow-sm transition-all hover:bg-primary hover:text-white hover:border-primary hover:scale-110"
+                    title={`View details for ${service.title}`}
+                    aria-label={`View details for ${service.title}`}
+                  >
+                    <Icons.ArrowRight className="h-4 w-4" />
+                  </Link>
+                ) : (
+                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full text-transparent group-hover:text-muted-foreground/50 transition-colors">
+                    <Icons.ChevronRight className="h-4 w-4" />
+                  </span>
                 )}
-              </button>
+              </div>
             );
           })}
         </div>

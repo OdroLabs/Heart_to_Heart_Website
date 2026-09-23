@@ -52,7 +52,7 @@ export default async function BusinessPage({ params }: { params: { locale: Local
           </p>
           <div className="flex justify-center">
             <Button asChild size="lg" className="rounded-full px-8 text-base font-bold shadow-md hover:-translate-y-0.5 transition-transform">
-              <a href="https://shop.hearttoheart.lk" target="_blank" rel="noopener noreferrer">
+              <a href="https://shop.h2h.lk" target="_blank" rel="noopener noreferrer">
                 Shop Me <ShoppingBag className="ml-2 h-5 w-5" />
               </a>
             </Button>
@@ -87,14 +87,14 @@ export default async function BusinessPage({ params }: { params: { locale: Local
                 <p className="mb-4 line-clamp-3 text-sm text-muted-foreground">
                   {loc(product, "description", locale)}
                 </p>
-                {whatsapp && product.inStock && (
+                {product.inStock && (
                   <Button asChild variant="secondary" size="sm" className="mt-auto w-fit">
                     <a
-                      href={`https://wa.me/${whatsapp}?text=${waText}`}
+                      href="https://shop.h2h.lk"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <MessageCircle className="h-4 w-4" /> {dict.common.orderNow}
+                      {dict.common.order || "Order"}
                     </a>
                   </Button>
                 )}

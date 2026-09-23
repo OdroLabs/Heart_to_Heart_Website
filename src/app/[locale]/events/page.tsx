@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { PageHero } from "@/components/site/page-hero";
 import { Section } from "@/components/site/section";
 import { EmptyState } from "@/components/site/empty-state";
+import { GalleryGrid } from "@/components/site/gallery-grid";
 
 export async function generateMetadata({
   params,
@@ -125,29 +126,15 @@ export default async function EventsPage({ params }: { params: { locale: Locale 
       {showGallery && (
         <section className="bg-muted">
           <Section title={galleryTitle}>
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-              {gallery.map((img) => {
-                const caption = loc(img, "caption", locale);
-                return (
-                  <figure
-                    key={img.id}
-                    className="group relative aspect-square overflow-hidden rounded-xl"
-                  >
-                    <Image
-                      src={img.image}
-                      alt={caption}
-                      fill
-                      className="object-cover transition-transform group-hover:scale-105"
-                    />
-                    {caption && (
-                      <figcaption className="absolute inset-x-0 bottom-0 bg-black/60 p-2 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100">
-                        {caption}
-                      </figcaption>
-                    )}
-                  </figure>
-                );
-              })}
-            </div>
+            <GalleryGrid
+              items={gallery.map((img) => ({
+                id: img.id,
+                image: img.image,
+                type: img.type,
+                videoUrl: img.videoUrl,
+                caption: loc(img, "caption", locale),
+              }))}
+            />
           </Section>
         </section>
       )}

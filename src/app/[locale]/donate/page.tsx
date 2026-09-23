@@ -24,7 +24,7 @@ export default async function DonatePage({
   searchParams,
 }: {
   params: { locale: Locale };
-  searchParams: { cancelled?: string };
+  searchParams: { cancelled?: string; payment_unconfigured?: string; error?: string };
 }) {
   const { locale } = params;
   const settings = await getSettings();
@@ -36,6 +36,9 @@ export default async function DonatePage({
 
   const impactTitle = s(settings, "donate_impact_title", locale);
   const impactItems = sPairs(settings, "donate_impact_items", locale);
+  const dynamicPurposes = impactItems
+    .map((item) => item.left)
+    .filter((title) => Boolean(title) && !title.toLowerCase().includes("lorem ipsum"));
 
   const presets = sList(settings, "donate_amounts")
     .map((line) => Number(line.replace(/[^\d.]/g, "")))
@@ -77,7 +80,13 @@ export default async function DonatePage({
                 </p>
               )}
 
-              <DonationForm locale={locale} dict={dict} presets={presets} />
+              <DonationForm
+                locale={locale}
+                dict={dict}
+                presets={presets}
+                purposes={dynamicPurposes}
+                paymentUnconfigured={Boolean(searchParams.payment_unconfigured || searchParams.error === "payment_failed")}
+              />
 
               {note && (
                 <p className="mt-5 whitespace-pre-line text-xs leading-relaxed text-muted-foreground">

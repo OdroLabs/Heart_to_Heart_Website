@@ -56,17 +56,23 @@ export function SiteFooter({
   const copyright = s(settings, "footer_copyright", locale);
   const credit = s(settings, "footer_credit", locale);
 
+  const legalLinks = [
+    { href: "/terms", label: dict.footer.terms },
+    { href: "/privacy", label: dict.footer.privacy },
+  ];
+
   const showExplore = show(settings, "show_footer_explore", nav.explore);
   const showInvolved = show(settings, "show_footer_involved", nav.involved);
   const showSocial = show(settings, "show_footer_social", socials);
   const showNewsletter = show(settings, "show_footer_newsletter", newsletterTitle);
+  const showLegal = show(settings, "show_footer_legal", legalLinks);
 
   return (
     <footer id="sec-footer" className="relative bg-navy-950 text-white">
 
       {/* Main footer body */}
       <div className="container relative py-14 md:py-16">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]">
 
           {/* ── Col 1: Brand + tagline + newsletter ──────────────────── */}
           <div>
@@ -202,8 +208,7 @@ export function SiteFooter({
               </h4>
               <ul className="space-y-3 text-sm text-white/55">
                 {address && (
-                  <li className="flex items-start gap-2.5">
-                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                  <li>
                     <span className="whitespace-pre-line leading-relaxed">{address}</span>
                   </li>
                 )}
@@ -211,9 +216,9 @@ export function SiteFooter({
                   <li key={phone}>
                     <a
                       href={`tel:${phone.replace(/\s/g, "")}`}
-                      className="flex items-center gap-2.5 transition-colors hover:text-white"
+                      className="block transition-colors hover:text-white"
                     >
-                      <Phone className="h-4 w-4 shrink-0 text-primary" /> {phone}
+                      {phone}
                     </a>
                   </li>
                 ))}
@@ -221,10 +226,31 @@ export function SiteFooter({
                   <li key={email}>
                     <a
                       href={`mailto:${email}`}
-                      className="flex items-center gap-2.5 transition-colors hover:text-white"
+                      className="block transition-colors hover:text-white"
                     >
-                      <Mail className="h-4 w-4 shrink-0 text-primary" /> {email}
+                      {email}
                     </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* ── Col 5: Legal ───────────────────────────────────────── */}
+          {showLegal && (
+            <div>
+              <h4 className="mb-5 text-xs font-bold uppercase tracking-[0.15em] text-white/90">
+                {dict.footer.legal}
+              </h4>
+              <ul className="space-y-3">
+                {legalLinks.map((l) => (
+                  <li key={l.href}>
+                    <Link
+                      href={`/${locale}${l.href}`}
+                      className="text-sm text-white/55 transition-colors hover:text-white"
+                    >
+                      {l.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
