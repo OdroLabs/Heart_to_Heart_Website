@@ -71,6 +71,16 @@ export function SiteHeader({
   const { primary, groups, contact } = nav;
   const hasContactStrip = phones.length > 0 || emails.length > 0;
 
+  /** Quick jump links to home-page sections, shown right before the Donate button. */
+  const homeQuickLinks: NavItem[] = [
+    { href: "/#sec-hero", label: dict.nav.home },
+    { href: "/#sec-news", label: dict.nav.latestNews },
+    { href: "/#sec-footer", label: dict.nav.social },
+    { href: "/#sec-projects", label: dict.nav.projects },
+    { href: "/#sec-contact", label: dict.nav.services },
+    { href: "/events#sec-gallery", label: dict.nav.gallery },
+  ];
+
   const isActive = (href: string) => {
     const full = `/${locale}${href}`;
     return href === "" ? pathname === `/${locale}` : pathname.startsWith(full);
@@ -273,6 +283,28 @@ export function SiteHeader({
                 {pillUnderline(isActive(contact.href))}
               </Link>
             )}
+
+            {/* Quick jump links — grouped dropdown, sits right before the Donate button */}
+            <div className="group/nav relative">
+              <button type="button" aria-haspopup="true" className={pillClass(false)}>
+                {dict.nav.quickLinks}
+                <ChevronDown className="h-3.5 w-3.5 opacity-60 transition-transform duration-200 group-hover/nav:rotate-180" />
+                {pillUnderline(false)}
+              </button>
+              <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 translate-y-1 pt-2 opacity-0 transition-all duration-200 group-focus-within/nav:visible group-focus-within/nav:translate-y-0 group-focus-within/nav:opacity-100 group-hover/nav:visible group-hover/nav:translate-y-0 group-hover/nav:opacity-100">
+                <div className="min-w-[230px] overflow-hidden rounded-2xl border border-border bg-white/95 p-2 shadow-xl shadow-navy-950/10 backdrop-blur-xl">
+                  {homeQuickLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={`/${locale}${link.href}`}
+                      className="flex items-center justify-between rounded-xl px-4 py-2.5 text-[13px] font-semibold text-foreground/75 transition-colors hover:bg-muted hover:text-primary"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
           </nav>
 
           <div className="flex items-center gap-1.5">
@@ -337,6 +369,13 @@ export function SiteHeader({
                   <div className="grid gap-1 sm:grid-cols-2">{group.items.map(mobileLink)}</div>
                 </div>
               ))}
+
+              <div className="mt-3 border-t pt-3">
+                <p className="px-4 pb-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-muted-foreground">
+                  {dict.nav.quickLinks}
+                </p>
+                <div className="grid gap-1 sm:grid-cols-2">{homeQuickLinks.map(mobileLink)}</div>
+              </div>
 
               {(showLangs || (showDonate && donateLabel)) && (
                 <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t pt-4">

@@ -124,7 +124,7 @@ export default async function EventsPage({ params }: { params: { locale: Locale 
       )}
 
       {showGallery && (
-        <section className="bg-muted">
+        <section id="sec-gallery" className="bg-muted">
           <Section title={galleryTitle}>
             <GalleryGrid
               items={gallery.map((img) => ({
