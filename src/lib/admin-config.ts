@@ -237,11 +237,11 @@ export const entities: EntityDef[] = [
     ],
   },
   {
-    slug: "publications",
+    slug: "resources",
     model: "publication",
-    title: "Publications",
-    titleSingular: "Publication",
-    description: "Research publications and reports (PDF downloads).",
+    title: "Resources",
+    titleSingular: "Resource",
+    description: "Research resources and reports (PDF downloads).",
     orderBy: { publishedAt: "desc" },
     fields: [
       {

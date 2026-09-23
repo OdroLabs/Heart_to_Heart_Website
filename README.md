@@ -83,6 +83,22 @@ Everything visible on the site is editable:
 
 Deploy to any Node.js host (VPS, cPanel with Node, Railway, etc.) with MySQL. Note: uploads are written to `public/uploads` on disk, so use a host with a persistent filesystem (serverless platforms like Vercel need S3-style storage instead — not wired up by default).
 
+### Docker
+
+Build image:
+
+```bash
+docker build -t heart-to-heart-website .
+```
+
+Run container:
+
+```bash
+docker run --env-file .env -p 3000:3000 heart-to-heart-website
+```
+
+App will be available at `http://localhost:3000`.
+
 Suggested production start (PM2):
 
 ```bash

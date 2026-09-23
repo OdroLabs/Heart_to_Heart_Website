@@ -30,12 +30,12 @@ export async function generateMetadata({
   if (!pub) return { title: "Not Found" };
 
   return {
-    title: `${loc(pub, "title", params.locale)} | Publications`,
+    title: `${loc(pub, "title", params.locale)} | Resources`,
     description: loc(pub, "description", params.locale),
   };
 }
 
-export default async function PublicationDetailPage({
+export default async function ResourceDetailPage({
   params,
 }: {
   params: { locale: Locale; id: string };
@@ -66,8 +66,8 @@ export default async function PublicationDetailPage({
       <div className="container max-w-4xl px-4 md:px-8">
         
         {/* Back Link */}
-        <Link 
-          href={`/${locale}/publications`} 
+        <Link
+          href={`/${locale}/resources`}
           className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors mb-8"
         >
           <ChevronLeft className="h-4 w-4" />

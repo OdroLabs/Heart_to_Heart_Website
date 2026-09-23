@@ -52,6 +52,7 @@ function SettingField({ item, settings }: { item: SettingDef; settings: Settings
         defaultValue={valueFor(settings, item.key, "valueEn")}
         label={item.label}
         help={item.help}
+        defaultOff={item.defaultOff}
       />
     );
   }

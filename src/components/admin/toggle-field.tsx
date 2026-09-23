@@ -13,15 +13,18 @@ export function ToggleField({
   defaultValue,
   label,
   help,
+  defaultOff,
 }: {
   name: string;
-  /** Raw stored value. Blank/undefined means on. */
+  /** Raw stored value. Blank/undefined means on, unless `defaultOff` is set. */
   defaultValue?: string | null;
   label: string;
   help?: string;
+  /** Blank/unsaved renders as off instead of the usual on. */
+  defaultOff?: boolean;
 }) {
   const raw = (defaultValue ?? "").trim().toLowerCase();
-  const initial = raw === "" ? true : ["1", "true", "on", "yes"].includes(raw);
+  const initial = raw === "" ? !defaultOff : ["1", "true", "on", "yes"].includes(raw);
   const [checked, setChecked] = useState(initial);
 
   return (

@@ -31,10 +31,12 @@ import {
   Languages,
   Files,
   UsersRound,
+  Rocket,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const settingsLinks = [
+  { href: "/admin/settings/coming-soon", label: "Coming Soon Mode", icon: Rocket },
   { href: "/admin/settings/general", label: "General", icon: Globe },
   { href: "/admin/settings/header", label: "Header & Menu", icon: PanelTop },
   { href: "/admin/settings/footer", label: "Footer", icon: PanelBottom },
@@ -51,7 +53,7 @@ const contentLinks = [
   { href: "/admin/content/team", label: "BOD & Staff", icon: Users },
   { href: "/admin/content/projects", label: "Projects", icon: FolderKanban },
   { href: "/admin/content/services", label: "Services", icon: HandHeart },
-  { href: "/admin/content/publications", label: "Publications", icon: FileText },
+  { href: "/admin/content/resources", label: "Resources", icon: FileText },
   { href: "/admin/content/news", label: "News", icon: Newspaper },
   { href: "/admin/content/events", label: "Events", icon: CalendarDays },
   { href: "/admin/content/gallery", label: "Gallery", icon: Images },

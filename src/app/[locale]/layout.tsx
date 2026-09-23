@@ -5,11 +5,13 @@ import { getLabels } from "@/lib/labels";
 import { buildNav } from "@/lib/nav";
 import { getSettings, s, sBool, show } from "@/lib/settings";
 import { pageMetadata } from "@/lib/seo";
+import { getAdmin } from "@/lib/session";
 import { SiteHeader } from "@/components/site/header";
 import { SiteFooter } from "@/components/site/footer";
 import { ScrollFX } from "@/components/site/scroll-fx";
 import { ScrollProgress } from "@/components/site/scroll-progress";
 import { FloatingWhatsApp } from "@/components/site/floating-whatsapp";
+import { ComingSoon } from "@/components/site/coming-soon";
 
 export const dynamic = "force-dynamic";
 
@@ -24,6 +26,16 @@ export async function generateMetadata({
 
   const keywords = s(settings, "seo_keywords");
   const favicon = s(settings, "favicon");
+
+  if (sBool(settings, "show_coming_soon", false) && !(await getAdmin())) {
+    return {
+      ...pageMetadata(settings, locale, {
+        title: s(settings, "coming_soon_title", locale) || "Coming Soon",
+      }),
+      icons: favicon ? { icon: favicon } : undefined,
+      robots: { index: false, follow: false },
+    };
+  }
 
   // Site-wide defaults. Every page below overrides title/description with
   // its own copy via its own `generateMetadata`; this is only what's used
@@ -46,6 +58,13 @@ export default async function LocaleLayout({
   const locale = params.locale;
   const settings = await getSettings();
   const dict = getLabels(locale, settings);
+
+  // Coming Soon Mode — a single page for everyone except admins already
+  // signed in to this dashboard, so the site can keep being built behind it.
+  if (sBool(settings, "show_coming_soon", false) && !(await getAdmin())) {
+    return <ComingSoon locale={locale} dict={dict} settings={settings} />;
+  }
+
   const nav = buildNav(settings, dict);
 
   const siteName = s(settings, "site_name", locale);
